@@ -1,0 +1,555 @@
+:root {
+  /* =========================
+     LIGHT MODE
+     ========================= */
+
+  color-scheme: light;
+
+  /* Backgrounds */
+  --bg-app: #f6f7fb;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f0f2f7;
+  --bg-tertiary: #e8ecf3;
+  --bg-input: #ffffff;
+  --bg-hover: #f0edff;
+  --bg-active: #ede8ff;
+  --header-bg: #ffffff;
+  --input-bg: #f0f2f7;
+  --popup-bg-tertiary: #f0f2f7;
+
+  /* Text */
+  --text-primary: #20232d;
+  --text-secondary: #50586a;
+  --text-muted: #60697a;
+  --text-placeholder: #626b7b;
+  --text-on-accent: #ffffff;
+
+  /* Borders */
+  --border-primary: #dce1eb;
+  --border-secondary: #cbd2df;
+  --border-focus: #6846e5;
+  --border-color: #d5dce8;
+  --border-hover: #aeb8c9;
+
+  /* Added: stronger border for input boundaries */
+  --border-input: #7d8799;
+
+  /* Brand / Accent */
+  --accent: #6846e5;
+  --accent-hover: #5937cf;
+  --accent-light: #f0ecff;
+  --accent-border: #cbbef7;
+
+  /* Added: violet text and links */
+  --accent-text: #5937cf;
+
+  /* Success */
+  --success: #16734f;
+  --success-bg: #e9f7ef;
+  --success-border: #b7dfc8;
+
+  /* Added: text on solid success backgrounds */
+  --text-on-success: #ffffff;
+
+  /* Danger */
+  --danger: #bd3345;
+  --danger-hover: #a5293a;
+  --danger-bg: #fff0f1;
+  --danger-border: #efbdc4;
+
+  /* Added: text on solid danger backgrounds */
+  --text-on-danger: #ffffff;
+
+  /* Warning */
+  --warning: #956207;
+  --warning-bg: #fff6df;
+
+  /* Added: warning border and solid-background text */
+  --warning-border: #e8cf93;
+  --text-on-warning: #ffffff;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(24, 32, 56, 0.06);
+  --shadow-md: 0 4px 12px rgba(24, 32, 56, 0.08);
+  --shadow-lg: 0 12px 32px rgba(24, 32, 56, 0.12);
+
+  /* Template colors */
+  --template-purple: #b49aff;
+  --template-green: #56d4a0;
+  --template-blue: #8bb4ff;
+
+  /* Compatibility alias: both spellings work */
+  --templat-blue: var(--template-blue);
+
+  /* Table */
+  --table-header: #f0f2f7;
+  --table-row: #ffffff;
+  --table-row-hover: #f4f1ff;
+
+  /* Scrollbar */
+  --scrollbar-track: #f0f2f7;
+  --scrollbar-thumb: #808b9e;
+  --scrollbar-thumb-hover: #68758b;
+
+  --pattern-base: var(--border-primary);
+  --pattern-detail: var(--border-secondary);
+
+  --pattern-opacity: 0.45;
+
+  /* heatmap  */
+  --heatmap-card-bg: var(--bg-primary);
+  --heatmap-card-border: var(--border-primary);
+
+  --heatmap-cell-empty: #e7edf3;
+  --heatmap-cell-border: #dbe3eb;
+
+  --heatmap-accent: #238b98;
+  --heatmap-accent-strong: #176d78;
+  --heatmap-accent-soft: #dff3f4;
+
+  --heatmap-best-ring: #176d78;
+
+  --heatmap-toggle-bg: var(--bg-secondary);
+  --heatmap-toggle-hover: #e3eaef;
+  --heatmap-toggle-active: #d9eff1;
+
+  --heatmap-summary-bg: #f6fbfb;
+  --heatmap-summary-border: #d7e9eb;
+
+  --heatmap-icon-bg: #dff3f4;
+  --heatmap-icon-color: #176d78;
+  --heatmap-tooltip-bg: #202932;
+  --heatmap-tooltip-text: #ffffff;
+  --heatmap-tooltip-muted: #c6d0d9;
+  --heatmap-tooltip-border: #33414d;
+
+  --heatmap-tooltip-best-bg: rgba(67, 192, 197, 0.14);
+
+  --login-popup-bg: #ffffff;
+  --login-popup-border: #d8deea;
+
+  --login-auth-bg: #ffffff;
+  --login-auth-text: #20232d;
+  --login-auth-border: #d8deea;
+  --login-auth-hover: #f6f7fb;
+
+  --login-chip-bg: #ffffff;
+
+  --login-illustration-shadow: rgba(61, 40, 145, 0.24);
+  --login-gradient-shadow: #3d2891;
+}
+
+.dark {
+  /* =========================
+     DARK MODE
+     ========================= */
+
+  color-scheme: dark;
+
+  /* Backgrounds */
+  --bg-app: #111318;
+  --bg-primary: #191c23;
+  --bg-secondary: #22262f;
+  --bg-tertiary: #2b303b;
+  --bg-input: #15181f;
+  --bg-hover: #27243a;
+  --bg-active: #332b4d;
+  --header-bg: #191c23;
+  --input-bg: #22262f;
+  --popup-bg-tertiary: #2b303b;
+
+  /* Text */
+  --text-primary: #edf0f7;
+  --text-secondary: #bdc4d3;
+  --text-muted: #9ba6ba;
+  --text-placeholder: #98a2b5;
+  --text-on-accent: #ffffff;
+
+  /* Borders */
+  --border-primary: #303744;
+  --border-secondary: #414a5b;
+  --border-focus: #b49aff;
+  --border-color: #343d4d;
+  --border-hover: #5c687e;
+
+  /* Added: stronger border for input boundaries */
+  --border-input: #77849b;
+
+  /* Brand / Accent */
+  --accent: #7652e6;
+  --accent-hover: #8055e5;
+  --accent-light: #2d2544;
+  --accent-border: #62518f;
+
+  /* Added: violet text and links */
+  --accent-text: #bea9ff;
+
+  /* Success */
+  --success: #56d4a0;
+  --success-bg: #172f27;
+  --success-border: #2d654f;
+
+  /* Added: text on solid success backgrounds */
+  --text-on-success: #10251c;
+
+  /* Danger */
+  --danger: #ff8b98;
+  --danger-hover: #ffa3ad;
+  --danger-bg: #341f27;
+  --danger-border: #7c3c4a;
+
+  /* Added: text on solid danger backgrounds */
+  --text-on-danger: #32151d;
+
+  /* Warning */
+  --warning: #edc26a;
+  --warning-bg: #332b1c;
+
+  /* Added: warning border and solid-background text */
+  --warning-border: #78613b;
+  --text-on-warning: #2d230f;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.32);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.42);
+
+  /* Template colors */
+  --template-purple: #6846e5;
+  --template-green: #16734f;
+  --template-blue: #315fc3;
+
+  /* Compatibility alias: both spellings work */
+  --templat-blue: var(--template-blue);
+
+  /* Table */
+  --table-header: #22262f;
+  --table-row: #191c23;
+  --table-row-hover: #27243a;
+
+  /* Scrollbar */
+  --scrollbar-track: #191c23;
+  --scrollbar-thumb: #626e84;
+  --scrollbar-thumb-hover: #7a889f;
+
+  --pattern-base: var(--bg-secondary);
+  --pattern-detail: var(--bg-tertiary);
+
+  --pattern-opacity: 0.4;
+
+  /* =========================
+     HEATMAP - DARK
+     ========================= */
+
+  --heatmap-card-bg: var(--bg-primary);
+  --heatmap-card-border: #323c49;
+
+  --heatmap-cell-empty: #27313d;
+  --heatmap-cell-border: #303c49;
+
+  --heatmap-accent: #43c0c5;
+  --heatmap-accent-strong: #6ad8da;
+  --heatmap-accent-soft: #17393d;
+
+  --heatmap-best-ring: #72dfe1;
+
+  --heatmap-toggle-bg: #222b35;
+  --heatmap-toggle-hover: #2a3541;
+  --heatmap-toggle-active: #173b40;
+
+  --heatmap-summary-bg: #1d252e;
+  --heatmap-summary-border: #303d49;
+
+  --heatmap-icon-bg: #17393d;
+  --heatmap-icon-color: #66d2d5;
+
+  /* existing variables */
+
+  --heatmap-tooltip-bg: #0d1117;
+  --heatmap-tooltip-text: #edf0f7;
+  --heatmap-tooltip-muted: #9ba6ba;
+  --heatmap-tooltip-border: #303a47;
+
+  --heatmap-tooltip-best-bg: rgba(67, 192, 197, 0.12);
+
+  /* Login popup */
+  --login-popup-bg: #111923;
+  --login-popup-border: #3a4658;
+
+  /*
+   * Deliberately light in dark mode.
+   * This matches the reference design.
+   */
+  --login-auth-bg: #f8f9fb;
+  --login-auth-text: #171b24;
+  --login-auth-border: #e4e8ef;
+  --login-auth-hover: #ffffff;
+
+  --login-chip-bg: #17202b;
+
+  --login-illustration-shadow: rgba(87, 50, 194, 0.42);
+  --login-gradient-shadow: #34236f;
+}
+
+:root {
+  /* =========================
+     ACCOUNT ACCESS MODAL
+     LIGHT MODE
+     ========================= */
+
+  --account-modal-overlay-bg: rgba(22, 26, 34, 0.48);
+
+  --account-modal-bg: var(--bg-primary);
+  --account-modal-border: var(--border-primary);
+  --account-modal-shadow: 0 18px 45px rgba(24, 32, 56, 0.18);
+
+  --account-modal-close-color: var(--text-muted);
+  --account-modal-close-hover: var(--bg-secondary);
+
+  /* Crown */
+  --account-modal-premium-bg: #fff7dc;
+  --account-modal-premium-border: #f1df9c;
+  --account-modal-premium-color: #a76d00;
+  --account-modal-icon-shadow: 0 5px 16px rgba(167, 109, 0, 0.12);
+
+  /* Plan banner */
+  --account-modal-plan-bg: #fffaf0;
+  --account-modal-plan-border: #eee2c7;
+  --account-modal-plan-text: var(--text-secondary);
+  --account-modal-plan-price: #8b5d00;
+  --account-modal-plan-icon: #a87508;
+
+  /* Secondary button */
+  --account-modal-secondary-bg: var(--bg-primary);
+  --account-modal-secondary-hover: var(--bg-secondary);
+  --account-modal-secondary-border: var(--border-primary);
+  --account-modal-secondary-border-hover: var(--border-hover);
+  --account-modal-secondary-text: var(--text-secondary);
+
+  /* Upgrade button */
+  --account-modal-upgrade-bg: #f4c84b;
+  --account-modal-upgrade-hover: #e8ba36;
+  --account-modal-upgrade-border: #dfb437;
+  --account-modal-upgrade-text: #2b230f;
+  --account-modal-upgrade-shadow: 0 3px 10px rgba(180, 132, 15, 0.18);
+}
+
+.dark {
+  /* =========================
+     ACCOUNT ACCESS MODAL
+     DARK MODE
+     ========================= */
+
+  --account-modal-overlay-bg: rgba(4, 7, 11, 0.66);
+
+  --account-modal-bg: #121923;
+  --account-modal-border: #273344;
+  --account-modal-shadow: 0 18px 50px rgba(0, 0, 0, 0.46);
+
+  --account-modal-close-color: #8f9aae;
+  --account-modal-close-hover: #1d2733;
+
+  /* Crown */
+  --account-modal-premium-bg: #2b271b;
+  --account-modal-premium-border: #403923;
+  --account-modal-premium-color: #f2c84b;
+  --account-modal-icon-shadow: 0 5px 18px rgba(242, 200, 75, 0.08);
+
+  /* Plan banner */
+  --account-modal-plan-bg: #1c201f;
+  --account-modal-plan-border: #34362d;
+  --account-modal-plan-text: #c2b98f;
+  --account-modal-plan-price: #f1c64b;
+  --account-modal-plan-icon: #e6bd42;
+
+  /* Secondary button */
+  --account-modal-secondary-bg: #111821;
+  --account-modal-secondary-hover: #1b2531;
+  --account-modal-secondary-border: #2b3849;
+  --account-modal-secondary-border-hover: #46566b;
+  --account-modal-secondary-text: #b9c4d5;
+
+  /* Upgrade button */
+  --account-modal-upgrade-bg: #f4ca50;
+  --account-modal-upgrade-hover: #ffda67;
+  --account-modal-upgrade-border: #d9ad35;
+  --account-modal-upgrade-text: #2b230f;
+  --account-modal-upgrade-shadow: 0 4px 14px rgba(244, 202, 80, 0.14);
+}
+
+:root {
+  /* =====================================
+     VALIDATION MODAL - ENHANCED
+     LIGHT MODE
+     ===================================== */
+
+  --validation-overlay-bg: rgba(24, 32, 56, 0.38);
+
+  --validation-modal-bg: var(--bg-primary);
+  --validation-modal-border: var(--border-secondary);
+  --validation-modal-shadow: var(--shadow-lg);
+
+  --validation-close-color: var(--text-muted);
+  --validation-close-hover-bg: var(--bg-secondary);
+
+  --validation-description-text: var(--text-secondary);
+
+  /* Illustration */
+  --validation-illustration-border: #ded6ff;
+  --validation-illustration-glow-center: #f5f1ff;
+  --validation-illustration-glow-edge: #ebe5ff;
+  --validation-illustration-inner-shadow: rgba(104, 70, 229, 0.08);
+  --validation-illustration-outer-shadow: rgba(104, 70, 229, 0.08);
+
+  --validation-envelope-paper: #ffffff;
+  --validation-envelope-paper-border: #cfc3ff;
+  --validation-envelope-line: #b49aff;
+
+  --validation-envelope-bg: #c8b8ff;
+  --validation-envelope-border: #a58bf5;
+  --validation-envelope-fold: #8f72ec;
+
+  --validation-question-bg: #6846e5;
+  --validation-question-border: #a48cff;
+  --validation-question-text: #ffffff;
+  --validation-question-shadow: rgba(104, 70, 229, 0.28);
+  --validation-question-highlight: rgba(255, 255, 255, 0.35);
+
+  --validation-spark-color: #7652e6;
+
+  /* Checkbox card */
+  --validation-checkbox-card-bg: #f8f6ff;
+  --validation-checkbox-card-hover-bg: #f3efff;
+  --validation-checkbox-card-border: #ddd5fa;
+  --validation-checkbox-card-border-hover: var(--accent-border);
+
+  --validation-checkbox-description: var(--text-secondary);
+
+  --validation-check-bg: #ffffff;
+  --validation-check-border: var(--border-secondary);
+  --validation-check-active-bg: var(--accent);
+  --validation-check-active-border: var(--accent);
+  --validation-check-mark: var(--text-on-accent);
+  --validation-check-shadow: rgba(104, 70, 229, 0.22);
+
+  /* Info */
+  --validation-info-bg: var(--bg-secondary);
+  --validation-info-border: var(--border-primary);
+
+  --validation-info-icon-color: #5476d9;
+  --validation-info-title: var(--accent-text);
+  --validation-info-description: var(--text-secondary);
+
+  /* Cancel */
+  --validation-cancel-bg: var(--bg-primary);
+  --validation-cancel-border: var(--border-secondary);
+  --validation-cancel-text: var(--text-primary);
+
+  --validation-cancel-hover-bg: var(--bg-secondary);
+  --validation-cancel-hover-border: var(--border-hover);
+
+  /* Submit */
+  --validation-submit-gradient-start: #8b5cf6;
+  --validation-submit-gradient-end: #6846e5;
+
+  --validation-submit-hover-start: #9669f8;
+  --validation-submit-hover-end: #5937cf;
+
+  --validation-submit-border: #6846e5;
+  --validation-submit-text: #ffffff;
+
+  --validation-submit-shadow: rgba(104, 70, 229, 0.22);
+  --validation-submit-hover-shadow: rgba(104, 70, 229, 0.3);
+}
+
+.dark {
+  /* =====================================
+     VALIDATION MODAL - ENHANCED
+     DARK MODE
+     ===================================== */
+
+  --validation-overlay-bg: rgba(5, 9, 15, 0.68);
+
+  --validation-modal-bg: #151b25;
+  --validation-modal-border: #3b4659;
+  --validation-modal-shadow: 0 20px 55px rgba(0, 0, 0, 0.46);
+
+  --validation-close-color: #bdc7da;
+  --validation-close-hover-bg: #222b37;
+
+  --validation-description-text: #b8c3d8;
+
+  /* Illustration */
+  --validation-illustration-border: #302b52;
+  --validation-illustration-glow-center: #272642;
+  --validation-illustration-glow-edge: #1a2030;
+
+  --validation-illustration-inner-shadow: rgba(118, 82, 230, 0.16);
+
+  --validation-illustration-outer-shadow: rgba(118, 82, 230, 0.08);
+
+  --validation-envelope-paper: #e7e0ff;
+  --validation-envelope-paper-border: #a992f4;
+  --validation-envelope-line: #aa91ff;
+
+  --validation-envelope-bg: #b5a1ff;
+  --validation-envelope-border: #876de4;
+  --validation-envelope-fold: #8b70eb;
+
+  --validation-question-bg: #6846e5;
+  --validation-question-border: #9475fa;
+  --validation-question-text: #ffffff;
+
+  --validation-question-shadow: rgba(104, 70, 229, 0.42);
+
+  --validation-question-highlight: rgba(255, 255, 255, 0.28);
+
+  --validation-spark-color: #8e6cff;
+
+  /* Checkbox card */
+  --validation-checkbox-card-bg: #1c2030;
+  --validation-checkbox-card-hover-bg: #22263a;
+  --validation-checkbox-card-border: #393653;
+  --validation-checkbox-card-border-hover: #62518f;
+
+  --validation-checkbox-description: #aeb9cf;
+
+  --validation-check-bg: #252c38;
+  --validation-check-border: #495469;
+
+  --validation-check-active-bg: #7652e6;
+  --validation-check-active-border: #8b68f2;
+  --validation-check-mark: #ffffff;
+
+  --validation-check-shadow: rgba(118, 82, 230, 0.32);
+
+  /* Info */
+  --validation-info-bg: #171e29;
+  --validation-info-border: #344158;
+
+  --validation-info-icon-color: #84a6ff;
+  --validation-info-title: #b497ff;
+  --validation-info-description: #b1bdd3;
+
+  /* Cancel */
+  --validation-cancel-bg: #1a212c;
+  --validation-cancel-border: #3b485d;
+  --validation-cancel-text: #e6eaf3;
+
+  --validation-cancel-hover-bg: #222c39;
+  --validation-cancel-hover-border: #59677c;
+
+  /* Submit */
+  --validation-submit-gradient-start: #8d5cff;
+  --validation-submit-gradient-end: #633be6;
+
+  --validation-submit-hover-start: #9a6cff;
+  --validation-submit-hover-end: #7149ed;
+
+  --validation-submit-border: #7652e6;
+  --validation-submit-text: #ffffff;
+
+  --validation-submit-shadow: rgba(101, 61, 230, 0.3);
+
+  --validation-submit-hover-shadow: rgba(118, 82, 230, 0.4);
+}
