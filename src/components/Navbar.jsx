@@ -24,11 +24,17 @@ export default function Navbar({ site, darkMode, onToggleTheme }) {
           >
             <span aria-hidden="true">{darkMode ? "☀" : "☾"}</span>
           </button> */}
-          <a className="button button--ghost nav-login" href={site.loginUrl}>
-            Sign in
+          <a
+            className="button button--ghost nav-login br-50"
+            href={site.loginUrl}
+          >
+            Install
           </a>
-          <a className="button button--primary" href={site.chromeStoreUrl}>
-            Get extension
+          <a
+            className="button button--primary br-50"
+            href={site.chromeStoreUrl}
+          >
+            Get Started
           </a>
         </div>
       </div>

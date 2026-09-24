@@ -1,4 +1,4 @@
-import MediaPlaceholder from './MediaPlaceholder.jsx';
+import MediaPlaceholder from "./MediaPlaceholder.jsx";
 
 export default function Hero({ site }) {
   return (
@@ -12,14 +12,18 @@ export default function Hero({ site }) {
             Browser extension + outreach workspace
           </div>
           <h1>
-            Cold mailing for jobs just got <span>easier</span>.
+            Cold mailing for jobs just got <span>easier</span>
           </h1>
           <p className="hero__lead">
-            Capture contacts while you browse, generate and verify professional emails, save prospects,
-            personalize messages, send from your connected inbox, and track what happens next.
+            Optimize your cold outreach by sending hundreds of personalized
+            emails using reusable templates and recipient specific details all
+            with the click of a button.
           </p>
           <div className="hero__actions">
-            <a className="button button--primary button--large" href={site.chromeStoreUrl}>
+            <a
+              className="button button--primary button--large"
+              href={site.chromeStoreUrl}
+            >
               Add to Chrome <span aria-hidden="true">→</span>
             </a>
             <a className="button button--ghost button--large" href="#product">
@@ -27,7 +31,8 @@ export default function Hero({ site }) {
             </a>
           </div>
           <p className="hero__microcopy">
-            Built for sales, recruiting, business development, lead generation, and networking.
+            Built for sales, recruiting, business development, lead generation,
+            and networking.
           </p>
         </div>
 
@@ -49,7 +54,9 @@ export default function Hero({ site }) {
             </span>
           </div>
           <div className="floating-card floating-card--right">
-            <span className="floating-card__icon floating-card__icon--accent">@</span>
+            <span className="floating-card__icon floating-card__icon--accent">
+              @
+            </span>
             <span>
               <strong>Email verified</strong>
               <small>Before you hit send</small>
