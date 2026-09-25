@@ -1,0 +1,463 @@
+.login-page {
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(440px, 39%) 1fr;
+
+  background: var(--bg-app);
+  color: var(--text-primary);
+
+  overflow: hidden;
+}
+
+/* ========================================
+   LEFT PANEL
+======================================== */
+
+.login-left {
+  position: relative;
+
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--bg-tertiary);
+
+  border-right: 1px solid var(--border-primary);
+
+  padding: 38px 40px 34px;
+}
+
+/* ========================================
+   BRAND
+======================================== */
+
+.login-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  width: fit-content;
+
+  color: var(--accent);
+}
+
+.logo-icon {
+  flex-shrink: 0;
+}
+
+.login-brand-name {
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+}
+
+/* ========================================
+   CONTENT
+======================================== */
+
+.login-content {
+  width: min(100%, 456px);
+
+  margin-top: 163px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-heading {
+  margin-bottom: 48px;
+}
+
+.login-heading h1 {
+  margin: 0;
+
+  font-size: 37px;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -1px;
+
+  color: var(--text-primary);
+}
+
+.login-heading p {
+  margin: 12px 0 0;
+
+  font-size: 18px;
+  line-height: 1.5;
+
+  color: var(--text-secondary);
+}
+
+/* ========================================
+   AUTH PROVIDERS
+======================================== */
+
+.login-providers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.provider-button {
+  position: relative;
+
+  width: 100%;
+  height: 48px;
+
+  display: grid;
+  grid-template-columns: 42px 1fr 74px;
+  align-items: center;
+
+  padding: 0 14px;
+
+  border: 1px solid var(--border-secondary);
+  border-radius: 9px;
+
+  background: transparent;
+  color: var(--text-primary);
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    background 150ms ease,
+    border-color 150ms ease,
+    transform 150ms ease;
+}
+
+.provider-button:hover {
+  background: var(--bg-secondary);
+  border-color: var(--border-hover);
+}
+
+.provider-button:active {
+  transform: translateY(1px);
+}
+
+.provider-button:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.provider-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.provider-label {
+  text-align: left;
+
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.last-used-badge {
+  justify-self: end;
+
+  padding: 4px 8px;
+
+  border-radius: 999px;
+
+  background: var(--accent);
+  color: var(--text-on-accent);
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.login-footer {
+  width: min(100%, 420px);
+
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-top: 40px;
+
+  text-align: center;
+
+  color: var(--text-muted);
+
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.login-footer a {
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.login-footer a:hover {
+  color: var(--accent-text);
+}
+
+/* ========================================
+   RIGHT SIDE
+======================================== */
+
+.login-showcase {
+  position: relative;
+
+  min-height: 100vh;
+
+  overflow: hidden;
+
+  background: var(--bg-secondary);
+}
+
+/* ========================================
+   PATTERN
+======================================== */
+
+.login-pattern {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: var(--pattern-opacity);
+
+  background-image:
+    radial-gradient(
+      circle at center,
+      var(--pattern-detail) 1px,
+      transparent 1.5px
+    ),
+    linear-gradient(
+      45deg,
+      transparent 47%,
+      var(--pattern-base) 48%,
+      var(--pattern-base) 50%,
+      transparent 51%
+    );
+
+  background-size:
+    31px 31px,
+    88px 88px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.95),
+    rgba(0, 0, 0, 0.55) 48%,
+    transparent 90%
+  );
+}
+
+/* subtle dark overlay like reference */
+.login-showcase::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 35%,
+    var(--bg-secondary) 95%
+  );
+}
+
+/* ========================================
+   INSTALL
+======================================== */
+
+.install-button {
+  position: absolute;
+  z-index: 3;
+
+  top: 42px;
+  right: 54px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 9px 16px;
+
+  border: 1px solid var(--border-primary);
+  border-radius: 22px;
+
+  background: transparent;
+  color: var(--text-primary);
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background 150ms ease,
+    border-color 150ms ease;
+}
+
+.install-button:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--border-hover);
+}
+
+/* ========================================
+   TESTIMONIAL
+======================================== */
+
+.testimonial {
+  position: absolute;
+  z-index: 2;
+
+  top: 31%;
+  left: 22%;
+
+  width: min(620px, 62%);
+}
+
+.testimonial-quote-mark {
+  position: absolute;
+
+  top: -48px;
+  left: -44px;
+
+  color: var(--text-muted);
+
+  font-family: Georgia, serif;
+  font-size: 105px;
+  line-height: 1;
+  font-weight: 700;
+
+  opacity: 0.8;
+}
+
+.testimonial blockquote {
+  position: relative;
+
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: clamp(28px, 2.15vw, 39px);
+  line-height: 1.12;
+  letter-spacing: -0.9px;
+  font-weight: 400;
+}
+
+.testimonial-user {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-top: 27px;
+
+  color: var(--text-secondary);
+
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.testimonial-avatar {
+  width: 54px;
+  height: 54px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+  border: 2px solid var(--border-primary);
+
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 1050px) {
+  .login-page {
+    grid-template-columns: minmax(410px, 48%) 1fr;
+  }
+
+  .testimonial {
+    left: 12%;
+    width: 76%;
+  }
+
+  .testimonial blockquote {
+    font-size: 29px;
+  }
+}
+
+@media (max-width: 800px) {
+  .login-page {
+    display: block;
+  }
+
+  .login-left {
+    min-height: 100vh;
+
+    padding: 28px 22px;
+  }
+
+  .login-content {
+    margin-top: 120px;
+  }
+
+  .login-showcase {
+    display: none;
+  }
+
+  .login-brand-name {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 500px) {
+  .login-left {
+    padding: 24px 18px;
+  }
+
+  .login-content {
+    margin-top: 100px;
+  }
+
+  .login-heading {
+    margin-bottom: 36px;
+  }
+
+  .login-heading h1 {
+    font-size: 32px;
+  }
+
+  .provider-button {
+    grid-template-columns: 38px 1fr auto;
+
+    height: 50px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .provider-label {
+    font-size: 15px;
+  }
+
+  .last-used-badge {
+    font-size: 10px;
+  }
+}
