@@ -12,15 +12,29 @@ export default function WebsiteAuthCallback({ onLogin }) {
       try {
         const data = await getWebsiteUser();
 
-        if (cancelled) return;
+        if (cancelled) {
+          return;
+        }
+        onLogin({
+          user: data.user,
+          account: data.account,
+        });
+        const storedRedirect = window.sessionStorage.getItem(
+          "relay_post_login_redirect",
+        );
 
-        onLogin(data.user);
+        window.sessionStorage.removeItem("relay_post_login_redirect");
+        const redirectTo = storedRedirect?.startsWith("/")
+          ? storedRedirect
+          : "/";
 
-        navigate("/", {
+        navigate(redirectTo, {
           replace: true,
         });
       } catch (error) {
-        if (cancelled) return;
+        if (cancelled) {
+          return;
+        }
 
         console.error("Website OAuth callback error:", error);
 

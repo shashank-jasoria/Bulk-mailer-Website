@@ -1,7 +1,131 @@
-import BrandMark from "./BrandMark.jsx";
-import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import BrandMark from "./BrandMark.jsx";
+// import { useState } from "react";
 import "../styles/Navbar.css";
+
+// export default function Navbar({
+//   site,
+//   darkMode,
+//   onToggleTheme,
+//   user,
+//   onLogout,
+//   authLoading,
+//   account,
+// }) {
+//   const [profileOpen, setProfileOpen] = useState(false);
+//   return (
+//     <header className="site-header">
+//       <div className="container navbar">
+//         <Link className="brand" to="/" aria-label={`${site.name} home`}>
+//           <BrandMark />
+//           <span>{site.name}</span>
+//         </Link>
+
+//         <div className="nav-actions">
+//           <nav className="nav-links" aria-label="Primary navigation">
+//             <Link to="/contact">Contact </Link>
+//             <Link to="/about">About</Link>
+//             <Link to="/pricing">Pricing</Link>
+//             <Link to="#faq">FAQ</Link>
+//           </nav>
+
+//           <button
+//             className="theme-toggle"
+//             type="button"
+//             onClick={onToggleTheme}
+//             aria-label={`Switch to ${darkMode ? "light" : "dark"} mode`}
+//           >
+//             <span aria-hidden="true">{darkMode ? "☀" : "☾"}</span>
+//           </button>
+
+//           <a
+//             className="button button--ghost nav-login br-50"
+//             href={site.chromeStoreUrl}
+//           >
+//             Install
+//           </a>
+
+//           {authLoading ? (
+//             <div className="nav-auth-placeholder" />
+//           ) : user ? (
+//             <div className="profile-dropdown">
+//               <button
+//                 type="button"
+//                 className="profile-button"
+//                 onClick={() => setProfileOpen((prev) => !prev)}
+//                 aria-label="Open profile menu"
+//                 aria-expanded={profileOpen}
+//               >
+//                 {user.profileImage ? (
+//                   <span className="profile-avatar">
+//                     <img
+//                       src={user.profileImage}
+//                       alt=""
+//                       className="profile-avatar-image"
+//                     />
+//                   </span>
+//                 ) : (
+//                   <span className="profile-avatar">
+//                     {user.email?.charAt(0).toUpperCase()}
+//                   </span>
+//                 )}
+//               </button>
+
+//               {profileOpen && (
+//                 <div className="profile-menu">
+//                   <div className="profile-menu-header">
+//                     <span className="profile-menu-label">Signed in as</span>
+
+//                     <span className="profile-menu-email">{user.email}</span>
+//                   </div>
+
+//                   {account?.tier && (
+//                     <>
+//                       <div className="profile-menu-divider" />
+
+//                       <div className="profile-menu-account">
+//                         <span className="profile-menu-label">Current plan</span>
+
+//                         <span className="profile-menu-tier">
+//                           {account.tier.name}
+//                         </span>
+//                       </div>
+//                     </>
+//                   )}
+
+//                   <div className="profile-menu-divider" />
+
+//                   <button
+//                     type="button"
+//                     className="profile-menu-item"
+//                     onClick={onToggleTheme}
+//                   >
+//                     <span>Theme</span>
+//                     <span className="profile-menu-value">
+//                       {darkMode ? "Dark" : "Light"}
+//                     </span>
+//                   </button>
+
+//                   <button
+//                     type="button"
+//                     className="profile-menu-item profile-menu-logout"
+//                     onClick={onLogout}
+//                   >
+//                     <span>Log Out</span>
+//                   </button>
+//                 </div>
+//               )}
+//             </div>
+//           ) : (
+//             <Link className="button button--primary br-50" to="/login">
+//               Get Started
+//             </Link>
+//           )}
+//         </div>
+//       </div>
+//     </header>
+//   );
+// }
 
 const navItems = [
   { label: "About", href: "/about" },
@@ -18,101 +142,11 @@ export default function Navbar({
   onLogout,
   authLoading,
   account,
-  billing,
-  billingLoading,
-  onCancelSubscription,
-  subscriptionActionLoading,
 }) {
   const [profileOpen, setProfileOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  function getInitials(name, email) {
-    const parts = (name || "").trim().split(/\s+/).filter(Boolean);
-
-    if (parts.length >= 2) {
-      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-    }
-    if (parts.length === 1) {
-      return parts[0][0].toUpperCase();
-    }
-    return (email?.charAt(0) || "?").toUpperCase();
-  }
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
-    };
-
-    // Set correct state on initial load
-    handleScroll();
-
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  function formatPlanDate(value) {
-    if (!value) {
-      return null;
-    }
-
-    const date = new Date(value);
-
-    if (Number.isNaN(date.getTime())) {
-      return null;
-    }
-
-    return new Intl.DateTimeFormat("en-GB", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    }).format(date);
-  }
-
-  function getPlanStatusText({ account, billing }) {
-    const tier = billing?.tier || account?.tier;
-    const subscription = billing?.subscription;
-    const planChange = billing?.planChange;
-    if (!tier) {
-      return null;
-    }
-    if (tier.key === "FREE") {
-      return "Explore Relay with essential features";
-    }
-    if (subscription?.cancelAtPeriodEnd && subscription?.currentPeriodEnd) {
-      return `Plan ends on ${formatPlanDate(subscription.currentPeriodEnd)}`;
-    }
-    if (planChange?.effectiveAt && planChange?.type === "downgrade") {
-      return `Plan changes on ${formatPlanDate(planChange.effectiveAt)}`;
-    }
-    if (planChange?.effectiveAt && planChange?.type === "upgrade") {
-      return `New billing starts on ${formatPlanDate(planChange.effectiveAt)}`;
-    }
-    if (subscription?.currentPeriodEnd) {
-      return `Renews on ${formatPlanDate(subscription.currentPeriodEnd)}`;
-    }
-    return null;
-  }
-
-  const planStatusText = getPlanStatusText({
-    account,
-    billing,
-  });
-  const currentTier = billing?.tier || account?.tier;
-  const isFreePlan = currentTier?.key === "FREE";
-  const cancellationScheduled =
-    billing?.subscription?.cancelAtPeriodEnd === true;
-  const canCancelSubscription =
-    !isFreePlan && Boolean(billing?.subscription) && !cancellationScheduled;
 
   return (
-    <header
-      className={`site-header ${isScrolled ? "site-header--scrolled" : ""}`}
-    >
+    <header className="site-header">
       <div className="site-header__inner">
         {/* Brand */}
         <Link to="/" className="site-header__brand" aria-label="Relay home">
@@ -155,8 +189,7 @@ export default function Navbar({
           {authLoading ? (
             <div className="nav-auth-placeholder" />
           ) : user ? (
-            // ref={profileRef}
-            <div className="profile">
+            <div className="profile" ref={profileRef}>
               <button
                 type="button"
                 className={`profile__trigger ${
@@ -175,12 +208,10 @@ export default function Navbar({
                     />
                   </span>
                 ) : (
-                  <Avatar initials={getInitials(user.name, user.email)} />
+                  <Avatar initials={user.email?.charAt(0).toUpperCase()} />
                 )}
 
-                <span className="profile__greeting">
-                  Hi, {user.name.split(" ")[0] || User}
-                </span>
+                <span className="profile__greeting">Hi, {user.firstName}</span>
 
                 <ChevronIcon open={profileOpen} />
               </button>
@@ -202,7 +233,7 @@ export default function Navbar({
                     )}
 
                     <div className="profile-menu__user-copy">
-                      <strong>{user.name || user.email}</strong>
+                      <strong>{user.fullName}</strong>
                       <span>{user.email}</span>
                     </div>
                   </div>
@@ -210,70 +241,28 @@ export default function Navbar({
                   <div className="profile-menu__separator" />
 
                   {/* Plan */}
-                  {currentTier && (
-                    <div className="profile-menu__plan">
-                      <div className="profile-menu__plan-icon">
-                        <CrownIcon />
-                      </div>
-
-                      <div className="profile-menu__plan-copy">
-                        <strong>{currentTier.name}</strong>
-
-                        {billingLoading ? (
-                          <span>Loading billing...</span>
-                        ) : planStatusText ? (
-                          <span>{planStatusText}</span>
-                        ) : null}
-                      </div>
-                      {/* <span className="profile-menu__status">
-                        {user.status}
-                      </span> */}
-                    </div>
-                  )}
-
-                  {isFreePlan ? (
-                    <Link
-                      to="/pricing"
-                      className="profile-menu__cancel"
-                      onClick={() => setProfileOpen(false)}
-                    >
+                  
+                  <div className="profile-menu__plan">
+                    <div className="profile-menu__plan-icon">
                       <CrownIcon />
-                      <span>View Subscription</span>
-                    </Link>
-                  ) : canCancelSubscription ? (
-                    <button
-                      type="button"
-                      className="profile-menu__cancel"
-                      onClick={onCancelSubscription}
-                      disabled={subscriptionActionLoading}
-                    >
-                      <CancelIcon />
+                    </div>
 
-                      <span>
-                        {subscriptionActionLoading
-                          ? "Cancelling..."
-                          : "Cancel Subscription"}
-                      </span>
-                    </button>
-                  ) : cancellationScheduled ? (
-                    <button
-                      type="button"
-                      className="profile-menu__cancel"
-                      disabled
-                    >
-                      <CancelIcon />
-                      <span>Cancellation Scheduled</span>
-                    </button>
-                  ) : null}
+                    <div className="profile-menu__plan-copy">
+                      <strong>{user.plan}</strong>
+                      <span>{user.renewalText}</span>
+                    </div>
 
-                  {/* <button
+                    <span className="profile-menu__status">{user.status}</span>
+                  </div>
+
+                  <button
                     type="button"
                     className="profile-menu__cancel"
                     onClick={onCancelSubscription}
                   >
                     <CancelIcon />
                     Cancel Subscription
-                  </button> */}
+                  </button>
 
                   <div className="profile-menu__separator" />
 
@@ -290,11 +279,11 @@ export default function Navbar({
                       <button
                         type="button"
                         className={`theme-switch ${
-                          darkMode ? "theme-switch--active" : ""
+                          isDark ? "theme-switch--active" : ""
                         }`}
                         aria-label="Toggle theme"
-                        aria-pressed={darkMode}
-                        onClick={onToggleTheme}
+                        aria-pressed={isDark}
+                        onClick={toggleTheme}
                       >
                         <span className="theme-switch__thumb" />
                       </button>
@@ -309,7 +298,10 @@ export default function Navbar({
                   <button
                     type="button"
                     className="profile-menu__logout"
-                    onClick={onLogout}
+                    onClick={() => {
+                      setProfileOpen(false);
+                      onLogout?.();
+                    }}
                   >
                     <LogoutIcon />
                     <span>Log out</span>
@@ -318,10 +310,12 @@ export default function Navbar({
               )}
             </div>
           ) : (
-            <button type="button" className="site-header__login-button">
-              <Link className="" to="/login">
-                Sign in
-              </Link>
+            <button
+              type="button"
+              className="site-header__login-button"
+              onClick={onLogin}
+            >
+              Sign in
             </button>
           )}
         </div>
@@ -329,6 +323,10 @@ export default function Navbar({
     </header>
   );
 }
+
+/* ---------------------------------
+   Icons
+---------------------------------- */
 
 function RelayLogo() {
   return (

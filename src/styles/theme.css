@@ -553,3 +553,151 @@
 
   --validation-submit-hover-shadow: rgba(118, 82, 230, 0.4);
 }
+
+/* pricing----------- */
+/* =========================================================
+   PRICING COMPONENT — LIGHT MODE
+   ========================================================= */
+
+:root {
+  /* Section */
+  --pricing-bg: #f7f8ff;
+  --pricing-bg-deep: #eef0fb;
+
+  --pricing-glow-purple: rgba(123, 70, 229, 0.16);
+  --pricing-glow-purple-strong: rgba(104, 70, 229, 0.22);
+  --pricing-glow-blue: rgba(73, 112, 255, 0.1);
+
+  /* Typography */
+  --pricing-title: #171a26;
+  --pricing-title-accent: #6846e5;
+
+  --pricing-text: #252a38;
+  --pricing-text-secondary: #59647a;
+  --pricing-text-muted: #818a9e;
+
+  /* Cards */
+  --pricing-card-bg: #ffffff;
+  --pricing-card-bg-end: #fafaff;
+
+  --pricing-card-border: #dce2ee;
+  --pricing-card-border-hover: #bac4d6;
+
+  --pricing-card-shadow: 0 1.2rem 3rem rgba(35, 39, 65, 0.08);
+
+  /* Purple / Core */
+  --pricing-purple: #7043e6;
+  --pricing-purple-bright: #8a46f5;
+  --pricing-purple-hover: #6234d6;
+
+  --pricing-purple-soft: #f1ebff;
+  --pricing-purple-icon-bg: #eee7ff;
+  --pricing-purple-icon-border: #b6a1fb;
+
+  --pricing-purple-glow: rgba(112, 67, 230, 0.28);
+  --pricing-purple-glow-strong: rgba(112, 67, 230, 0.4);
+
+  /* Free */
+  --pricing-free-icon: #4b73c7;
+  --pricing-free-icon-bg: #edf3ff;
+  --pricing-free-icon-border: #bfd0f0;
+
+  /* Pro */
+  --pricing-gold: #d58a00;
+  --pricing-gold-bright: #ee9b00;
+  --pricing-gold-bg: #fff7e3;
+  --pricing-gold-border: #e5b64f;
+  --pricing-gold-glow: rgba(213, 138, 0, 0.16);
+
+  /* Feature icons */
+  --pricing-feature-default: #5576ad;
+  --pricing-feature-success: #0aa873;
+  --pricing-feature-danger: #e44759;
+  --pricing-feature-warning: #dc9200;
+
+  /* Misc */
+  --pricing-divider: #e0e5ef;
+
+  --pricing-launch-bg-start: #f0e9ff;
+  --pricing-launch-bg-end: #f7f2ff;
+  --pricing-launch-border: #9b68ec;
+
+  --pricing-core-button-start: #7544ec;
+  --pricing-core-button-end: #6a30ef;
+
+  --pricing-pro-button-hover: #fff8e9;
+}
+
+/* =========================================================
+   PRICING COMPONENT — DARK MODE
+   Matches the supplied screenshot
+   ========================================================= */
+
+.dark {
+  /* Section */
+  --pricing-bg: #070d19;
+  --pricing-bg-deep: #0b1120;
+
+  --pricing-glow-purple: rgba(99, 47, 206, 0.24);
+  --pricing-glow-purple-strong: rgba(123, 55, 238, 0.32);
+  --pricing-glow-blue: rgba(56, 74, 181, 0.14);
+
+  /* Typography */
+  --pricing-title: #f7f8fc;
+  --pricing-title-accent: #8646f6;
+
+  --pricing-text: #f4f6fc;
+  --pricing-text-secondary: #bfd0ef;
+  --pricing-text-muted: #7d87a6;
+
+  /* Cards */
+  --pricing-card-bg: #0a1220;
+  --pricing-card-bg-end: #09111e;
+
+  --pricing-card-border: #27354d;
+  --pricing-card-border-hover: #405271;
+
+  --pricing-card-shadow: 0 1.4rem 3.5rem rgba(0, 0, 0, 0.28);
+
+  /* Purple / Core */
+  --pricing-purple: #8a42f4;
+  --pricing-purple-bright: #a448ff;
+  --pricing-purple-hover: #9a4cff;
+
+  --pricing-purple-soft: #24143e;
+  --pricing-purple-icon-bg: #271546;
+  --pricing-purple-icon-border: #6830bf;
+
+  --pricing-purple-glow: rgba(145, 66, 246, 0.36);
+  --pricing-purple-glow-strong: rgba(145, 66, 246, 0.58);
+
+  /* Free */
+  --pricing-free-icon: #99bcff;
+  --pricing-free-icon-bg: #162846;
+  --pricing-free-icon-border: #294879;
+
+  /* Pro */
+  --pricing-gold: #ffad08;
+  --pricing-gold-bright: #ffb71b;
+  --pricing-gold-bg: #231b08;
+  --pricing-gold-border: #885b00;
+  --pricing-gold-glow: rgba(255, 173, 8, 0.16);
+
+  /* Feature icons */
+  --pricing-feature-default: #aecbfb;
+  --pricing-feature-success: #13d89a;
+  --pricing-feature-danger: #ff4e68;
+  --pricing-feature-warning: #ffad08;
+
+  /* Misc */
+  --pricing-divider: #243047;
+
+  --pricing-launch-bg-start: #25143f;
+  --pricing-launch-bg-end: #15142a;
+  --pricing-launch-border: #7944bc;
+
+  --pricing-core-button-start: #7c3cf2;
+  --pricing-core-button-end: #6929f2;
+
+  --pricing-pro-button-hover: #211b0e;
+}

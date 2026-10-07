@@ -33,14 +33,14 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div className="home-container">
       <Hero site={site} />
 
       <ProductOptions />
 
       <Faq />
 
-      <section className="section final-cta">
+      {/* <section className="section final-cta">
         <div className="container final-cta__panel reveal">
           <div>
             <p className="section-kicker section-kicker--light">
@@ -66,7 +66,7 @@ export default function Home() {
             Get the extension <span aria-hidden="true">→</span>
           </a>
         </div>
-      </section>
-    </>
+      </section> */}
+    </div>
   );
 }

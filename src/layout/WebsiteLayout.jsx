@@ -10,21 +10,43 @@ export default function WebsiteLayout({
   onToggleTheme,
   user,
   onLogout,
+  authLoading,
+  account,
+  billing,
+  billingLoading,
+  onCancelSubscription,
+  subscriptionActionLoading,
 }) {
   return (
-    <div className="site-shell background">
+    // background
+    <div className="site-shell ">
       <Navbar
         site={site}
         darkMode={darkMode}
         onToggleTheme={onToggleTheme}
         user={user}
         onLogout={onLogout}
+        authLoading={authLoading}
+        account={account}
+        billing={billing}
+        billingLoading={billingLoading}
+        onCancelSubscription={onCancelSubscription}
+        subscriptionActionLoading={subscriptionActionLoading}
       />
+
       <main>
-        <Outlet />
+        <Outlet
+          context={{
+            user,
+            account,
+            authLoading,
+            billing,
+            billingLoading,
+          }}
+        />
       </main>
 
-      <Footer site={site} />
+      <Footer site={site} darkMode={darkMode} />
     </div>
   );
 }
