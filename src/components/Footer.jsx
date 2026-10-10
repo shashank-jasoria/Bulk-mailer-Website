@@ -9,6 +9,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import "../styles/Footer.css";
+import { Link } from "react-router-dom";
 
 export default function Footer({ site, darkMode }) {
   console.log("site", site);
@@ -56,10 +57,19 @@ export default function Footer({ site, darkMode }) {
               <h3>Resources</h3>
 
               <nav aria-label="Footer resources">
-                <a href="#contact">Contact</a>
-                <a href="#about">About</a>
-                <a href="#faq">FAQ</a>
-                <a href="#blog">Blog</a>
+                <Link to="/contact">Contact</Link>
+
+                <Link to="/about">About</Link>
+
+                <Link to="/#faq">FAQ</Link>
+
+                <Link
+                  to="/blog"
+                  className="site-header__brand"
+                  aria-label="Relay Blog"
+                >
+                  Blog
+                </Link>
               </nav>
             </div>
 
@@ -86,8 +96,8 @@ export default function Footer({ site, darkMode }) {
 
 function OutreachBanner({ darkMode }) {
   const imageSrc = darkMode
-    ? "./footer-banner-dark.png"
-    : "./footer-banner-light.png";
+    ? "/footer-banner-dark.png"
+    : "/footer-banner-light.png";
   return (
     <section className="outreach-banner">
       {/* decorative background */}
@@ -102,7 +112,7 @@ function OutreachBanner({ darkMode }) {
           <div className="outreach-banner__badge">
             <Zap size={15} />
             <span>
-              Get started with <strong>SpeedyApply</strong>
+              Get started with <strong>Relay</strong>
             </span>
           </div>
 
@@ -112,7 +122,7 @@ function OutreachBanner({ darkMode }) {
 
           <p className="outreach-banner__subtitle">
             Send cold emails faster, get more interviews, and land your next job
-            with SpeedyApply..
+            with Relay..
           </p>
 
           <div className="outreach-banner__cta">
@@ -159,13 +169,6 @@ function OutreachBanner({ darkMode }) {
           <img src={imageSrc} className="footer-img" alt="" />
         </div>
 
-        {/* ==============================
-            CTA
-        ============================== */}
-
-        {/* ==============================
-            ILLUSTRATION
-        ============================== */}
         {/* <div className="outreach-banner__illustration" aria-hidden="true">
           <Sparkles className="outreach-banner__spark outreach-banner__spark--one" />
           <Sparkles className="outreach-banner__spark outreach-banner__spark--two" />

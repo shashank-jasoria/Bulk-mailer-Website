@@ -9,7 +9,6 @@ import {
 import { getBillingStatus, cancelSubscription } from "./api/billingApi";
 import WebsiteLayout from "./layout/WebsiteLayout.jsx";
 import WebsiteAuthCallback from "./pages/WebsiteAuthCallback.jsx";
-
 import Home from "./pages/Home.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import PageNotFound from "./pages/PageNotFound.jsx";
@@ -17,6 +16,10 @@ import PricingPage from "./pages/PricingPage.jsx";
 import PublicOnlyRoute from "./components/PublicOnlyRoute.jsx";
 import ContactUs from "./pages/ContactUs.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
+import BlogPage from "./pages/BlogPage.jsx";
+import BlogArticlePage from "./pages/BlogArticlePage";
+import PublicPageSeo from "./components/PublicPageSeo.jsx";
+import ScrollToTop from "./components/ScrollToTop.jsx";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -137,6 +140,8 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <PublicPageSeo />
+      <ScrollToTop />
       <Routes>
         {/* Public website */}
         <Route
@@ -159,6 +164,8 @@ export default function App() {
           <Route path="pricing" element={<PricingPage />} />
           <Route path="about" element={<AboutUs />} />
           <Route path="contact" element={<ContactUs />} />
+          <Route path="blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogArticlePage />} />
         </Route>
 
         {/* Authentication pages */}

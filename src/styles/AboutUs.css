@@ -821,7 +821,7 @@
   padding: 30px 44px;
 
   display: grid;
-  grid-template-columns: 1.05fr 1px 1.45fr;
+  grid-template-columns: 0.8fr 1px 1.5fr;
   align-items: center;
   gap: 42px;
 
@@ -844,7 +844,7 @@
 }
 
 .impact-copy h2 {
-  font-size: 31px;
+  font-size: 28px;
   line-height: 1.05;
 }
 
@@ -895,7 +895,7 @@
 
   color: var(--text-primary);
 
-  font-size: 31px;
+  font-size: 16px;
   line-height: 1;
   font-weight: 800;
 }

@@ -404,8 +404,8 @@ a:focus-visible {
   max-width: 720px;
   margin: 0;
   font-size: 6rem;
-  line-height: 0.95;
-  letter-spacing: -0.072em;
+  line-height: 1.05;
+  letter-spacing: -2px;
   font-weight: 790;
 }
 .product-part-top {

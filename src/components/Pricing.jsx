@@ -494,9 +494,9 @@ export default function Pricing({ user, account, authLoading }) {
             <span className="pricing-spark">✦</span>
           </div>
 
-          <h2 className="pricing-title">
+          <h1 className="pricing-title">
             Choose the plan that fits <span>your outreach</span>
-          </h2>
+          </h1>
 
           <p className="pricing-subtitle">
             Extract LinkedIn contacts, generate emails and send personalized

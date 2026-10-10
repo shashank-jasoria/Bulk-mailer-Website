@@ -6,7 +6,7 @@ import "../styles/Navbar.css";
 const navItems = [
   { label: "About", href: "/about" },
   { label: "Pricing", href: "/pricing" },
-  { label: "FAQ", href: "#faq" },
+  { label: "FAQ", href: "/#faq" },
   { label: "Contact", href: "/contact" },
 ];
 

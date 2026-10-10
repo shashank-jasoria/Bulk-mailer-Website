@@ -1,0 +1,36 @@
+# Intended for Hostinger web hosting with Apache-compatible .htaccess rules.
+# The `blog/` directory also contains assets; its existence must not force
+# a /blog -> /blog/ redirect, because our canonical blog URL has no slash.
+<IfModule mod_dir.c>
+  DirectorySlash Off
+</IfModule>
+
+# The Vite build copies public/.htaccess to dist/.htaccess.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Use URLs without trailing slashes, matching current canonical /blog/:slug.
+  RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+  # Do not expose duplicate .html URLs to search engines.
+  RewriteCond %{THE_REQUEST} \s/+(.+)\.html[\s?] [NC]
+  RewriteRule ^(.+)\.html$ /$1 [R=301,L]
+
+  # Serve the REAL prerendered HTML for /blog/slug, /blog, /pricing, etc.
+  # This rule must precede the "real directory" check, because dist/blog/
+  # exists as a folder for article HTML files.
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.+)$ $1.html [L]
+
+  # Serve built JS/CSS files, images, favicon, robots.txt, sitemap.xml, etc.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Nonexistent article URLs should be real 404s, not a copy of the homepage.
+  RewriteRule ^blog/[^/]+$ - [R=404,L]
+
+  # React Router still handles /login, /auth/callback and unknown SPA paths.
+  # The fallback is the original app shell, marked noindex in prerender.js.
+  RewriteRule ^ /spa-fallback.html [L]
+</IfModule>

@@ -234,8 +234,6 @@ function PlanHeader({ plan, type, popular = false }) {
 export default function PlanComparison() {
   return (
     <section className="">
-
-
       <div className="comparison-container">
         <header className="comparison-heading">
           <h2>

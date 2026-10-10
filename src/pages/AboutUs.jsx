@@ -3,8 +3,10 @@ import {
   ArrowRight,
   BarChart3,
   Clock3,
-  Globe2,
+  Heart,
   Mail,
+  MessageCircleMore,
+  Rocket,
   Send,
   ShieldCheck,
   TrendingUp,
@@ -340,29 +342,29 @@ export default function AboutUs() {
         <div className="impact-stats">
           <div className="impact-stat">
             <div className="impact-icon">
-              <Users size={28} />
+              <Rocket size={28} />
             </div>
 
-            <strong>10,000+</strong>
-            <span>Professionals use Relay</span>
+            <strong>Actively Building</strong>
+            <span>New features and improvements are coming soon</span>
           </div>
 
           <div className="impact-stat">
             <div className="impact-icon">
-              <Mail size={28} />
+              <MessageCircleMore size={28} />
             </div>
 
-            <strong>1M+</strong>
-            <span>Emails generated</span>
+            <strong>Your Feedback Matters</strong>
+            <span>Helps us build a tool that solves real problems</span>
           </div>
 
           <div className="impact-stat">
             <div className="impact-icon">
-              <Globe2 size={28} />
+              <Heart size={28} />
             </div>
 
-            <strong>50+</strong>
-            <span>Countries</span>
+            <strong>Join Early</strong>
+            <span>Be among the first to use Relay and get early updates</span>
           </div>
         </div>
       </section>
