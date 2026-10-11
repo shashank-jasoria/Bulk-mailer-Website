@@ -63,12 +63,12 @@ const posts = [
   {
     id: 5,
     category: "Product Updates",
-    title: "Introducing Relay: A New Way to Simplify Outreach",
+    title: "Introducing Pacemailer: A New Way to Simplify Outreach",
     description:
-      "Why we built Relay, what problem it solves, and what's coming next.",
+      "Why we built Pacemailer, what problem it solves, and what's coming next.",
     date: "Sep 12, 2026",
     readTime: "3 min read",
-    slug: "introducing-relay",
+    slug: "introducing-pacemailer",
   },
   {
     id: 6,

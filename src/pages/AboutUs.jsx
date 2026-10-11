@@ -98,8 +98,8 @@ function BrowserIllustration() {
 
       <div className="relay-contact-card">
         <div className="relay-card-logo">
-          <span>R</span>
-          <strong>Relay</strong>
+          <span>P</span>
+          <strong>Pacemailer</strong>
         </div>
 
         <label>
@@ -168,7 +168,7 @@ export default function AboutUs() {
           </h1>
 
           <p className="about-hero-description">
-            Relay was built to help professionals save time, find the right
+            Pacemailer was built to help professionals save time, find the right
             contacts, and send personalized emails that create real
             opportunities.
           </p>
@@ -230,7 +230,7 @@ export default function AboutUs() {
           documents, I realized there had to be a better way. Most outreach
           tools are built for sales teams and recruiters, often with expensive
           subscriptions, and they can still make it surprisingly difficult to
-          add and manage individual unique contacts. So I built Relay a simple
+          add and manage individual unique contacts. So I built Pacemailer a simple
           yet powerful browser extension that streamlines the entire outreach
           process, from finding and generating emails to personalizing and
           sending them.
@@ -241,7 +241,7 @@ export default function AboutUs() {
           difficult to add and manage individual unique contacts.
         </p>
         <p>
-          So I built Relay a simple yet powerful browser extension that
+          So I built Pacemailer a simple yet powerful browser extension that
           streamlines the entire outreach process, from finding and generating
           emails to personalizing and sending them.
         </p> */}
@@ -332,7 +332,7 @@ export default function AboutUs() {
           </h2>
 
           <p>
-            From job seekers to recruiters and sales professionals, Relay is
+            From job seekers to recruiters and sales professionals, Pacemailer is
             used by people around the world to create meaningful connections.
           </p>
         </div>
@@ -364,7 +364,7 @@ export default function AboutUs() {
             </div>
 
             <strong>Join Early</strong>
-            <span>Be among the first to use Relay and get early updates</span>
+            <span>Be among the first to use Pacemailer and get early updates</span>
           </div>
         </div>
       </section>
@@ -389,7 +389,7 @@ export default function AboutUs() {
           <h2>Let’s make outreach effortless</h2>
 
           <p>
-            We're just getting started. Our goal is to keep improving Relay and
+            We're just getting started. Our goal is to keep improving Pacemailer and
             empowering professionals like you to achieve more.
           </p>
 

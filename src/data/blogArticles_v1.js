@@ -125,7 +125,7 @@ export const blogPosts = [
           },
           {
             type: "paragraph",
-            text: "Relay is designed to help make email outreach workflows more manageable. Use its available email lookup and validation features in accordance with your plan and the rules that apply to your outreach.",
+            text: "Pacemailer is designed to help make email outreach workflows more manageable. Use its available email lookup and validation features in accordance with your plan and the rules that apply to your outreach.",
           },
         ],
       },
@@ -569,16 +569,16 @@ export const blogPosts = [
   },
   {
     id: 5,
-    slug: "introducing-relay",
+    slug: "introducing-pacemailer",
     category: "Product Updates",
-    title: "Introducing Relay: A New Way to Simplify Outreach",
+    title: "Introducing Pacemailer: A New Way to Simplify Outreach",
     description:
-      "Why we built Relay, what problem it aims to solve, and what we're working toward.",
+      "Why we built Pacemailer, what problem it aims to solve, and what we're working toward.",
     date: "Sep 12, 2026",
     publishedAt: "2026-09-12",
     readTime: "3 min read",
     author: "Shashank J",
-    image: "/blog/introducing-relay.svg",
+    image: "/blog/introducing-pacemailer.svg",
     imageAlt: "Illustration of a purple envelope and connected outreach cards",
     sections: [
       {
@@ -591,12 +591,12 @@ export const blogPosts = [
           },
           {
             type: "paragraph",
-            text: "We built Relay around a simpler idea: make these everyday steps easier to manage while keeping the person receiving the message at the center of the process.",
+            text: "We built Pacemailer around a simpler idea: make these everyday steps easier to manage while keeping the person receiving the message at the center of the process.",
           },
         ],
       },
       {
-        id: "relay-approach",
+        id: "pacemailer-approach",
         title: "Our Approach",
         blocks: [
           {
@@ -622,7 +622,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "Start with a real outreach goal, prepare a short message, and choose a group of people for whom it is genuinely relevant. Explore the features available on your Relay account and review your usage limits before scaling a workflow.",
+            text: "Start with a real outreach goal, prepare a short message, and choose a group of people for whom it is genuinely relevant. Explore the features available on your Pacemailer account and review your usage limits before scaling a workflow.",
           },
           {
             type: "internalLink",

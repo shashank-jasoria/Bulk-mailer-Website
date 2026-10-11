@@ -5,7 +5,7 @@ export const blogPosts = [
     category: "LinkedIn",
     title: "How to Find and Verify Emails from LinkedIn",
     description:
-      "Learn how to find LinkedIn prospects, reveal available work emails, generate possible addresses, and verify them before outreach with Relay.",
+      "Learn how to find LinkedIn prospects, reveal available work emails, generate possible addresses, and verify them before outreach with Pacemailer.",
     date: "Sep 28, 2026",
     publishedAt: "2026-09-28",
     updatedAt: "2026-10-10",
@@ -15,7 +15,7 @@ export const blogPosts = [
     imageAlt:
       "Professional contact directory, magnifying glass, and email envelope",
     intro:
-      "A LinkedIn profile can tell you whom you want to contact, but it does not always tell you which email address is appropriate. This practical guide separates finding an existing email from generating a possible one, then shows how Relay can help you verify, save, and contact a prospect thoughtfully.",
+      "A LinkedIn profile can tell you whom you want to contact, but it does not always tell you which email address is appropriate. This practical guide separates finding an existing email from generating a possible one, then shows how Pacemailer can help you verify, save, and contact a prospect thoughtfully.",
     sections: [
       {
         id: "start-with-profile",
@@ -27,7 +27,7 @@ export const blogPosts = [
           },
           {
             type: "paragraph",
-            text: "Relay works as a Chrome extension alongside your LinkedIn workflow. It can bring available profile details into your contact workflow, reducing repeated copying between browser tabs. Check extracted fields before saving, especially company names and job titles, because public profiles and page layouts can be incomplete or out of date.",
+            text: "Pacemailer works as a Chrome extension alongside your LinkedIn workflow. It can bring available profile details into your contact workflow, reducing repeated copying between browser tabs. Check extracted fields before saving, especially company names and job titles, because public profiles and page layouts can be incomplete or out of date.",
           },
           {
             type: "list",
@@ -51,7 +51,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "Relay supports two distinct paths. When an existing email match is available in its email data, the availability check can show a masked address, such as ****@example.com, with a verification status. Choosing Reveal returns the actual available address, subject to your account's daily reveal allowance. The availability check itself does not reveal the full address.",
+            text: "Pacemailer supports two distinct paths. When an existing email match is available in its email data, the availability check can show a masked address, such as ****@example.com, with a verification status. Choosing Reveal returns the actual available address, subject to your account's daily reveal allowance. The availability check itself does not reveal the full address.",
           },
           {
             type: "paragraph",
@@ -81,7 +81,7 @@ export const blogPosts = [
           {
             type: "tip",
             title: "Two quotas, two purposes",
-            text: "Relay tracks daily email reveals separately from daily email sending. Their allowances can be configured independently by plan, so do not assume a reveal automatically consumes a sending credit.",
+            text: "Pacemailer tracks daily email reveals separately from daily email sending. Their allowances can be configured independently by plan, so do not assume a reveal automatically consumes a sending credit.",
           },
         ],
       },
@@ -105,7 +105,7 @@ export const blogPosts = [
           },
           {
             type: "paragraph",
-            text: "Start by confirming the real company domain from its official website. A company can have several domains, subsidiaries, acquired brands, or role-specific aliases. Relay's company-format and company-override tools can help you work more consistently when profiles show ambiguous company details, but the underlying information still needs human review.",
+            text: "Start by confirming the real company domain from its official website. A company can have several domains, subsidiaries, acquired brands, or role-specific aliases. Pacemailer's company-format and company-override tools can help you work more consistently when profiles show ambiguous company details, but the underlying information still needs human review.",
           },
           {
             type: "internalLink",
@@ -135,7 +135,7 @@ export const blogPosts = [
               },
               {
                 title: "Use verification where your plan supports it",
-                text: "Relay's Verify & Send workflow can check an address before sending. Treat valid, invalid, and unknown results differently; unknown is not the same as verified.",
+                text: "Pacemailer's Verify & Send workflow can check an address before sending. Treat valid, invalid, and unknown results differently; unknown is not the same as verified.",
               },
               {
                 title: "Review the context",
@@ -156,11 +156,11 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "Once you have reviewed the prospect, save the contact in Relay instead of rebuilding the same record later. Your contact workflow can keep the person, company, LinkedIn URL, email details, and sending history together. Review auto-saved contacts just as carefully as those saved manually.",
+            text: "Once you have reviewed the prospect, save the contact in Pacemailer instead of rebuilding the same record later. Your contact workflow can keep the person, company, LinkedIn URL, email details, and sending history together. Review auto-saved contacts just as carefully as those saved manually.",
           },
           {
             type: "paragraph",
-            text: "Next, select an email template for the purpose of your message. Relay supports reusable templates and fields such as {{firstName}} and {{company}}; additional custom variables can be configured where your plan allows them. Replace or configure any placeholder that is not available in your account before sending.",
+            text: "Next, select an email template for the purpose of your message. Pacemailer supports reusable templates and fields such as {{firstName}} and {{company}}; additional custom variables can be configured where your plan allows them. Replace or configure any placeholder that is not available in your account before sending.",
           },
           {
             type: "code",
@@ -179,7 +179,7 @@ export const blogPosts = [
           },
           {
             type: "paragraph",
-            text: "The bracketed details above are meant to be researched and edited manually, not presented as facts Relay discovered. Double-check every merged field in your preview before sending.",
+            text: "The bracketed details above are meant to be researched and edited manually, not presented as facts Pacemailer discovered. Double-check every merged field in your preview before sending.",
           },
           {
             type: "internalLink",
@@ -194,7 +194,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "With a connected Gmail or Microsoft email account, Relay can place outgoing work into its sending queue. Its sending-speed controls help you manage the pace of outbound messages, while account limits constrain how many messages you can send. A slower pace is not a guarantee against spam filtering; message quality, permission, and provider policies still matter.",
+            text: "With a connected Gmail or Microsoft email account, Pacemailer can place outgoing work into its sending queue. Its sending-speed controls help you manage the pace of outbound messages, while account limits constrain how many messages you can send. A slower pace is not a guarantee against spam filtering; message quality, permission, and provider policies still matter.",
           },
           {
             type: "paragraph",
@@ -234,7 +234,7 @@ export const blogPosts = [
           },
           {
             type: "paragraph",
-            text: "Relay brings these steps into one workflow, but careful judgment is still the difference between useful prospecting and unwanted outreach. Build a routine you can repeat accurately rather than relying on the number of contacts collected.",
+            text: "Pacemailer brings these steps into one workflow, but careful judgment is still the difference between useful prospecting and unwanted outreach. Build a routine you can repeat accurately rather than relying on the number of contacts collected.",
           },
           {
             type: "internalLink",
@@ -251,7 +251,7 @@ export const blogPosts = [
     category: "Email Templates",
     title: "10 Cold Email Templates for Personalized Outreach",
     description:
-      "Ten outreach email templates for recruiters, partnerships, and networking, plus practical personalization tips using Relay templates and variables.",
+      "Ten outreach email templates for recruiters, partnerships, and networking, plus practical personalization tips using Pacemailer templates and variables.",
     date: "Sep 24, 2026",
     publishedAt: "2026-09-24",
     updatedAt: "2026-10-10",
@@ -260,7 +260,7 @@ export const blogPosts = [
     image: "/blog/cold-email-templates.svg",
     imageAlt: "Reusable outreach templates and an email envelope",
     intro:
-      "A good cold email template saves typing without making every recipient feel interchangeable. These ten examples are designed for real professional introductions and can be adapted in Relay using contact fields, reusable templates, and—where available—custom variables.",
+      "A good cold email template saves typing without making every recipient feel interchangeable. These ten examples are designed for real professional introductions and can be adapted in Pacemailer using contact fields, reusable templates, and—where available—custom variables.",
     sections: [
       {
         id: "what-good-template-does",
@@ -272,12 +272,12 @@ export const blogPosts = [
           },
           {
             type: "paragraph",
-            text: "Relay helps keep reusable email copy in one place, but it cannot replace genuine research. Read the person's public professional information and replace generic lines with a specific observation you can verify. Do not fabricate a referral, past meeting, customer result, or familiarity.",
+            text: "Pacemailer helps keep reusable email copy in one place, but it cannot replace genuine research. Read the person's public professional information and replace generic lines with a specific observation you can verify. Do not fabricate a referral, past meeting, customer result, or familiarity.",
           },
           {
             type: "tip",
             title: "Template placeholders need setup",
-            text: "Common fields such as {{firstName}} and {{company}} can be resolved by your configured Relay workflow. Placeholders such as {{specificProject}} or {{yourName}} below are examples: create suitable custom variables where supported, or replace them manually. Never send unresolved {{placeholders}}.",
+            text: "Common fields such as {{firstName}} and {{company}} can be resolved by your configured Pacemailer workflow. Placeholders such as {{specificProject}} or {{yourName}} below are examples: create suitable custom variables where supported, or replace them manually. Never send unresolved {{placeholders}}.",
           },
         ],
       },
@@ -435,8 +435,8 @@ export const blogPosts = [
         ],
       },
       {
-        id: "relay-template-setup",
-        title: "Turn an Example Into a Relay Template",
+        id: "pacemailer-template-setup",
+        title: "Turn an Example Into a Pacemailer Template",
         blocks: [
           {
             type: "steps",
@@ -447,7 +447,7 @@ export const blogPosts = [
               },
               {
                 title: "Add a clear subject and body",
-                text: "Paste the example into a Relay template and remove any lines that are not true for your outreach.",
+                text: "Paste the example into a Pacemailer template and remove any lines that are not true for your outreach.",
               },
               {
                 title: "Check contact fields",
@@ -459,13 +459,13 @@ export const blogPosts = [
               },
               {
                 title: "Verify and send where available",
-                text: "Use Relay's verification options and choose an appropriate connected account and sending pace.",
+                text: "Use Pacemailer's verification options and choose an appropriate connected account and sending pace.",
               },
             ],
           },
           {
             type: "paragraph",
-            text: "Relay applies plan-based limits to templates, custom variables, and attachments. Review your account allowances before creating a large library or adding supporting documents.",
+            text: "Pacemailer applies plan-based limits to templates, custom variables, and attachments. Review your account allowances before creating a large library or adding supporting documents.",
           },
           {
             type: "tip",
@@ -514,16 +514,16 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "Relay can help send messages through connected Gmail or Microsoft accounts and manage queued sending and sending speed. These controls organize the workflow; they do not guarantee inbox placement. Use small, relevant batches rather than treating every available contact as an automatic send target.",
+            text: "Pacemailer can help send messages through connected Gmail or Microsoft accounts and manage queued sending and sending speed. These controls organize the workflow; they do not guarantee inbox placement. Use small, relevant batches rather than treating every available contact as an automatic send target.",
           },
           {
             type: "paragraph",
-            text: "Review useful replies, bounced messages, and conversations that move forward. Relay offers email-open tracking on supported plans, but privacy tools and image loading can make opens an unreliable measure of actual interest.",
+            text: "Review useful replies, bounced messages, and conversations that move forward. Pacemailer offers email-open tracking on supported plans, but privacy tools and image loading can make opens an unreliable measure of actual interest.",
           },
           {
             type: "internalLink",
             slug: "simple-outreach-workflow",
-            text: "Build a step-by-step outreach workflow in Relay",
+            text: "Build a step-by-step outreach workflow in Pacemailer",
           },
         ],
       },
@@ -535,7 +535,7 @@ export const blogPosts = [
     category: "Productivity",
     title: "LinkedIn Outreach Workflow: From Prospect to Email",
     description:
-      "A LinkedIn outreach workflow with Relay: research prospects, find or generate emails, verify, save contacts, personalize, send, and track results.",
+      "A LinkedIn outreach workflow with Pacemailer: research prospects, find or generate emails, verify, save contacts, personalize, send, and track results.",
     date: "Sep 20, 2026",
     publishedAt: "2026-09-20",
     updatedAt: "2026-10-10",
@@ -545,7 +545,7 @@ export const blogPosts = [
     imageAlt:
       "Connected stages from LinkedIn research through email sending and review",
     intro:
-      "An outreach workflow becomes easier to improve when each action has a purpose. This walkthrough shows how to go from one LinkedIn profile to a researched contact, a checked email address, an appropriate personalized message, and a measurable next step—using Relay where it fits.",
+      "An outreach workflow becomes easier to improve when each action has a purpose. This walkthrough shows how to go from one LinkedIn profile to a researched contact, a checked email address, an appropriate personalized message, and a measurable next step—using Pacemailer where it fits.",
     sections: [
       {
         id: "choose-outcome",
@@ -572,7 +572,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "Open each relevant LinkedIn profile and read the visible role, organization, experience, and publicly shared professional information. Relay's Chrome extension can help bring profile details into the contact workflow so you spend less time copying fields by hand.",
+            text: "Open each relevant LinkedIn profile and read the visible role, organization, experience, and publicly shared professional information. Pacemailer's Chrome extension can help bring profile details into the contact workflow so you spend less time copying fields by hand.",
           },
           {
             type: "steps",
@@ -587,7 +587,7 @@ export const blogPosts = [
               },
               {
                 title: "Save the contact",
-                text: "Store the profile and relevant details in Relay so you can review, filter, and track the conversation later.",
+                text: "Store the profile and relevant details in Pacemailer so you can review, filter, and track the conversation later.",
               },
               {
                 title: "Review automatically captured fields",
@@ -597,7 +597,7 @@ export const blogPosts = [
           },
           {
             type: "paragraph",
-            text: "Relay's contact dashboard supports searching, filtering, and sorting contacts. It is helpful for preventing the same person from being treated as a completely new prospect every time you encounter their profile.",
+            text: "Pacemailer's contact dashboard supports searching, filtering, and sorting contacts. It is helpful for preventing the same person from being treated as a completely new prospect every time you encounter their profile.",
           },
         ],
       },
@@ -607,7 +607,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "If an existing email match is available, Relay can show a masked result before you choose whether to reveal it. Review the domain and validation status first. The full address is only returned after a reveal action, and your plan may limit daily reveals.",
+            text: "If an existing email match is available, Pacemailer can show a masked result before you choose whether to reveal it. Review the domain and validation status first. The full address is only returned after a reveal action, and your plan may limit daily reveals.",
           },
           {
             type: "paragraph",
@@ -634,7 +634,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "Before preparing a send, clean up the contact details. Use Relay's verification workflow where supported by your plan, and pay attention to invalid or unknown statuses. A verification status is a technical signal, not consent to receive unsolicited messages.",
+            text: "Before preparing a send, clean up the contact details. Use Pacemailer's verification workflow where supported by your plan, and pay attention to invalid or unknown statuses. A verification status is a technical signal, not consent to receive unsolicited messages.",
           },
           {
             type: "paragraph",
@@ -653,7 +653,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "Create a concise Relay email template with a truthful subject line, an opening relevant to the person, and one useful next step. Contact variables such as {{firstName}} and {{company}} can reduce repetitive editing. For specific outreach details, use configured custom variables where supported or edit the text manually.",
+            text: "Create a concise Pacemailer email template with a truthful subject line, an opening relevant to the person, and one useful next step. Contact variables such as {{firstName}} and {{company}} can reduce repetitive editing. For specific outreach details, use configured custom variables where supported or edit the text manually.",
           },
           {
             type: "code",
@@ -671,7 +671,7 @@ export const blogPosts = [
           },
           {
             type: "paragraph",
-            text: "Preview the final rendered message. Check company names, pronouns, signatures, links, and any attachments before sending. Relay limits available templates and custom variables by plan, so reuse a few high-quality templates instead of collecting dozens of nearly identical ones.",
+            text: "Preview the final rendered message. Check company names, pronouns, signatures, links, and any attachments before sending. Pacemailer limits available templates and custom variables by plan, so reuse a few high-quality templates instead of collecting dozens of nearly identical ones.",
           },
           {
             type: "internalLink",
@@ -686,11 +686,11 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "Relay supports sending through connected Gmail and Microsoft email accounts. Messages can be processed using its background sending queue, rather than relying on one long browser request. Choose the account that fits your communication purpose and check its current sending allowance.",
+            text: "Pacemailer supports sending through connected Gmail and Microsoft email accounts. Messages can be processed using its background sending queue, rather than relying on one long browser request. Choose the account that fits your communication purpose and check its current sending allowance.",
           },
           {
             type: "paragraph",
-            text: "Relay also includes sending-speed controls. Use them to select a pace appropriate for your account and workflow. Your daily sending quota is independent of your daily email reveal quota; revealing an address does not automatically mean you can send more messages.",
+            text: "Pacemailer also includes sending-speed controls. Use them to select a pace appropriate for your account and workflow. Your daily sending quota is independent of your daily email reveal quota; revealing an address does not automatically mean you can send more messages.",
           },
           {
             type: "list",
@@ -714,7 +714,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "Use Relay's dashboard and contact history to see what was sent and identify records that need attention. Depending on the plan, additional email activity and open-tracking information may be available. A heatmap can show patterns, but small samples and tracking privacy limitations make simplistic conclusions risky.",
+            text: "Use Pacemailer's dashboard and contact history to see what was sent and identify records that need attention. Depending on the plan, additional email activity and open-tracking information may be available. A heatmap can show patterns, but small samples and tracking privacy limitations make simplistic conclusions risky.",
           },
           {
             type: "steps",
@@ -756,7 +756,7 @@ export const blogPosts = [
     category: "Outreach Tips",
     title: "Company Email Formats: Examples and Verification Tips",
     description:
-      "Understand common work email patterns, how to confirm company domains, when to use Relay company overrides, and why generated addresses need verification.",
+      "Understand common work email patterns, how to confirm company domains, when to use Pacemailer company overrides, and why generated addresses need verification.",
     date: "Sep 16, 2026",
     publishedAt: "2026-09-16",
     updatedAt: "2026-10-10",
@@ -840,12 +840,12 @@ export const blogPosts = [
         ],
       },
       {
-        id: "relay-company-override",
-        title: "When a Company Override Helps in Relay",
+        id: "pacemailer-company-override",
+        title: "When a Company Override Helps in Pacemailer",
         blocks: [
           {
             type: "paragraph",
-            text: "A LinkedIn profile does not always expose company data in the same location or format. Relay includes company override support for situations where you know which organization a set of contacts belongs to and want the generation workflow to use that consistent context.",
+            text: "A LinkedIn profile does not always expose company data in the same location or format. Pacemailer includes company override support for situations where you know which organization a set of contacts belongs to and want the generation workflow to use that consistent context.",
           },
           {
             type: "paragraph",
@@ -868,7 +868,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "Relay can help generate a probable work email from a naming pattern. Separately, its email-availability workflow can show masked matches from available email records. Selecting a reveal returns the matching full address, subject to your daily reveal limit.",
+            text: "Pacemailer can help generate a probable work email from a naming pattern. Separately, its email-availability workflow can show masked matches from available email records. Selecting a reveal returns the matching full address, subject to your daily reveal limit.",
           },
           {
             type: "paragraph",
@@ -882,7 +882,7 @@ export const blogPosts = [
           {
             type: "internalLink",
             slug: "find-verify-linkedin-emails",
-            text: "Read how Relay supports reveals, generation, and verification",
+            text: "Read how Pacemailer supports reveals, generation, and verification",
           },
         ],
       },
@@ -903,7 +903,7 @@ export const blogPosts = [
           },
           {
             type: "paragraph",
-            text: "Relay can store company formats and help apply them consistently during contact research. The most useful habit is still to record how an address was obtained—revealed match, published contact detail, or generated possibility—and review it before sending.",
+            text: "Pacemailer can store company formats and help apply them consistently during contact research. The most useful habit is still to record how an address was obtained—revealed match, published contact detail, or generated possibility—and review it before sending.",
           },
           {
             type: "internalLink",
@@ -916,25 +916,25 @@ export const blogPosts = [
   },
   {
     id: 5,
-    slug: "introducing-relay",
+    slug: "introducing-pacemailer",
     category: "Product Updates",
-    title: "Introducing Relay: LinkedIn to Email Outreach",
+    title: "Introducing Pacemailer: LinkedIn to Email Outreach",
     description:
-      "Meet Relay, a Chrome extension and SaaS workflow for LinkedIn prospecting, email discovery, verification, templates, sending, and analytics.",
+      "Meet Pacemailer, a Chrome extension and SaaS workflow for LinkedIn prospecting, email discovery, verification, templates, sending, and analytics.",
     date: "Sep 12, 2026",
     publishedAt: "2026-09-12",
     updatedAt: "2026-10-10",
     readTime: "5 min read",
     author: "Shashank J",
-    image: "/blog/introducing-relay.svg",
+    image: "/blog/introducing-pacemailer.svg",
     imageAlt:
-      "Relay outreach workflow with connected profile, email, and contact cards",
+      "Pacemailer outreach workflow with connected profile, email, and contact cards",
     intro:
-      "Relay brings the steps between finding a professional contact on LinkedIn and sending a thoughtful email into one connected workflow. Here is what it does, whom it is for, and how the extension and the web service work together.",
+      "Pacemailer brings the steps between finding a professional contact on LinkedIn and sending a thoughtful email into one connected workflow. Here is what it does, whom it is for, and how the extension and the web service work together.",
     sections: [
       {
-        id: "why-we-built-relay",
-        title: "Why We Built Relay",
+        id: "why-we-built-pacemailer",
+        title: "Why We Built Pacemailer",
         blocks: [
           {
             type: "paragraph",
@@ -942,7 +942,7 @@ export const blogPosts = [
           },
           {
             type: "paragraph",
-            text: "Relay was built to reduce this repeated manual work. Rather than being only an email extractor, it combines a Chrome extension for the LinkedIn workflow with a SaaS backend for contacts, templates, sending, usage limits, and analytics. The goal is to make relevant one-to-one communication easier to organize—not to turn every profile into an automatic sales pitch.",
+            text: "Pacemailer was built to reduce this repeated manual work. Rather than being only an email extractor, it combines a Chrome extension for the LinkedIn workflow with a SaaS backend for contacts, templates, sending, usage limits, and analytics. The goal is to make relevant one-to-one communication easier to organize—not to turn every profile into an automatic sales pitch.",
           },
         ],
       },
@@ -952,7 +952,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "The browser extension brings Relay into the moment you are researching someone. It can capture available profile context such as a person's name, organization, LinkedIn URL, and other visible professional details. You can then review and save that information to your contact list.",
+            text: "The browser extension brings Pacemailer into the moment you are researching someone. It can capture available profile context such as a person's name, organization, LinkedIn URL, and other visible professional details. You can then review and save that information to your contact list.",
           },
           {
             type: "paragraph",
@@ -961,7 +961,7 @@ export const blogPosts = [
           {
             type: "tip",
             title: "The extension is the workflow layer",
-            text: "Relay's Chrome extension helps you work beside LinkedIn. Its backend handles business rules and data, while the website handles product information, accounts, and subscription management.",
+            text: "Pacemailer's Chrome extension helps you work beside LinkedIn. Its backend handles business rules and data, while the website handles product information, accounts, and subscription management.",
           },
         ],
       },
@@ -971,7 +971,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "Relay supports email availability checks that can show masked existing email matches and their available verification statuses. If a match is relevant, the user can choose to reveal the actual email, subject to a plan-based daily reveal allowance.",
+            text: "Pacemailer supports email availability checks that can show masked existing email matches and their available verification statuses. If a match is relevant, the user can choose to reveal the actual email, subject to a plan-based daily reveal allowance.",
           },
           {
             type: "paragraph",
@@ -990,7 +990,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "Relay provides email verification and a Verify & Send workflow for eligible plans. Results should be interpreted carefully: an invalid result calls for correction, and unknown does not mean verified. Validation reduces avoidable mistakes; it cannot promise delivery or replace appropriate permission.",
+            text: "Pacemailer provides email verification and a Verify & Send workflow for eligible plans. Results should be interpreted carefully: an invalid result calls for correction, and unknown does not mean verified. Validation reduces avoidable mistakes; it cannot promise delivery or replace appropriate permission.",
           },
           {
             type: "paragraph",
@@ -1009,7 +1009,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "Relay supports connected Gmail and Microsoft email accounts for sending. Instead of requiring a long-running browser request for every message, it uses a background queue to process email work. Sending-speed controls help you manage outbound pacing alongside each plan's daily sending allowance.",
+            text: "Pacemailer supports connected Gmail and Microsoft email accounts for sending. Instead of requiring a long-running browser request for every message, it uses a background queue to process email work. Sending-speed controls help you manage outbound pacing alongside each plan's daily sending allowance.",
           },
           {
             type: "paragraph",
@@ -1023,8 +1023,8 @@ export const blogPosts = [
         ],
       },
       {
-        id: "who-relay-is-for",
-        title: "Who Can Use Relay?",
+        id: "who-pacemailer-is-for",
+        title: "Who Can Use Pacemailer?",
         blocks: [
           {
             type: "list",
@@ -1038,13 +1038,13 @@ export const blogPosts = [
           },
           {
             type: "paragraph",
-            text: "Relay is not a guarantee of replies or inbox placement. It is a set of workflow tools that can save time when used with accurate data, thoughtful messaging, and respect for the person being contacted.",
+            text: "Pacemailer is not a guarantee of replies or inbox placement. It is a set of workflow tools that can save time when used with accurate data, thoughtful messaging, and respect for the person being contacted.",
           },
         ],
       },
       {
         id: "getting-started",
-        title: "How to Get Started With Relay",
+        title: "How to Get Started With Pacemailer",
         blocks: [
           {
             type: "steps",
@@ -1055,7 +1055,7 @@ export const blogPosts = [
               },
               {
                 title: "Review a LinkedIn profile",
-                text: "Open the profile in your browser and inspect the details Relay identifies.",
+                text: "Open the profile in your browser and inspect the details Pacemailer identifies.",
               },
               {
                 title: "Check an email route",
@@ -1073,7 +1073,7 @@ export const blogPosts = [
           },
           {
             type: "paragraph",
-            text: "Relay has Free, Core, and Pro account tiers, with different features and limits. Check the current pricing page for the latest allowances instead of relying on numbers in an older blog post.",
+            text: "Pacemailer has Free, Core, and Pro account tiers, with different features and limits. Check the current pricing page for the latest allowances instead of relying on numbers in an older blog post.",
           },
           {
             type: "internalLink",
@@ -1090,7 +1090,7 @@ export const blogPosts = [
     category: "LinkedIn",
     title: "Recruiter Outreach on LinkedIn: A Practical Guide",
     description:
-      "A guide to researching candidates on LinkedIn and using Relay email verification, templates, sending controls, and contact history responsibly.",
+      "A guide to researching candidates on LinkedIn and using Pacemailer email verification, templates, sending controls, and contact history responsibly.",
     date: "Sep 8, 2026",
     publishedAt: "2026-09-08",
     updatedAt: "2026-10-10",
@@ -1099,7 +1099,7 @@ export const blogPosts = [
     image: "/blog/recruiter-outreach-guide.svg",
     imageAlt: "Recruiter candidate profiles connected to a professional email",
     intro:
-      "Candidate outreach works best when the opportunity is specific and the message respects the person receiving it. This guide shows a realistic recruiting workflow using LinkedIn research and Relay for contact organization, email verification, reusable messages, and follow-up history.",
+      "Candidate outreach works best when the opportunity is specific and the message respects the person receiving it. This guide shows a realistic recruiting workflow using LinkedIn research and Pacemailer for contact organization, email verification, reusable messages, and follow-up history.",
     sections: [
       {
         id: "define-opportunity",
@@ -1126,7 +1126,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "Use LinkedIn to understand a candidate's professional background, including current company, publicly described projects, skills, and likely role fit. Relay's extension can help move available profile details into a contact record while you are already viewing the profile.",
+            text: "Use LinkedIn to understand a candidate's professional background, including current company, publicly described projects, skills, and likely role fit. Pacemailer's extension can help move available profile details into a contact record while you are already viewing the profile.",
           },
           {
             type: "steps",
@@ -1141,7 +1141,7 @@ export const blogPosts = [
               },
               {
                 title: "Save an accurate contact",
-                text: "Use Relay's contact management to preserve relevant context and prevent duplicate or contradictory outreach.",
+                text: "Use Pacemailer's contact management to preserve relevant context and prevent duplicate or contradictory outreach.",
               },
               {
                 title: "Choose an appropriate channel",
@@ -1157,11 +1157,11 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "Relay can show masked availability results for certain existing email matches. If the match is relevant, you can choose to reveal it using the applicable daily reveal quota. If no suitable match is available, you may have a company-email-format path for generating a possible work address, but a generated address is not verified.",
+            text: "Pacemailer can show masked availability results for certain existing email matches. If the match is relevant, you can choose to reveal it using the applicable daily reveal quota. If no suitable match is available, you may have a company-email-format path for generating a possible work address, but a generated address is not verified.",
           },
           {
             type: "paragraph",
-            text: "When you have a candidate address, review its domain and available verification status. Relay's Verify & Send option is available on eligible plans. An unknown verification result should not be presented as confirmed delivery, and a technical check does not grant permission to message someone.",
+            text: "When you have a candidate address, review its domain and available verification status. Pacemailer's Verify & Send option is available on eligible plans. An unknown verification result should not be presented as confirmed delivery, and a technical check does not grant permission to message someone.",
           },
           {
             type: "list",
@@ -1185,7 +1185,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "A strong recruiting message identifies the role, briefly explains the fit, and offers a simple next step. Use Relay templates to avoid repetitive editing, while adding one genuine observation about the person. Fields such as {{firstName}} and {{company}} can be populated using supported contact data; role-specific placeholders below need manual editing or configured custom variables.",
+            text: "A strong recruiting message identifies the role, briefly explains the fit, and offers a simple next step. Use Pacemailer templates to avoid repetitive editing, while adding one genuine observation about the person. Fields such as {{firstName}} and {{company}} can be populated using supported contact data; role-specific placeholders below need manual editing or configured custom variables.",
           },
           {
             type: "template",
@@ -1219,7 +1219,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "Relay can send through connected Gmail and Microsoft email accounts and process queued sending tasks. Its sending-speed controls help you manage when messages are sent. Use them with the sending limits of your account and the applicable rules of your email provider.",
+            text: "Pacemailer can send through connected Gmail and Microsoft email accounts and process queued sending tasks. Its sending-speed controls help you manage when messages are sent. Use them with the sending limits of your account and the applicable rules of your email provider.",
           },
           {
             type: "paragraph",
@@ -1238,7 +1238,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "paragraph",
-            text: "Use Relay's contact history and dashboard to review the messages associated with each candidate and avoid repeated approaches from different searches. Some tiers also provide email-open tracking and email activity analytics. Open tracking is imperfect because mail clients may block or preload images.",
+            text: "Use Pacemailer's contact history and dashboard to review the messages associated with each candidate and avoid repeated approaches from different searches. Some tiers also provide email-open tracking and email activity analytics. Open tracking is imperfect because mail clients may block or preload images.",
           },
           {
             type: "steps",
@@ -1263,7 +1263,7 @@ export const blogPosts = [
           },
           {
             type: "paragraph",
-            text: "A reliable recruiting workflow should make candidates feel informed and respected. Relay helps maintain the research-to-outreach steps so you can spend more time having useful conversations.",
+            text: "A reliable recruiting workflow should make candidates feel informed and respected. Pacemailer helps maintain the research-to-outreach steps so you can spend more time having useful conversations.",
           },
           {
             type: "internalLink",

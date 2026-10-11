@@ -664,7 +664,7 @@ export default function HomeSvg({
                 <use href={`#${symbolPrefix}-lee-i-send`} />
               </svg>
             </span>
-            <strong>Job Mailr</strong>
+            <strong>PaceMailer</strong>
             <span className="lee-panel-menu">
               <svg
                 className="lee-icon "

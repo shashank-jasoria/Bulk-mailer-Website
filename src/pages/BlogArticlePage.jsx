@@ -34,7 +34,7 @@ function useArticleMetadata(article) {
     const articleUrl = `${siteUrl}/blog/${article.slug}`;
     const imageUrl = `${siteUrl}/blog/og/${article.slug}.png`;
 
-    document.title = `${article.title} | Relay Blog`;
+    document.title = `${article.title} | Pacemailer Blog`;
 
     function setMeta(key, value, property = false) {
       const attr = property ? "property" : "name";
@@ -66,7 +66,7 @@ function useArticleMetadata(article) {
     setMeta("og:image", imageUrl, true);
     setMeta("og:image:width", "1200", true);
     setMeta("og:image:height", "630", true);
-    setMeta("og:site_name", "Relay", true);
+    setMeta("og:site_name", "Pacemailer", true);
     setMeta("article:published_time", article.publishedAt, true);
     setMeta("twitter:card", "summary_large_image");
     setMeta("twitter:title", article.title);
@@ -99,7 +99,7 @@ function useArticleMetadata(article) {
         datePublished: article.publishedAt,
         dateModified: article.updatedAt ?? article.publishedAt,
         author: { "@type": "Person", name: article.author },
-        publisher: { "@type": "Organization", name: "Relay", url: siteUrl },
+        publisher: { "@type": "Organization", name: "Pacemailer", url: siteUrl },
         mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
         inLanguage: "en",
       },
@@ -126,7 +126,7 @@ function useArticleMetadata(article) {
     schemas.forEach((schema) => {
       const script = document.createElement("script");
       script.type = "application/ld+json";
-      script.dataset.relayBlogSchema = "true";
+      script.dataset.PacemailerBlogSchema = "true";
       script.textContent = JSON.stringify(schema).replace(/</g, "\\u003c");
       document.head.appendChild(script);
       cleanups.push(() => script.remove());
@@ -522,11 +522,11 @@ export default function BlogArticlePage() {
               </span>
               <h3>Make outreach simpler</h3>
               <p>
-                Explore Relay's tools for more organized, thoughtful email
+                Explore Pacemailer's tools for more organized, thoughtful email
                 outreach.
               </p>
               <Link to="/pricing">
-                Explore Relay <ArrowRight size={16} />
+                Explore Pacemailer <ArrowRight size={16} />
               </Link>
             </div> */}
           </aside>

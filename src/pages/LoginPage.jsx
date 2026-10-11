@@ -7,7 +7,7 @@ export default function LoginPage({ onGoogleLogin, onOutlookLogin }) {
         <div className="login-brand">
           <LogoIcon />
 
-          <span className="login-brand-name">SpeedyApply</span>
+          <span className="login-brand-name">PaceMailer</span>
         </div>
 
         <div className="login-content">
@@ -46,7 +46,7 @@ export default function LoginPage({ onGoogleLogin, onOutlookLogin }) {
         </div>
 
         <footer className="login-footer">
-          By continuing, you agree to SpeedyApply&apos;s{" "}
+          By continuing, you agree to PaceMailer&apos;s{" "}
           <a href="/terms">Terms of Service</a> and{" "}
           <a href="/privacy">Privacy Policy</a>, and to receive periodic emails
           with updates.

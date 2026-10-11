@@ -262,7 +262,7 @@ export default function Pricing({ user, account, authLoading }) {
   //   }
 
   //   if (tier.key === "FREE") {
-  //     return "Explore Relay with essential features";
+  //     return "Explore Pacemailer with essential features";
   //   }
 
   //   // Plan changes take priority because

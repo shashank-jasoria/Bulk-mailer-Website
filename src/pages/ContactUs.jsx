@@ -16,7 +16,7 @@ const faqItems = [
   {
     question: "How does the extension work?",
     answer:
-      "Install the extension, sign in to your account, and Relay will be ready to use from your browser.",
+      "Install the extension, sign in to your account, and Pacemailer will be ready to use from your browser.",
   },
   {
     question: "Is my data safe?",
@@ -26,7 +26,7 @@ const faqItems = [
   {
     question: "Can I use it on multiple devices?",
     answer:
-      "Yes. Sign in with the same Relay account on each supported device.",
+      "Yes. Sign in with the same Pacemailer account on each supported device.",
   },
   {
     question: "Do you offer refunds?",
@@ -36,7 +36,7 @@ const faqItems = [
   {
     question: "Where can I manage my subscription?",
     answer:
-      "You can manage your subscription from your Relay account settings.",
+      "You can manage your subscription from your Pacemailer account settings.",
   },
 ];
 
@@ -293,8 +293,8 @@ export default function ContactUs() {
                 icon={<Mail size={25} />}
                 title="Email Support"
                 description="For general queries and support"
-                linkText="support@relayapp.com"
-                href="mailto:support@relayapp.com"
+                linkText="support@pacemailer.com"
+                href="mailto:support@pacemailer.com"
               />
               {/* 
               <SupportCard

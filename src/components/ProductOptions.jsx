@@ -153,7 +153,8 @@ const productSections = [
       {
         icon: Save,
         title: "Auto-save while you work",
-        description: "Let Relay save contacts automatically as you browse.",
+        description:
+          "Let Pacemailer save contacts automatically as you browse.",
       },
       {
         icon: Users,
@@ -221,13 +222,13 @@ const productSections = [
     eyebrow: "Email discovery",
     title: "Find the right email, your way.",
     description:
-      "Use Relay's email tools to find an address, discover a company's pattern, or generate one automatically.",
+      "Use Pacemailer's email tools to find an address, discover a company's pattern, or generate one automatically.",
     features: [
       {
         icon: Search,
         title: "Use email finding tools",
         description:
-          "Already have an email finder? Use the address directly in Relay.",
+          "Already have an email finder? Use the address directly in Pacemailer.",
       },
       {
         icon: SlidersHorizontal,
@@ -239,7 +240,7 @@ const productSections = [
         icon: Sparkles,
         title: "Generate emails automatically",
         description:
-          "Set the format once and let Relay generate emails for new contacts.",
+          "Set the format once and let Pacemailer generate emails for new contacts.",
       },
     ],
   },

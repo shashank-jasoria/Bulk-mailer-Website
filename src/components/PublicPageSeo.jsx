@@ -39,7 +39,8 @@ export default function PublicPageSeo() {
     const canonical = siteUrl + path;
 
     if (!seo) {
-      document.title = path === "/login" ? "Sign In | Relay" : "Relay";
+      document.title =
+        path === "/login" ? "Sign In | Pacemailer" : "Pacemailer";
       setMeta("robots", "noindex, nofollow");
       document.head.querySelector('link[rel="canonical"]')?.remove();
       return;
@@ -49,7 +50,7 @@ export default function PublicPageSeo() {
     setMeta("description", seo.description);
     setMeta("robots", "index, follow, max-image-preview:large");
     setMeta("og:type", "website", true);
-    setMeta("og:site_name", "Relay", true);
+    setMeta("og:site_name", "Pacemailer", true);
     setMeta("og:title", seo.title, true);
     setMeta("og:description", seo.description, true);
     setMeta("og:url", canonical, true);

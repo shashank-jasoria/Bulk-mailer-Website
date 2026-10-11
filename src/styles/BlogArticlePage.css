@@ -1,7 +1,3 @@
-/* Relay blog article template. Theme colors come from src/styles/theme.css.
-   All text sizes and spacing use px, intentionally independent of the site-wide
-   html font-size (62.5% and responsive overrides). */
-
 .relay-article-page {
   min-height: 100vh;
   background: var(--bg-app);
