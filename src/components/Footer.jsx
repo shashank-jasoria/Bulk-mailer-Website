@@ -26,7 +26,7 @@ export default function Footer({ site, darkMode }) {
               </div>
 
               <div className="site-footer__brand-text">
-                <h2>SpeedyApply</h2>
+                <h2>PaceMailer</h2>
                 <p>LinkedIn Email Extractor</p>
               </div>
             </div>
@@ -66,7 +66,7 @@ export default function Footer({ site, darkMode }) {
                 <Link
                   to="/blog"
                   className="site-header__brand"
-                  aria-label="Relay Blog"
+                  aria-label="Pacemailer Blog"
                 >
                   Blog
                 </Link>
@@ -86,7 +86,7 @@ export default function Footer({ site, darkMode }) {
 
           {/* Copyright */}
           <p className="site-footer__copyright">
-            © 2026 SpeedyApply. All rights reserved.
+            © 2026 PaceMailer. All rights reserved.
           </p>
         </div>
       </footer>
@@ -112,7 +112,7 @@ function OutreachBanner({ darkMode }) {
           <div className="outreach-banner__badge">
             <Zap size={15} />
             <span>
-              Get started with <strong>Relay</strong>
+              Get started with <strong>Pacemailer</strong>
             </span>
           </div>
 
@@ -122,7 +122,7 @@ function OutreachBanner({ darkMode }) {
 
           <p className="outreach-banner__subtitle">
             Send cold emails faster, get more interviews, and land your next job
-            with Relay..
+            with Pacemailer.
           </p>
 
           <div className="outreach-banner__cta">

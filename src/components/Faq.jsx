@@ -10,7 +10,7 @@ export default function Faq() {
         <div className="section-heading reveal">
           {/* <p className="section-kicker">Questions</p> */}
           <h2 className="faq-heading">Any Questions.</h2>
-          <p>Learn More about Relay and how it can help you .</p>
+          <p>Learn More about Pacemailer and how it can help you .</p>
         </div>
 
         <div className="faq-list reveal reveal--delay">

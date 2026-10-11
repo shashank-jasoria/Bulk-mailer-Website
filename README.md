@@ -1,6 +1,6 @@
-# Relay landing site
+# PaceMailer landing site
 
-A React/Vite landing page for the temporary product name **Relay**.
+A React/Vite landing page for the temporary product name **PaceMailer**.
 
 ## Run locally
 
@@ -30,7 +30,7 @@ Replace a placeholder with your own `<img>`, `<video>`, screenshot component, or
 
 ## Notes
 
-- `Relay` is intentionally kept as a temporary name.
+- `PaceMailer` is intentionally kept as a temporary name.
 - Chrome Store, login, docs, support, legal, and checkout links are placeholders (`#`).
 - Pricing is described as regional rather than hardcoding unfinished amounts.
 - Dark mode is included and stored in `localStorage`.

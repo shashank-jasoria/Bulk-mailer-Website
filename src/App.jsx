@@ -20,12 +20,14 @@ import BlogPage from "./pages/BlogPage.jsx";
 import BlogArticlePage from "./pages/BlogArticlePage";
 import PublicPageSeo from "./components/PublicPageSeo.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
+import PacemailerPrivacyPolicy from "./pages/PacemailerPrivacyPolicy.jsx";
+import PacemailerTermsOfService from "./pages/TermsOfService.jsx";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window === "undefined") return false;
 
-    return window.localStorage.getItem("relay-theme") === "dark";
+    return window.localStorage.getItem("Pacemailer-theme") === "dark";
   });
   const [user, setUser] = useState(null);
   const [account, setAccount] = useState(null);
@@ -68,7 +70,10 @@ export default function App() {
   useEffect(() => {
     document.documentElement.classList.toggle("dark", darkMode);
 
-    window.localStorage.setItem("relay-theme", darkMode ? "dark" : "light");
+    window.localStorage.setItem(
+      "Pacemailer-theme",
+      darkMode ? "dark" : "light",
+    );
   }, [darkMode]);
 
   async function handleLogout() {
@@ -166,6 +171,8 @@ export default function App() {
           <Route path="contact" element={<ContactUs />} />
           <Route path="blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogArticlePage />} />
+          <Route path="privacy-policy" element={<PacemailerPrivacyPolicy />} />
+          <Route path="terms" element={<PacemailerTermsOfService />} />
         </Route>
 
         {/* Authentication pages */}

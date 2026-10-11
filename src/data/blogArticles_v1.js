@@ -1,9 +1,3 @@
-/**
- * Content for the blog listing AND individual article pages.
- * Add a new object to publish another article using the same layout.
- * All dates are ISO strings for valid <time> elements and SEO metadata.
- * Review article copy, author, and dates before publishing.
- */
 export const blogPosts = [
   {
     id: 1,

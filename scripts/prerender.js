@@ -127,7 +127,7 @@ async function setStaticMetadata(page, details) {
       setMeta("name", "robots", "index, follow, max-image-preview:large");
 
       setMeta("property", "og:type", "website");
-      setMeta("property", "og:site_name", "Relay");
+      setMeta("property", "og:site_name", "Pacemailer");
       setMeta("property", "og:title", title);
       setMeta("property", "og:description", description);
       setMeta("property", "og:url", canonical);
@@ -182,7 +182,7 @@ async function setArticleMetadata(page, article) {
       }
 
       // Page title
-      document.title = `${post.title} | Relay Blog`;
+      document.title = `${post.title} | PaceMailer Blog`;
 
       // Standard SEO metadata
       setMeta("name", "description", post.description);
@@ -191,7 +191,7 @@ async function setArticleMetadata(page, article) {
 
       // Open Graph
       setMeta("property", "og:type", "article");
-      setMeta("property", "og:site_name", "Relay");
+      setMeta("property", "og:site_name", "PaceMailer");
       setMeta("property", "og:title", post.title);
 
       setMeta("property", "og:description", post.description);
@@ -223,9 +223,9 @@ async function setArticleMetadata(page, article) {
 
       canonical.href = articleUrl;
 
-      // Remove existing Relay article JSON-LD.
+      // Remove existing Pacemailer article JSON-LD.
       document
-        .querySelectorAll('script[data-relay-blog-schema="true"]')
+        .querySelectorAll('script[data-pacemailer-blog-schema="true"]')
         .forEach((element) => element.remove());
 
       // BlogPosting structured data
@@ -249,7 +249,7 @@ async function setArticleMetadata(page, article) {
 
         publisher: {
           "@type": "Organization",
-          name: "Relay",
+          name: "Pacemailer",
           url: baseUrl,
         },
 
@@ -289,7 +289,7 @@ async function setArticleMetadata(page, article) {
 
         script.type = "application/ld+json";
 
-        script.dataset.relayBlogSchema = "true";
+        script.dataset.pacemailerBlogSchema = "true";
 
         script.textContent = JSON.stringify(schema).replace(/</g, "\\u003c");
 

@@ -81,7 +81,7 @@ export default function Navbar({
       return null;
     }
     if (tier.key === "FREE") {
-      return "Explore Relay with essential features";
+      return "Explore Pacemailer with essential features";
     }
     if (subscription?.cancelAtPeriodEnd && subscription?.currentPeriodEnd) {
       return `Plan ends on ${formatPlanDate(subscription.currentPeriodEnd)}`;
@@ -115,11 +115,15 @@ export default function Navbar({
     >
       <div className="site-header__inner">
         {/* Brand */}
-        <Link to="/" className="site-header__brand" aria-label="Relay home">
+        <Link
+          to="/"
+          className="site-header__brand"
+          aria-label="Pacemailer home"
+        >
           <RelayLogo />
 
           <span className="site-header__brand-name">
-            Rel<span className="site-header__brand-diamond">a</span>y
+            Pace<span className="site-header__brand-diamond">Mail</span>er
           </span>
         </Link>
 
