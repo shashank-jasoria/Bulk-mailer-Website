@@ -504,7 +504,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.28em;
-  font-size: 0.81em;
+  font-size: 1em;
   font-weight: 620;
 }
 .lee-message-meta > span:last-child {
