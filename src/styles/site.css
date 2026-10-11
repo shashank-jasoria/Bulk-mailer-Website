@@ -368,7 +368,7 @@ a:focus-visible {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  grid-template-columns: 0.8fr 1.2fr;
   align-items: center;
   gap: 72px;
 }
@@ -403,7 +403,7 @@ a:focus-visible {
 .hero h1 {
   max-width: 720px;
   margin: 0;
-  font-size: 6rem;
+  font-size: 5rem;
   line-height: 1.05;
   letter-spacing: -2px;
   font-weight: 790;

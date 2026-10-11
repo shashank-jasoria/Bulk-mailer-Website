@@ -1,0 +1,1439 @@
+.lee-hero {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  color: var(--text-primary);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+  container: lee-hero / inline-size;
+  isolation: isolate;
+}
+.lee-hero,
+.lee-hero * {
+  box-sizing: border-box;
+}
+.lee-hero h3,
+.lee-hero p {
+  margin: 0;
+}
+.lee-symbols {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+.lee-icon {
+  width: 1.35em;
+  height: 1.35em;
+  flex: 0 0 auto;
+  display: inline-block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vertical-align: middle;
+}
+.lee-artboard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1280 / 1080;
+  font-size: 1.6cqi;
+}
+.lee-backdrop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.lee-ambient {
+  position: absolute;
+  inset: 4% -1% 0;
+  /* background: radial-gradient(
+    ellipse at 62% 53%,
+    var(--pricing-glow-purple-strong),
+    transparent 61%
+  ); */
+  pointer-events: none;
+}
+.lee-orbit {
+  position: absolute;
+  border: 1px solid var(--accent-border);
+  border-radius: 50%;
+  opacity: 0.36;
+  pointer-events: none;
+}
+.lee-orbit--one {
+  width: 88%;
+  height: 71%;
+  top: 15%;
+  left: 4%;
+  transform: rotate(-13deg);
+}
+.lee-orbit--two {
+  width: 77%;
+  height: 93%;
+  top: 0;
+  left: 13%;
+  transform: rotate(39deg);
+  opacity: 0.16;
+}
+.lee-workflow-label {
+  position: absolute;
+  left: 7%;
+  top: 3.5%;
+  display: flex;
+  gap: 0.85em;
+  align-items: center;
+  font-size: 0.9em;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.lee-workflow-label > .lee-icon {
+  width: 1.25em;
+  color: var(--accent-text);
+}
+.lee-linkedin-mark {
+  display: grid;
+  place-items: center;
+  width: 1.8em;
+  height: 1.8em;
+  border: 1px solid var(--accent-border);
+  border-radius: 0.4em;
+  background: var(--accent-light);
+  color: var(--accent-text);
+  font-size: 1.15em;
+  font-weight: 750;
+  letter-spacing: -0.07em;
+  padding-right: 0.08em;
+}
+
+/* Browser chrome */
+.lee-browser {
+  position: absolute;
+  inset: 11% 5.6% 9%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-secondary);
+  border-radius: 1.3em;
+  box-shadow:
+    0 2.4em 6em -2.5em var(--login-illustration-shadow),
+    var(--shadow-lg),
+    0 0 0 0.4em var(--bg-primary);
+}
+.lee-tabbar {
+  display: flex;
+  align-items: center;
+  gap: 1.2em;
+  height: 2.8em;
+  flex: 0 0 auto;
+  padding: 0.5em 1.2em 0;
+  background: var(--bg-secondary);
+}
+.lee-window-dots {
+  display: flex;
+  gap: 0.42em;
+  align-self: center;
+  padding-bottom: 0.45em;
+}
+.lee-window-dots i {
+  width: 0.64em;
+  height: 0.64em;
+  border-radius: 50%;
+  background: var(--danger);
+}
+.lee-window-dots i:nth-child(2) {
+  background: var(--warning);
+}
+.lee-window-dots i:nth-child(3) {
+  background: var(--success);
+}
+.lee-browser-tab {
+  min-width: 18em;
+  height: 100%;
+  padding: 0 1em;
+  display: flex;
+  align-items: center;
+  gap: 0.65em;
+  background: var(--bg-primary);
+  border-radius: 0.75em 0.75em 0 0;
+  font-size: 0.84em;
+  color: var(--text-secondary);
+}
+.lee-browser-tab > .lee-icon {
+  color: var(--accent-text);
+  width: 1.25em;
+}
+.lee-tab-close {
+  margin-left: auto;
+  font-size: 1.45em;
+  font-weight: 300;
+}
+.lee-new-tab {
+  width: 1.05em;
+  margin-top: -0.3em;
+  color: var(--text-muted);
+}
+.lee-addressbar {
+  display: flex;
+  align-items: center;
+  gap: 1.05em;
+  height: 3.05em;
+  padding: 0.45em 1.3em;
+  border-bottom: 1px solid var(--border-primary);
+  color: var(--text-muted);
+}
+.lee-addressbar > .lee-icon {
+  width: 1.05em;
+  height: 1.05em;
+}
+.lee-back {
+  transform: rotate(180deg);
+}
+.lee-forward {
+  opacity: 0.45;
+}
+.lee-address {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  flex: 1;
+  height: 2.25em;
+  padding: 0 1em;
+  background: var(--bg-secondary);
+  border-radius: 1.4em;
+  font-size: 0.8em;
+  letter-spacing: 0.02em;
+}
+.lee-address > .lee-icon {
+  width: 1em;
+}
+.lee-extension-button {
+  display: grid;
+  place-items: center;
+  width: 1.85em;
+  height: 1.85em;
+  border-radius: 0.5em;
+  background: var(--accent);
+  color: var(--text-on-accent);
+  box-shadow: var(--shadow-sm);
+}
+.lee-extension-button .lee-icon {
+  width: 1.2em;
+}
+.lee-workspace {
+  flex: 1;
+  display: grid;
+  /* grid-template-columns: 61% 39%; */
+  min-height: 0;
+}
+
+/* Gmail-style workspace */
+.lee-mail-app {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg-app);
+}
+.lee-mail-header {
+  display: flex;
+  align-items: center;
+  gap: 1.1em;
+  height: 5.4em;
+  padding: 0 1.45em;
+  flex-shrink: 0;
+}
+.lee-gmail-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65em;
+  font-size: 1.6em;
+  font-weight: 520;
+  letter-spacing: -0.03em;
+}
+.lee-gmail-brand > .lee-icon {
+  width: 0.8em;
+  margin-right: 0.2em;
+  color: var(--text-secondary);
+}
+.lee-gmail-mark {
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+}
+.lee-gmail-mark .lee-icon {
+  width: 1.42em;
+  height: 1.42em;
+  stroke-width: 2.4;
+}
+.lee-mail-search {
+  display: flex;
+  gap: 0.7em;
+  align-items: center;
+  flex: 1;
+  height: 3.05em;
+  padding: 0 1.1em;
+  color: var(--text-muted);
+  background: var(--bg-tertiary);
+  border-radius: 1.8em;
+  font-size: 0.9em;
+  margin-left: 0.9em;
+}
+.lee-mail-search > .lee-icon:last-child {
+  margin-left: auto;
+}
+.lee-profile {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  width: 2.4em;
+  height: 2.4em;
+  background: var(--accent-light);
+  border: 1px solid var(--accent-border);
+  color: var(--accent-text);
+  font-size: 0.8em;
+  font-weight: 650;
+  flex: 0 0 auto;
+}
+.lee-mail-body {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+}
+.lee-mail-sidebar {
+  flex: 0 0 22%;
+  padding: 0.1em 0.7em 1em;
+}
+.lee-compose {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  border-radius: 1.1em;
+  padding: 1em 0.85em;
+  background: var(--accent-light);
+  color: var(--accent-text);
+  margin-bottom: 1.2em;
+  font-size: 0.88em;
+  font-weight: 650;
+}
+.lee-folder {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  height: 3.05em;
+  padding: 0 0.8em;
+  margin-bottom: 0.1em;
+  font-size: 0.87em;
+  color: var(--text-secondary);
+  border-radius: 0 1.7em 1.7em 0;
+}
+.lee-folder .lee-icon {
+  width: 1.35em;
+}
+.lee-folder small {
+  margin-left: auto;
+  font-size: 0.86em;
+}
+.lee-folder--active {
+  color: var(--accent-text);
+  background: var(--bg-active);
+  font-weight: 700;
+}
+.lee-sidebar-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2.6em 0.6em 1em;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+.lee-sidebar-label .lee-icon {
+  width: 1.1em;
+}
+.lee-label-item {
+  display: flex;
+  gap: 0.8em;
+  align-items: center;
+  margin: 1.25em 0.7em;
+  font-size: 0.85em;
+  color: var(--text-secondary);
+}
+.lee-label-item > span {
+  width: 0.6em;
+  height: 0.6em;
+  border: 1px solid var(--accent-border);
+  border-radius: 0.17em;
+  background: var(--accent-light);
+  transform: rotate(-45deg);
+}
+.lee-label-item:last-child > span {
+  background: var(--success-bg);
+  border-color: var(--success-border);
+}
+.lee-inbox {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  flex-direction: column;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-right: 0;
+  border-bottom: 0;
+  border-radius: 1.1em 0 0 0;
+  overflow: hidden;
+}
+.lee-inbox-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6em;
+  padding: 1.25em 1.55em 0.8em;
+}
+.lee-inbox-heading h3 {
+  font-size: 1.7em;
+  font-weight: 650;
+  letter-spacing: -0.04em;
+}
+.lee-inbox-heading p {
+  margin-top: 0.25em;
+  color: var(--text-muted);
+  font-size: 0.83em;
+}
+.lee-inbox-count {
+  color: var(--text-muted);
+  font-size: 0.75em;
+  white-space: nowrap;
+}
+.lee-mail-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  padding: 0.7em 1.5em 1em;
+  border-bottom: 1px solid var(--border-primary);
+  color: var(--text-muted);
+  padding-top: 0px;
+}
+.lee-mail-toolbar > .lee-icon {
+  width: 1.05em;
+  height: 1.05em;
+}
+.lee-mail-toolbar > .lee-icon:nth-child(2) {
+  width: 0.7em;
+  margin-left: -0.4em;
+}
+.lee-empty-check {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  border: 1.4px solid var(--border-hover);
+  border-radius: 0.2em;
+}
+.lee-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.45em;
+  margin-left: auto;
+  padding: 0.3em 0.65em;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 0.5em;
+  font-size: 0.78em;
+}
+.lee-filter .lee-icon {
+  width: 1.1em;
+  height: 1.1em;
+}
+.lee-messages {
+  position: relative;
+  min-height: 0;
+  flex: 1;
+  overflow: hidden;
+}
+.lee-messages::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 3em;
+  background: linear-gradient(transparent, var(--bg-primary));
+  pointer-events: none;
+}
+.lee-mail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7em;
+  padding: 0.95em 1.45em;
+  min-height: 7.3em;
+  border-bottom: 1px solid var(--border-primary);
+  background: var(--table-row);
+}
+.lee-mail-row:nth-child(2),
+.lee-mail-row:nth-child(4) {
+  background: var(--table-row-hover);
+}
+.lee-mail-row > .lee-empty-check {
+  margin-top: 0.1em;
+  width: 0.9em;
+  height: 0.9em;
+  opacity: 0.8;
+}
+.lee-star {
+  color: var(--border-hover);
+  width: 1em;
+  height: 1em;
+  margin-top: 0.05em;
+}
+.lee-message {
+  flex: 1;
+  min-width: 0;
+}
+.lee-message-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.28em;
+  font-size: 0.81em;
+  font-weight: 620;
+}
+.lee-message-meta > span:last-child {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 0.9em;
+}
+.lee-message-subject {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.88em;
+  font-weight: 580;
+}
+.lee-message-subject > span {
+  font-weight: 450;
+}
+.lee-message-preview {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-muted);
+  font-size: 0.78em;
+  margin-top: 0.2em;
+}
+.lee-attachment {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-top: 0.65em;
+  padding: 0.2em 0.7em 0.2em 0.45em;
+  border-radius: 1em;
+  border: 1px solid var(--border-secondary);
+  color: var(--text-secondary);
+  font-size: 0.72em;
+}
+.lee-attachment .lee-icon {
+  width: 1.15em;
+  height: 1.15em;
+  color: var(--danger);
+}
+.lee-mail-footnote {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  padding: 1em;
+  font-size: 0.73em;
+  color: var(--text-muted);
+}
+.lee-mail-footnote .lee-icon {
+  width: 0.95em;
+  height: 0.95em;
+}
+
+/* The extension, intentionally dark like the provided product screenshots. */
+.lee-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-left: 1px solid var(--border-primary);
+
+  /*  */
+  width: 40%;
+  position: absolute;
+  z-index: 999;
+  right: 0px;
+  bottom: 50%;
+  overflow: hidden;
+  transform: translate(50%, 50%) rotate(-3deg);
+  border: 1px solid var(--border-secondary);
+  border-radius: 1.35em;
+  box-shadow:
+    var(--shadow-lg),
+    0 1.8em 3.2em -2em var(--login-illustration-shadow);
+}
+.lee-panel-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  min-height: 3.6em;
+  padding: 0.6em 1.15em;
+  border-bottom: 1px solid var(--border-primary);
+  background: var(--header-bg);
+}
+.lee-panel-heading strong {
+  font-size: 0.95em;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.lee-product-icon {
+  display: grid;
+  place-items: center;
+  width: 2em;
+  height: 2em;
+  background: var(--accent);
+  color: var(--text-on-accent);
+  border-radius: 0.55em;
+}
+.lee-product-icon .lee-icon {
+  width: 1.22em;
+}
+.lee-panel-menu {
+  margin-left: auto;
+  color: var(--text-muted);
+}
+.lee-panel-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-primary);
+  padding: 0 1.15em;
+}
+.lee-panel-tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  flex: 1;
+  padding: 0.95em 0 0.9em;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.lee-panel-tab .lee-icon {
+  width: 1.05em;
+  height: 1.05em;
+}
+.lee-panel-tab--active {
+  color: var(--accent-text);
+}
+.lee-panel-tab--active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+}
+.lee-panel-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
+  padding: 1.2em 1.1em 0.9em;
+  /* background-image: radial-gradient(
+    var(--pattern-detail) 0.6px,
+    transparent 0.6px
+  ); */
+  background-size: 1.15em 1.15em;
+}
+.lee-contacts-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  margin-bottom: 1.05em;
+}
+.lee-contact-icon {
+  display: grid;
+  place-items: center;
+  width: 2.65em;
+  height: 2.65em;
+  border: 1px solid var(--accent-border);
+  border-radius: 0.8em;
+  background: var(--accent-light);
+  color: var(--accent-text);
+}
+.lee-contact-icon .lee-icon {
+  width: 1.35em;
+  height: 1.35em;
+}
+.lee-contacts-heading h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: 1em;
+  font-weight: 620;
+}
+.lee-contacts-heading h3 > span {
+  border-radius: 0.35em;
+  padding: 0.18em 0.45em;
+  color: var(--accent-text);
+  background: var(--accent-light);
+  font-size: 0.82em;
+  font-weight: 650;
+}
+.lee-contacts-heading p {
+  color: var(--text-muted);
+  font-size: 0.72em;
+  margin-top: 0.2em;
+}
+.lee-contacts-heading > .lee-icon {
+  margin-left: auto;
+  color: var(--text-muted);
+  width: 1.2em;
+}
+.lee-contact-tools {
+  display: flex;
+  gap: 0.6em;
+  margin-bottom: 0.8em;
+}
+.lee-contact-search {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  min-width: 0;
+  flex: 1;
+  height: 2.9em;
+  padding: 0 0.85em;
+  border: 1px solid var(--border-secondary);
+  border-radius: 0.6em;
+  background: var(--bg-input);
+  color: var(--text-placeholder);
+  font-size: 0.79em;
+}
+.lee-contact-search .lee-icon {
+  width: 1.1em;
+}
+.lee-rate {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  padding: 0 0.6em;
+  border: 1px solid var(--border-primary);
+  border-radius: 0.6em;
+  background: var(--bg-secondary);
+  font-size: 0.76em;
+  white-space: nowrap;
+}
+.lee-rate strong {
+  font-weight: 550;
+}
+.lee-rate > .lee-icon:first-child {
+  color: var(--accent-text);
+  width: 1.3em;
+}
+.lee-rate > .lee-icon:last-child {
+  width: 0.8em;
+  color: var(--text-muted);
+}
+.lee-selection-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5em;
+  margin-bottom: 1em;
+}
+.lee-delete,
+.lee-send-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  height: 2.9em;
+  border-radius: 0.55em;
+  padding: 0 0.9em;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+.lee-delete {
+  color: var(--danger);
+  background: var(--bg-primary);
+  border: 1px solid var(--danger-border);
+}
+.lee-delete > .lee-icon {
+  width: 1.2em;
+}
+.lee-send-button {
+  color: var(--text-on-accent);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+.lee-send-button > .lee-icon {
+  width: 1.2em;
+}
+.lee-send-button > span {
+  display: grid;
+  place-items: center;
+  min-width: 1.8em;
+  padding: 0.06em 0.35em;
+  border-radius: 0.3em;
+  background: color-mix(in srgb, var(--text-on-accent) 17%, transparent);
+  font-size: 0.88em;
+}
+.lee-verify-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  padding: 0.85em 0.7em;
+  background: var(--accent-light);
+  border: 1px solid var(--accent-border);
+  border-radius: 0.8em;
+  margin-bottom: 1em;
+}
+.lee-verify-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6em;
+  height: 2.6em;
+  color: var(--accent-text);
+  background: var(--bg-primary);
+  border-radius: 0.75em;
+  flex-shrink: 0;
+}
+.lee-verify-icon .lee-icon {
+  width: 1.4em;
+  height: 1.4em;
+}
+.lee-verify-banner strong {
+  display: block;
+  font-size: 0.78em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.lee-verify-banner p {
+  color: var(--text-secondary);
+  font-size: 0.7em;
+  margin-top: 0.32em;
+}
+.lee-verify-banner > .lee-icon {
+  margin-left: auto;
+  width: 1.1em;
+  color: var(--accent-text);
+}
+.lee-contacts-table {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-primary);
+  border-radius: 0.7em;
+  overflow: hidden;
+  background: var(--table-row);
+  min-height: 0;
+  flex: 1;
+}
+.lee-table-heading,
+.lee-contact-row {
+  display: grid;
+  grid-template-columns: 1.75em minmax(0, 1fr) 5.3em;
+  gap: 0.55em;
+  align-items: center;
+}
+.lee-table-heading {
+  flex-shrink: 0;
+  height: 3em;
+  padding: 0 0.75em;
+  background: var(--table-header);
+  color: var(--text-secondary);
+  font-size: 0.77em;
+  font-weight: 600;
+}
+.lee-contact-row {
+  flex: 1;
+  min-height: 3.2em;
+  padding: 0.3em 0.75em;
+  border-top: 1px solid var(--border-primary);
+  font-size: 0.8em;
+  background: var(--table-row);
+}
+.lee-contact-row:nth-child(3) {
+  background: var(--table-row-hover);
+}
+.lee-check {
+  display: grid;
+  place-items: center;
+  width: 1.4em;
+  height: 1.4em;
+  border-radius: 0.37em;
+  color: var(--text-on-accent);
+  background: var(--accent);
+}
+.lee-check .lee-icon {
+  width: 1.02em;
+  height: 1.02em;
+  stroke-width: 2.6;
+}
+.lee-person {
+  display: flex;
+  align-items: center;
+  gap: 0.65em;
+  min-width: 0;
+}
+.lee-person > span:last-child {
+  min-width: 0;
+}
+.lee-person strong {
+  display: block;
+  font-size: 0.95em;
+  font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.lee-person small {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.79em;
+  margin-top: 0.28em;
+  color: var(--text-muted);
+}
+.lee-avatar {
+  display: grid;
+  place-items: center;
+  width: 2.35em;
+  height: 2.35em;
+  flex-shrink: 0;
+  border-radius: 50%;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+.lee-avatar--violet {
+  color: var(--accent-text);
+  background: var(--accent-light);
+  border: 1px solid var(--accent-border);
+}
+.lee-avatar--green {
+  color: var(--success);
+  background: var(--success-bg);
+  border: 1px solid var(--success-border);
+}
+.lee-avatar--blue {
+  color: var(--heatmap-accent);
+  background: var(--heatmap-accent-soft);
+  border: 1px solid var(--heatmap-summary-border);
+}
+.lee-company {
+  font-size: 0.85em;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lee-panel-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  margin-top: 0.85em;
+  color: var(--text-muted);
+  font-size: 0.71em;
+}
+.lee-panel-footer > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 0.55em;
+  color: var(--accent-text);
+}
+.lee-panel-footer i {
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  background: var(--accent-text);
+}
+
+/* Floating layers are intentionally outside the browser's overflow boundary. */
+.lee-floating {
+  position: absolute;
+  z-index: 3;
+}
+.lee-ready-card {
+  top: 5.2%;
+  right: 1.1%;
+  width: 28%;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 1em 0.75em;
+  border: 1px solid var(--validation-submit-border);
+  border-radius: 1.15em;
+  color: var(--text-on-accent);
+  background: linear-gradient(
+    115deg,
+    var(--validation-submit-gradient-start),
+    var(--validation-submit-gradient-end)
+  );
+  box-shadow:
+    0 1.25em 2.4em -0.65em var(--validation-submit-shadow),
+    var(--shadow-md);
+  animation: lee-drift 7s ease-in-out infinite;
+}
+.lee-ready-icon {
+  display: grid;
+  place-items: center;
+  width: 3em;
+  height: 3em;
+  background: color-mix(in srgb, var(--text-on-accent) 13%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text-on-accent) 22%, transparent);
+  border-radius: 0.9em;
+  flex-shrink: 0;
+}
+.lee-ready-icon .lee-icon {
+  width: 1.65em;
+  height: 1.65em;
+}
+.lee-ready-card strong {
+  display: block;
+  font-size: 1.18em;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+}
+.lee-ready-card > div > span {
+  display: block;
+  font-size: 1em;
+  margin-top: 0.3em;
+  opacity: 0.85;
+}
+.lee-ready-check {
+  display: grid;
+  place-items: center;
+  width: 1.65em;
+  height: 1.65em;
+  margin-left: auto;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--text-on-accent) 35%, transparent);
+}
+.lee-ready-check .lee-icon {
+  width: 0.95em;
+  height: 0.95em;
+  stroke-width: 2;
+}
+.lee-collection-card {
+  left: 0.8%;
+  bottom: -4%;
+  width: 37.2%;
+  padding: 1em;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-secondary);
+  border-radius: 1.35em;
+  box-shadow:
+    var(--shadow-lg),
+    0 1.8em 3.2em -2em var(--login-illustration-shadow);
+  animation: lee-drift 8s ease-in-out -2s infinite;
+}
+.lee-collection-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 1em;
+  font-weight: 620;
+}
+.lee-collection-title > span:last-child {
+  display: grid;
+  place-items: center;
+  width: 1.9em;
+  height: 1.9em;
+  border-radius: 50%;
+  background: var(--accent-light);
+  color: var(--accent-text);
+}
+.lee-collection-title .lee-icon {
+  width: 1.05em;
+  height: 1.05em;
+}
+.lee-collection-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.12em;
+  color: var(--accent-text);
+  font-size: 3em;
+  font-weight: 650;
+  letter-spacing: -0.07em;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+.lee-collection-metric > span {
+  display: grid;
+  place-items: center;
+  width: 0.88em;
+  height: 0.88em;
+  color: var(--accent-text);
+  background: var(--accent-light);
+  border-radius: 0.22em;
+}
+.lee-collection-metric .lee-icon {
+  width: 0.44em;
+  height: 0.44em;
+  stroke-width: 1.45;
+}
+.lee-collection-card > p {
+  font-size: 0.76em;
+  color: var(--text-muted);
+  margin-top: 0.45em;
+}
+.lee-collection-divider {
+  height: 1px;
+  background: var(--border-primary);
+  margin: 1.2em 0;
+}
+.lee-collection-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.85em;
+  transform: scale(1.5);
+  justify-content: center;
+}
+.lee-avatar-stack {
+  display: flex;
+  padding-left: 0.05em;
+  flex-shrink: 0;
+}
+.lee-avatar-stack > span {
+  display: grid;
+  place-items: center;
+  width: 2.3em;
+  height: 2.3em;
+  margin-left: -0.25em;
+  border: 2px solid var(--bg-primary);
+  border-radius: 50%;
+  font-size: 0.66em;
+  font-weight: 650;
+  color: var(--accent-text);
+  background: var(--accent-light);
+}
+.lee-avatar-stack > span:nth-child(2) {
+  background: var(--success-bg);
+  color: var(--success);
+}
+.lee-avatar-stack > span:nth-child(3) {
+  background: var(--heatmap-accent-soft);
+  color: var(--heatmap-accent-strong);
+}
+.lee-avatar-stack > span:last-child {
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+}
+.lee-collection-footer strong {
+  display: block;
+  font-weight: 600;
+  font-size: 0.76em;
+}
+.lee-collection-footer small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.67em;
+  margin-top: 0.12em;
+}
+.lee-verification-card {
+  right: 2.8%;
+  bottom: 4.3%;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  width: 29.8%;
+  padding: 1.2em 1.3em;
+  border: 1px solid var(--border-secondary);
+  border-radius: 1.1em;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  box-shadow: var(--shadow-lg);
+  animation: lee-drift 7.5s ease-in-out -4s infinite;
+}
+.lee-verification-icon {
+  display: grid;
+  place-items: center;
+  width: 3.05em;
+  height: 3.05em;
+  color: var(--success);
+  background: var(--success-bg);
+  border: 1px solid var(--success-border);
+  border-radius: 0.9em;
+  flex: 0 0 auto;
+}
+.lee-verification-icon .lee-icon {
+  width: 1.65em;
+  height: 1.65em;
+}
+.lee-verification-card strong {
+  display: block;
+  font-size: 1.1em;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+}
+.lee-verification-card > div > span {
+  display: block;
+  margin-top: 0.25em;
+  font-size: 1em;
+  color: var(--text-muted);
+}
+.lee-verification-spark {
+  margin-left: auto;
+  color: var(--accent-text);
+  width: 1.35em;
+}
+.lee-bottom-note {
+  position: absolute;
+  bottom: 2.8%;
+  left: 25.5%;
+  display: flex;
+  align-items: center;
+  gap: 0.9em;
+  color: var(--text-muted);
+  font-size: 0.6em;
+  font-weight: 550;
+  letter-spacing: 0.17em;
+}
+.lee-bottom-note > span {
+  width: 2em;
+  height: 1px;
+  background: var(--border-hover);
+}
+
+/* A gentle motion cue, without animating actual delivery or fake data. */
+@keyframes lee-drift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.5em);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lee-hero * {
+    animation: none !important;
+  }
+}
+
+/* Responsive to the component's width, not the whole viewport.
+
+*/
+@media (max-width: 430px) {
+  .lee-artboard {
+    aspect-ratio: 420 / 805;
+    font-size: clamp(10px, 3.15cqi, 17px);
+  }
+  .lee-browser {
+    inset: 13% 4% 13%;
+    border-radius: 1.2em;
+  }
+  .lee-workflow-label,
+  .lee-orbit,
+  .lee-tabbar,
+  .lee-mail-app,
+  .lee-bottom-note {
+    display: none;
+  }
+  .lee-addressbar {
+    height: 3.2em;
+    padding: 0.5em 0.9em;
+    gap: 0.8em;
+  }
+  .lee-addressbar > .lee-forward,
+  .lee-addressbar > .lee-icon:last-child {
+    display: none;
+  }
+  .lee-address {
+    min-width: 0;
+    font-size: 0.76em;
+  }
+  .lee-address span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .lee-workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .lee-panel {
+    border-left: 0;
+  }
+  .lee-panel-heading {
+    min-height: 3.5em;
+  }
+  .lee-panel-content {
+    padding: 1em 1.1em 0.9em;
+  }
+  .lee-contacts-heading {
+    margin-bottom: 1em;
+  }
+  .lee-contact-search {
+    font-size: 0.81em;
+  }
+  .lee-rate {
+    font-size: 0.77em;
+  }
+  .lee-table-heading {
+    height: 3.2em;
+  }
+  .lee-contact-row {
+    min-height: 3.2em;
+  }
+  .lee-contact-row:nth-child(n + 6) {
+    display: none;
+  }
+  .lee-ready-card {
+    top: 3%;
+    right: 0.7%;
+    width: 83%;
+    padding: 1.2em;
+    border-radius: 1.1em;
+    gap: 0.8em;
+  }
+  .lee-ready-card strong {
+    font-size: 1.18em;
+  }
+  .lee-ready-card > div > span {
+    font-size: 0.8em;
+  }
+  .lee-ready-icon {
+    width: 2.8em;
+    height: 2.8em;
+  }
+  .lee-collection-card {
+    left: 0.3%;
+    top: auto;
+    bottom: 7.4%;
+    width: 47%;
+    padding: 1.05em 1.15em;
+    border-radius: 1em;
+  }
+  .lee-collection-title {
+    font-size: 0.81em;
+  }
+  .lee-collection-title > span:last-child {
+    width: 1.65em;
+    height: 1.65em;
+  }
+  .lee-collection-metric {
+    font-size: 3.2em;
+    margin-top: 0.05em;
+  }
+  .lee-collection-metric > span {
+    width: 0.8em;
+    height: 0.8em;
+  }
+  .lee-collection-card > p {
+    font-size: 0.68em;
+    line-height: 1.4;
+    max-width: 15em;
+  }
+  .lee-collection-divider,
+  .lee-collection-footer {
+    display: none;
+  }
+  .lee-verification-card {
+    right: 0.5%;
+    bottom: 1.7%;
+    width: 65%;
+    gap: 0.7em;
+    padding: 1em;
+    border-radius: 1em;
+  }
+  .lee-verification-icon {
+    width: 2.6em;
+    height: 2.6em;
+    border-radius: 0.75em;
+  }
+  .lee-verification-card strong {
+    font-size: 0.91em;
+  }
+  .lee-verification-card > div > span {
+    font-size: 0.66em;
+  }
+  .lee-verification-spark {
+    display: none;
+  }
+  .lee-ambient {
+    inset: 0 -1%;
+  }
+}
+/* A less tall, centered composition for intermediate container widths. */
+@media (min-width: 840px) and (max-width: 1084px) {
+  .lee-artboard {
+    aspect-ratio: 600 / 790;
+    font-size: 2.3cqi;
+  }
+  .lee-browser {
+    inset: 13% 10% 13%;
+  }
+  .lee-ready-card {
+    width: 66%;
+    right: 5%;
+  }
+  .lee-collection-card {
+    width: 34%;
+    left: 4%;
+    bottom: 8%;
+  }
+  .lee-verification-card {
+    width: 54%;
+    right: 4%;
+  }
+}
+@media (max-width: 840px) {
+  .lee-artboard {
+    aspect-ratio: 320 / 320;
+    font-size: 10px;
+  }
+  .lee-panel-heading strong {
+    font-size: 0.89em;
+  }
+  .lee-contact-row:nth-child(n + 5) {
+    display: none;
+  }
+  .lee-contact-search {
+    padding: 0 0.6em;
+    gap: 0.45em;
+    font-size: 0.76em;
+  }
+  .lee-verify-banner {
+    gap: 0.5em;
+  }
+  .lee-verify-banner strong {
+    font-size: 0.72em;
+  }
+  .lee-ready-card {
+    width: 90%;
+  }
+  .lee-ready-card strong {
+    font-size: 1.12em;
+  }
+  .lee-collection-card {
+    width: 51%;
+  }
+  .lee-verification-card {
+    width: 73%;
+  }
+}
+
+.lee-gmail-mark svg {
+  color: var(--danger);
+}

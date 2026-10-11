@@ -1,6 +1,10 @@
+import HomeSvg from "./HomeSvg.jsx";
 import MediaPlaceholder from "./MediaPlaceholder.jsx";
+import { useOutletContext } from "react-router-dom";
 
 export default function Hero({ site }) {
+  const { darkMode } = useOutletContext();
+
   return (
     <section className="hero section" id="top">
       <div className="hero-glow hero-glow--one" />
@@ -35,8 +39,8 @@ export default function Hero({ site }) {
             and networking.
           </p>
         </div>
-
-        <div className="hero__visual reveal reveal--delay">
+        <HomeSvg panelTheme={darkMode ? "dark" : "light"} />
+        {/* <div className="hero__visual reveal reveal--delay">
           <div className="browser-shell">
             <div className="browser-shell__top">
               <span />
@@ -62,7 +66,7 @@ export default function Hero({ site }) {
               <small>Before you hit send</small>
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="container benefit-strip reveal">

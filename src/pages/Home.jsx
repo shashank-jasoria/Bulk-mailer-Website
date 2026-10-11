@@ -7,6 +7,7 @@ import Faq from "../components/Faq.jsx";
 import { site } from "../data/site.js";
 
 export default function Home() {
+  
   useEffect(() => {
     const items = [...document.querySelectorAll(".reveal")];
 

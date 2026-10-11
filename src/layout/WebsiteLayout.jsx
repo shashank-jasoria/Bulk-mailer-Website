@@ -42,6 +42,7 @@ export default function WebsiteLayout({
             authLoading,
             billing,
             billingLoading,
+            darkMode,
           }}
         />
       </main>
