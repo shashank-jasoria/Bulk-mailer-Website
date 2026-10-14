@@ -165,14 +165,14 @@ const plans = {
   core: {
     name: "Core",
     description: "For individuals",
-    price: "₹50",
+    price: "₹49",
     icon: Zap,
   },
 
   pro: {
     name: "Pro",
     description: "For power users",
-    price: "₹200",
+    price: "₹199",
     icon: Crown,
   },
 };

@@ -16,6 +16,7 @@ export default function WebsiteLayout({
   billingLoading,
   onCancelSubscription,
   subscriptionActionLoading,
+  refreshWebsiteUser,
 }) {
   return (
     // background
@@ -43,6 +44,7 @@ export default function WebsiteLayout({
             billing,
             billingLoading,
             darkMode,
+            refreshWebsiteUser,
           }}
         />
       </main>

@@ -1,0 +1,326 @@
+.account-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px;
+
+  background: var(--account-modal-overlay-bg);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* =========================
+   MODAL
+   ========================= */
+
+.account-modal {
+  position: relative;
+
+  /*
+   * Dynamic width passed from React.
+   * It can never become wider than the available viewport.
+   */
+  width: calc(100vw - 54px);
+
+  box-sizing: border-box;
+
+  padding: 31px 20px 17px;
+
+  border: 1px solid var(--account-modal-border);
+  border-radius: 13px;
+
+  background: var(--account-modal-bg);
+
+  box-shadow: var(--account-modal-shadow);
+
+  color: var(--text-primary);
+
+  animation: account-modal-enter 160ms ease-out;
+  max-width: 400px;
+}
+
+@keyframes account-modal-enter {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================
+   CLOSE
+   ========================= */
+
+.account-modal-close {
+  position: absolute;
+  top: 11px;
+  right: 11px;
+
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: transparent;
+  color: var(--account-modal-close-color);
+
+  cursor: pointer;
+
+  transition:
+    color 140ms ease,
+    background 140ms ease;
+}
+
+.account-modal-close svg {
+  width: 20px;
+  height: 20px;
+}
+
+.account-modal-close:hover {
+  color: var(--text-primary);
+  background: var(--account-modal-close-hover);
+}
+
+.account-modal-close:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* =========================
+   ICON
+   ========================= */
+
+.account-modal-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 14px;
+
+  border-radius: 50%;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.account-modal-icon--feature {
+  color: var(--account-modal-premium-color);
+  background: var(--account-modal-premium-bg);
+  border: 1px solid var(--account-modal-premium-border);
+
+  box-shadow: var(--account-modal-icon-shadow);
+}
+
+.account-modal-icon--limit {
+  color: var(--warning);
+  background: var(--warning-bg);
+  border: 1px solid var(--warning-border);
+}
+
+.account-modal-icon--limit svg {
+  height: 26px;
+}
+
+.account-modal-crown {
+  width: 25px;
+  height: 25px;
+}
+
+/* =========================
+   CONTENT
+   ========================= */
+
+.account-modal-content {
+  text-align: center;
+}
+
+.account-modal-title {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+.account-modal-message {
+  max-width: 290px;
+
+  margin: 6px auto 0;
+
+  color: var(--text-secondary);
+
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* =========================
+   PLAN
+   ========================= */
+
+.account-modal-plan {
+  min-height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  margin-top: 16px;
+  padding: 8px 12px;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--account-modal-plan-border);
+  border-radius: 10px;
+
+  background: var(--account-modal-plan-bg);
+
+  color: var(--account-modal-plan-text);
+
+  font-size: 12px;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.account-modal-plan strong {
+  color: var(--account-modal-plan-price);
+  font-weight: 700;
+}
+
+.account-modal-plan-icon {
+  width: 16px;
+  height: 16px;
+
+  flex: 0 0 auto;
+
+  color: var(--account-modal-plan-icon);
+}
+
+/* =========================
+   BUTTONS
+   ========================= */
+
+.account-modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+.account-modal-cancel,
+.account-modal-action {
+  min-width: 0;
+  min-height: 43px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 14px;
+
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease,
+    transform 100ms ease,
+    box-shadow 140ms ease;
+}
+
+/* Continue Free */
+.account-modal-cancel {
+  border: 1px solid var(--account-modal-secondary-border);
+
+  background: var(--account-modal-secondary-bg);
+  color: var(--account-modal-secondary-text);
+}
+
+.account-modal-cancel:hover {
+  border-color: var(--account-modal-secondary-border-hover);
+  background: var(--account-modal-secondary-hover);
+  color: var(--text-primary);
+}
+
+/* Upgrade Plan */
+.account-modal-action {
+  border: 1px solid var(--account-modal-upgrade-border);
+
+  background: var(--account-modal-upgrade-bg);
+  color: var(--account-modal-upgrade-text);
+
+  box-shadow: var(--account-modal-upgrade-shadow);
+}
+
+.account-modal-action:hover {
+  background: var(--account-modal-upgrade-hover);
+}
+
+.account-modal-action:active,
+.account-modal-cancel:active {
+  transform: translateY(1px);
+}
+
+.account-modal-action:focus-visible,
+.account-modal-cancel:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* =========================
+   VERY NARROW EXTENSION UI
+   ========================= */
+
+@media (max-width: 310px) {
+  .account-modal {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .account-modal-message {
+    font-size: 12px;
+  }
+
+  .account-modal-plan {
+    font-size: 11px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .account-modal {
+    animation: none;
+  }
+}

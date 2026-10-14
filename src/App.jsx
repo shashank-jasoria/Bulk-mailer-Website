@@ -143,6 +143,15 @@ export default function App() {
     };
   }, [user?.id]);
 
+  async function refreshWebsiteUser() {
+    const data = await getWebsiteUser();
+
+    setUser(data.user || null);
+    setAccount(data.account || null);
+
+    return data;
+  }
+
   return (
     <BrowserRouter>
       <PublicPageSeo />
@@ -162,6 +171,7 @@ export default function App() {
               billingLoading={billingLoading}
               onCancelSubscription={handleCancelSubscription}
               subscriptionActionLoading={subscriptionActionLoading}
+              refreshWebsiteUser={refreshWebsiteUser}
             />
           }
         >

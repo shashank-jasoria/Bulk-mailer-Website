@@ -2,6 +2,7 @@ import BrandMark from "./BrandMark.jsx";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Navbar.css";
+import useNotification from "../context/notifications/useNotification.jsx";
 
 const navItems = [
   { label: "About", href: "/about" },
@@ -25,6 +26,7 @@ export default function Navbar({
 }) {
   const [profileOpen, setProfileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { showToast, showConfirm } = useNotification();
 
   function getInitials(name, email) {
     const parts = (name || "").trim().split(/\s+/).filter(Boolean);
@@ -108,6 +110,21 @@ export default function Navbar({
     billing?.subscription?.cancelAtPeriodEnd === true;
   const canCancelSubscription =
     !isFreePlan && Boolean(billing?.subscription) && !cancellationScheduled;
+
+  function handleCancelSubscription() {
+    showConfirm({
+      title: "Cancel Subscription?",
+      message:
+        "Are you sure you want to cancel your subscription? Your plan will remain active until the end of the current billing period.",
+
+      confirmText: "Yes, Cancel Subscription",
+      cancelText: "Keep Subscription",
+
+      onConfirm: async () => {
+        await onCancelSubscription();
+      },
+    });
+  }
 
   return (
     <header
@@ -248,7 +265,7 @@ export default function Navbar({
                     <button
                       type="button"
                       className="profile-menu__cancel"
-                      onClick={onCancelSubscription}
+                      onClick={handleCancelSubscription}
                       disabled={subscriptionActionLoading}
                     >
                       <CancelIcon />

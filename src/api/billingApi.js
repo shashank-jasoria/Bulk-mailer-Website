@@ -10,6 +10,12 @@ export async function resolveCheckoutContext(contextId) {
   });
 }
 
+export async function getRegionalPricing() {
+  return apiRequest("/billing/pricing", {
+    method: "GET",
+  });
+}
+
 export async function getBillingStatus({ checkoutContextId } = {}) {
   return apiRequest("/billing/status", {
     method: "POST",

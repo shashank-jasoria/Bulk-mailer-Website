@@ -2,13 +2,19 @@
 
 import { useEffect, useState, useCallback } from "react";
 
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import {
+  useLocation,
+  useNavigate,
+  useOutletContext,
+  useSearchParams,
+} from "react-router-dom";
 import "../styles/pricingCard.css";
 import {
   getBillingStatus,
   createCheckout,
   changePlan,
   cancelSubscription,
+  getRegionalPricing,
 } from "../api/billingApi";
 
 const params = new URLSearchParams(window.location.search);
@@ -93,7 +99,7 @@ const plans = [
     name: "Core",
     description: "For individuals and small teams",
     icon: Zap,
-    price: "₹49",
+    // price: "₹49",
     oldPrice: "₹99",
     priceSuffix: "/ month",
     summary: "More capacity and essential features for consistent outreach.",
@@ -150,7 +156,7 @@ const plans = [
     name: "Pro",
     description: "For power users and teams",
     icon: Crown,
-    price: "₹199",
+    // price: "₹199",
     oldPrice: "₹399",
     priceSuffix: "/ month",
     summary: "Unlock advanced features and scale your outreach.",
@@ -214,6 +220,9 @@ export default function Pricing({ user, account, authLoading }) {
   const [billingError, setBillingError] = useState(null);
   const [actionLoading, setActionLoading] = useState(null);
   const [actionError, setActionError] = useState(null);
+  const [regionalPricing, setRegionalPricing] = useState(null);
+  const [pricingLoading, setPricingLoading] = useState(true);
+  const [pricingError, setPricingError] = useState(null);
   const loadBilling = useCallback(async () => {
     if (!isExtensionFlow && !user) {
       setBilling(null);
@@ -234,6 +243,7 @@ export default function Pricing({ user, account, authLoading }) {
       setBillingLoading(false);
     }
   }, [checkoutContextId, isExtensionFlow, user]);
+  const { refreshWebsiteUser } = useOutletContext();
 
   useEffect(() => {
     if (!isExtensionFlow && authLoading) {
@@ -250,42 +260,41 @@ export default function Pricing({ user, account, authLoading }) {
     navigate("/login");
   }
 
-  // function getPlanStatusText({ account, billing }) {
-  //   const tier = billing?.tier || account?.tier;
+  useEffect(() => {
+    let cancelled = false;
+    async function loadRegionalPricing() {
+      try {
+        setPricingLoading(true);
+        setPricingError(null);
 
-  //   const subscription = billing?.subscription;
+        const data = await getRegionalPricing();
 
-  //   const planChange = billing?.planChange;
+        if (!data?.success || !data?.prices) {
+          throw new Error("Failed to load regional pricing");
+        }
 
-  //   if (!tier) {
-  //     return null;
-  //   }
+        if (cancelled) return;
 
-  //   if (tier.key === "FREE") {
-  //     return "Explore Pacemailer with essential features";
-  //   }
+        setRegionalPricing(data.prices);
+      } catch (error) {
+        if (cancelled) return;
 
-  //   // Plan changes take priority because
-  //   // replacement flows also cancel the old
-  //   // subscription at period end.
-  //   if (planChange?.effectiveAt && planChange?.type === "downgrade") {
-  //     return `Plan changes on ${formatPlanDate(planChange.effectiveAt)}`;
-  //   }
+        console.error("Failed to load prices:", error);
+        setRegionalPricing(null);
+        setPricingError(error);
+      } finally {
+        if (!cancelled) {
+          setPricingLoading(false);
+        }
+      }
+    }
 
-  //   if (planChange?.effectiveAt && planChange?.type === "upgrade") {
-  //     return `New billing starts on ${formatPlanDate(planChange.effectiveAt)}`;
-  //   }
+    loadRegionalPricing();
 
-  //   if (subscription?.cancelAtPeriodEnd && subscription?.currentPeriodEnd) {
-  //     return `Plan ends on ${formatPlanDate(subscription.currentPeriodEnd)}`;
-  //   }
-
-  //   if (subscription?.currentPeriodEnd) {
-  //     return `Renews on ${formatPlanDate(subscription.currentPeriodEnd)}`;
-  //   }
-
-  //   return null;
-  // }
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   async function handlePlanAction(plan) {
     if (actionLoading) {
@@ -346,6 +355,9 @@ export default function Pricing({ user, account, authLoading }) {
         return;
       }
       await loadBilling();
+      if (!isExtensionFlow && user) {
+        await refreshWebsiteUser();
+      }
     } catch (error) {
       console.error("Billing action failed:", error);
       setActionError(error);
@@ -510,6 +522,23 @@ export default function Pricing({ user, account, authLoading }) {
         <div className="pricing-grid">
           {plans.map((plan) => {
             const PlanIcon = plan.icon;
+            const priceInfo =
+              plan.id === "free"
+                ? null
+                : regionalPricing?.[plan.id.toUpperCase()];
+
+            const displayPrice =
+              plan.id === "free"
+                ? "Free"
+                : pricingLoading
+                  ? "Loading..."
+                  : priceInfo?.formattedPrice || "Unavailable";
+
+            const displaySuffix = priceInfo?.billingPeriod
+              ? `/ ${priceInfo.billingPeriod}`
+              : "";
+
+            const priceUnavailable = plan.id !== "free" && !priceInfo;
 
             return (
               <article
@@ -548,11 +577,13 @@ export default function Pricing({ user, account, authLoading }) {
                       <span className="pricing-old-price">{plan.oldPrice}</span>
                     )}
 
-                    <span className="pricing-price">{plan.price}</span>
+                    <span className="pricing-price"> {displayPrice}</span>
 
-                    <span className="pricing-price-suffix">
-                      {plan.priceSuffix}
-                    </span>
+                    {displaySuffix && (
+                      <span className="pricing-price-suffix">
+                        {displaySuffix}
+                      </span>
+                    )}
                   </div>
 
                   {plan.discount && (
@@ -569,7 +600,11 @@ export default function Pricing({ user, account, authLoading }) {
                   type="button"
                   className="pricing-button"
                   onClick={() => handlePlanAction(plan)}
-                  disabled={isButtonDisabled(plan)}
+                  disabled={
+                    isButtonDisabled(plan) ||
+                    actionLoading !== null ||
+                    priceUnavailable
+                  }
                 >
                   {getButtonLabel(plan)}
                 </button>

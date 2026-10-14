@@ -1,0 +1,971 @@
+/* ================================
+   Required Fields Modal
+   ================================ */
+
+.required-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 16px;
+
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+/* ================================
+   Modal
+   ================================ */
+
+.required-modal {
+  position: relative;
+
+  width: min(100%, 360px);
+  max-height: calc(100vh - 32px);
+
+  padding: 22px;
+
+  overflow-y: auto;
+
+  background: var(--bg-primary);
+  border: 1px solid var(--border-secondary);
+  border-radius: 14px;
+
+  box-shadow: var(--shadow-lg);
+}
+
+/* ================================
+   Close Button
+   ================================ */
+
+.required-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: var(--text-secondary);
+
+  font-size: 25px;
+  font-weight: 300;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.required-modal-close:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+  border-radius: 6px;
+}
+
+/* ================================
+   Icon
+   ================================ */
+
+.required-modal-icon {
+  width: 48px;
+  height: 48px;
+
+  margin: 0 auto 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+
+  background: var(--accent-light);
+
+  color: var(--accent);
+
+  box-shadow: 0 0 0 4px var(--bg-primary);
+}
+
+.required-modal-icon span {
+  font-size: 23px;
+  font-weight: 700;
+}
+
+/* ================================
+   Header
+   ================================ */
+
+.required-modal-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.required-modal-header h2 {
+  margin: 0 35px 6px;
+
+  color: var(--text-primary);
+
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.required-modal-header p {
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* ================================
+   Fields
+   ================================ */
+
+.required-modal-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.required-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.required-field label {
+  color: var(--text-primary);
+
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.required-star {
+  margin-left: 3px;
+  color: var(--danger);
+}
+
+/* ================================
+   Input
+   ================================ */
+
+.required-input-wrapper {
+  position: relative;
+}
+
+.required-input-wrapper input {
+  width: 100%;
+  height: 42px;
+
+  padding: 0 12px;
+
+  border: 1px solid var(--border-secondary);
+  border-radius: 7px;
+
+  outline: none;
+
+  background: var(--bg-input);
+  color: var(--text-primary);
+
+  font-family: inherit;
+  font-size: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.required-input-wrapper input::placeholder {
+  color: var(--text-placeholder);
+}
+
+.required-input-wrapper input:hover {
+  border-color: var(--border-focus);
+}
+
+.required-input-wrapper input:focus {
+  border-color: var(--border-focus);
+
+  box-shadow: 0 0 0 2px var(--accent-light);
+}
+
+/* Input with icon */
+
+.required-input-wrapper:has(.required-input-icon) input {
+  padding-left: 38px;
+}
+
+.required-input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: var(--text-muted);
+
+  font-size: 16px;
+
+  pointer-events: none;
+}
+
+/* ================================
+   Validation Error
+   ================================ */
+
+.required-field-error {
+  color: var(--danger);
+
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+/* ================================
+   Buttons
+   ================================ */
+
+.required-modal-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+.required-btn {
+  height: 40px;
+
+  border-radius: 7px;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.required-btn:active {
+  transform: scale(0.98);
+}
+
+/* Cancel */
+
+.required-btn-cancel {
+  border: 1px solid var(--border-secondary);
+
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.required-btn-cancel:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-focus);
+}
+
+/* Submit */
+
+.required-btn-submit {
+  border: 1px solid var(--accent);
+
+  background: var(--accent);
+  color: var(--text-on-accent);
+}
+
+.required-btn-submit:hover {
+  background: var(--accent-hover);
+}
+
+/* ================================
+   Scrollbar
+   ================================ */
+
+.required-modal::-webkit-scrollbar {
+  width: 5px;
+}
+
+.required-modal::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+.required-modal::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 10px;
+}
+
+.required-modal::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+.required-unverified-illustration {
+  position: relative;
+
+  width: 118px;
+  height: 118px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 22px;
+}
+
+.required-unverified-glow {
+  position: absolute;
+  inset: 0;
+
+  border: 1px solid var(--validation-illustration-border);
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle at 50% 45%,
+    var(--validation-illustration-glow-center),
+    var(--validation-illustration-glow-edge)
+  );
+
+  box-shadow:
+    inset 0 0 30px var(--validation-illustration-inner-shadow),
+    0 0 25px var(--validation-illustration-outer-shadow);
+}
+
+.required-envelope-icon {
+  position: relative;
+  z-index: 2;
+
+  width: 76px;
+  height: 76px;
+}
+
+.required-envelope-paper {
+  fill: var(--validation-envelope-paper);
+  stroke: var(--validation-envelope-paper-border);
+  stroke-width: 1.5;
+}
+
+.required-envelope-lines {
+  fill: none;
+  stroke: var(--validation-envelope-line);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.required-envelope-body {
+  fill: var(--validation-envelope-bg);
+  stroke: var(--validation-envelope-border);
+  stroke-width: 1.5;
+}
+
+.required-envelope-fold {
+  fill: none;
+  stroke: var(--validation-envelope-fold);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.required-question-badge {
+  position: absolute;
+  z-index: 4;
+
+  top: 12px;
+  right: 5px;
+
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid var(--validation-question-border);
+  border-radius: 50%;
+
+  background: var(--validation-question-bg);
+
+  color: var(--validation-question-text);
+
+  font-size: 27px;
+  font-weight: 700;
+  line-height: 1;
+
+  box-shadow:
+    0 5px 14px var(--validation-question-shadow),
+    inset 0 1px 2px var(--validation-question-highlight);
+}
+
+.required-spark {
+  position: absolute;
+  z-index: 3;
+
+  width: 17px;
+  height: 4px;
+
+  border-radius: 20px;
+
+  background: var(--validation-spark-color);
+}
+
+.required-spark-one {
+  left: -3px;
+  top: 57px;
+
+  transform: rotate(27deg);
+}
+
+.required-spark-two {
+  left: -5px;
+  top: 74px;
+
+  transform: rotate(-20deg);
+}
+
+/* =========================================================
+   COMPACT UNVERIFIED EMAIL POPUP
+   Only affects variant="unverified-email"
+   ========================================================= */
+
+.required-modal-overlay--unverified {
+  padding: 10px;
+
+  background: var(--validation-overlay-bg);
+
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+/* =========================
+   MODAL
+   ========================= */
+
+.required-modal--unverified {
+  width: min(var(--required-modal-width, 300px), calc(100vw - 20px));
+
+  max-width: 300px;
+
+  /*
+   * Keeps the popup around the size you wanted.
+   * If the extension viewport is shorter,
+   * it automatically shrinks.
+   */
+  max-height: min(395px, calc(100vh - 20px));
+
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  padding: 18px 16px 16px;
+
+  border: 1px solid var(--validation-modal-border);
+  border-radius: 14px;
+
+  background: var(--validation-modal-bg);
+  color: var(--text-primary);
+
+  box-shadow: var(--validation-modal-shadow);
+}
+
+/* Small scrollbar if content ever needs it */
+
+.required-modal--unverified::-webkit-scrollbar {
+  width: 5px;
+}
+
+.required-modal--unverified::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.required-modal--unverified::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 999px;
+}
+
+/* =========================
+   CLOSE
+   ========================= */
+
+.required-modal--unverified .required-modal-close {
+  position: absolute;
+
+  top: 8px;
+  right: 8px;
+
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 6px;
+
+  background: transparent;
+  color: var(--validation-close-color);
+
+  cursor: pointer;
+}
+
+.required-modal--unverified .required-modal-close:hover {
+  background: var(--validation-close-hover-bg);
+  color: var(--text-primary);
+}
+
+.required-modal--unverified .required-close-svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* =========================================================
+   SMALL EMAIL ILLUSTRATION
+   ========================================================= */
+
+.required-modal--unverified .required-unverified-illustration {
+  position: relative;
+
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 10px;
+}
+
+.required-modal--unverified .required-unverified-glow {
+  position: absolute;
+  inset: 0;
+
+  border: 1px solid var(--validation-illustration-border);
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    var(--validation-illustration-glow-center),
+    var(--validation-illustration-glow-edge)
+  );
+
+  box-shadow:
+    inset 0 0 16px var(--validation-illustration-inner-shadow),
+    0 0 12px var(--validation-illustration-outer-shadow);
+}
+
+.required-modal--unverified .required-envelope-icon {
+  position: relative;
+  z-index: 2;
+
+  width: 40px;
+  height: 40px;
+}
+
+.required-modal--unverified .required-question-badge {
+  position: absolute;
+
+  top: -1px;
+  right: -3px;
+
+  z-index: 4;
+
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--validation-question-border);
+  border-radius: 50%;
+
+  background: var(--validation-question-bg);
+  color: var(--validation-question-text);
+
+  font-size: 15px;
+  font-weight: 700;
+
+  box-shadow: 0 3px 7px var(--validation-question-shadow);
+}
+
+/* Hide decorative sparks in compact UI */
+
+.required-modal--unverified .required-spark {
+  display: none;
+}
+
+/* =========================
+   HEADER
+   ========================= */
+
+.required-modal--unverified .required-modal-header {
+  max-width: 250px;
+
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+.required-modal--unverified .required-modal-header h2 {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+
+  letter-spacing: -0.01em;
+}
+
+.required-modal--unverified .required-modal-header p {
+  margin: 2px auto 0;
+
+  color: var(--validation-description-text);
+
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+/* =========================
+   FIELDS
+   ========================= */
+
+.required-modal--unverified .required-modal-fields {
+  margin-top: 22px;
+}
+
+/* =========================================================
+   CHECKBOX CARD
+   ========================================================= */
+
+.required-modal--unverified .required-checkbox--card {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 9px;
+
+  padding: 10px;
+
+  border: 1px solid var(--validation-checkbox-card-border);
+
+  border-radius: 9px;
+
+  background: var(--validation-checkbox-card-bg);
+
+  cursor: pointer;
+
+  transition:
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
+.required-modal--unverified .required-checkbox--card:hover {
+  border-color: var(--validation-checkbox-card-border-hover);
+
+  background: var(--validation-checkbox-card-hover-bg);
+}
+
+/* Hide native input only for card version */
+
+.required-modal--unverified .required-checkbox--card > input {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+/* Custom checkbox */
+
+.required-modal--unverified .required-checkbox-control {
+  width: 23px;
+  height: 23px;
+
+  flex: 0 0 23px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--validation-check-border);
+  border-radius: 5px;
+
+  background: var(--validation-check-bg);
+
+  color: transparent;
+}
+
+.required-modal--unverified .required-checkbox-control svg {
+  width: 15px;
+  height: 15px;
+}
+
+.required-modal--unverified
+  .required-checkbox--card
+  > input:checked
+  + .required-checkbox-control {
+  border-color: var(--validation-check-active-border);
+
+  background: var(--validation-check-active-bg);
+
+  color: var(--validation-check-mark);
+
+  box-shadow: 0 3px 8px var(--validation-check-shadow);
+}
+
+.required-modal--unverified
+  .required-checkbox--card
+  > input:focus-visible
+  + .required-checkbox-control {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Text */
+
+.required-modal--unverified .required-checkbox-content {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.required-modal--unverified .required-checkbox-label {
+  color: var(--text-primary);
+
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.required-modal--unverified .required-checkbox-description {
+  margin-top: 3px;
+
+  color: var(--validation-checkbox-description);
+
+  font-size: 10.5px;
+  line-height: 1.3;
+}
+
+/* =========================================================
+   INFO BOX
+   ========================================================= */
+
+.required-modal--unverified .required-info-box {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 8px;
+
+  margin-top: 9px;
+
+  padding: 9px 10px;
+
+  border: 1px solid var(--validation-info-border);
+  border-radius: 9px;
+
+  background: var(--validation-info-bg);
+}
+
+.required-modal--unverified .required-info-icon {
+  width: 21px;
+  height: 21px;
+
+  flex: 0 0 21px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid var(--validation-info-icon-color);
+
+  border-radius: 50%;
+
+  color: var(--validation-info-icon-color);
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.required-modal--unverified .required-info-content {
+  min-width: 0;
+}
+
+.required-modal--unverified .required-info-title {
+  color: var(--validation-info-title);
+
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.required-modal--unverified .required-info-description {
+  margin-top: 3px;
+
+  color: var(--validation-info-description);
+
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.required-modal--unverified .required-modal-actions {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 0.85fr)
+    minmax(0, 1.15fr);
+
+  gap: 8px;
+
+  margin-top: 12px;
+}
+
+.required-modal--unverified .required-btn {
+  min-width: 0;
+  min-height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 8px 9px;
+
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    transform 100ms ease;
+}
+
+/* Cancel */
+
+.required-modal--unverified .required-btn-cancel {
+  border: 1px solid var(--validation-cancel-border);
+
+  background: var(--validation-cancel-bg);
+
+  color: var(--validation-cancel-text);
+}
+
+.required-modal--unverified .required-btn-cancel:hover {
+  background: var(--validation-cancel-hover-bg);
+
+  border-color: var(--validation-cancel-hover-border);
+}
+
+/* Submit */
+
+.required-modal--unverified .required-btn-submit {
+  border: 1px solid var(--validation-submit-border);
+
+  background: linear-gradient(
+    105deg,
+    var(--validation-submit-gradient-start),
+    var(--validation-submit-gradient-end)
+  );
+
+  color: var(--validation-submit-text);
+
+  box-shadow: 0 3px 10px var(--validation-submit-shadow);
+}
+
+.required-modal--unverified .required-btn-submit:hover {
+  background: linear-gradient(
+    105deg,
+    var(--validation-submit-hover-start),
+    var(--validation-submit-hover-end)
+  );
+}
+
+.required-modal--unverified .required-btn:active {
+  transform: translateY(1px);
+}
+
+.required-modal--unverified .required-submit-icon {
+  width: 16px;
+  height: 16px;
+
+  flex: 0 0 auto;
+}
+
+/* =========================
+   VERY SMALL EXTENSION WIDTH
+   ========================= */
+
+@media (max-width: 320px) {
+  .required-modal-overlay--unverified {
+    padding: 6px;
+  }
+
+  .required-modal--unverified {
+    width: calc(100vw - 12px);
+
+    padding: 16px 12px 13px;
+
+    border-radius: 12px;
+  }
+
+  .required-modal--unverified .required-modal-header h2 {
+    font-size: 17px;
+  }
+
+  .required-modal--unverified .required-modal-header p {
+    font-size: 11px;
+  }
+
+  .required-modal--unverified .required-modal-actions {
+    gap: 6px;
+  }
+
+  .required-modal--unverified .required-btn {
+    padding-left: 6px;
+    padding-right: 6px;
+
+    font-size: 11px;
+  }
+}
