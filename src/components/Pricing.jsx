@@ -448,7 +448,7 @@ export default function Pricing({ user, account, authLoading }) {
           }
 
           await loadRazorpayCheckout();
-
+          let authorizationReturned = false;
           const razorpay = new window.Razorpay({
             key: checkout.keyId,
             subscription_id: checkout.subscriptionId,
@@ -456,6 +456,7 @@ export default function Pricing({ user, account, authLoading }) {
             description: `${targetTierKey} subscription`,
 
             handler: async (response) => {
+              authorizationReturned = true;
               try {
                 if (
                   response.razorpay_subscription_id !== checkout.subscriptionId
@@ -482,7 +483,28 @@ export default function Pricing({ user, account, authLoading }) {
 
             modal: {
               ondismiss: () => {
-                setActionLoading(null);
+                if (authorizationReturned) {
+                  return;
+                }
+
+                setActionLoading("ABANDONING");
+                setActionError(null);
+
+                abandonRazorpayCheckout({
+                  checkoutContextId: checkoutContextId || undefined,
+                  subscriptionId: checkout.subscriptionId,
+                })
+                  .then(() => loadBilling())
+                  .catch((error) => {
+                    console.error(
+                      "Unable to close unfinished Razorpay checkout:",
+                      error,
+                    );
+                    setActionError(error);
+                  })
+                  .finally(() => {
+                    setActionLoading(null);
+                  });
               },
             },
           });

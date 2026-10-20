@@ -76,3 +76,16 @@ export async function verifyRazorpayAuthorization({
     }),
   });
 }
+
+export async function abandonRazorpayCheckout({
+  checkoutContextId,
+  subscriptionId,
+}) {
+  return apiRequest("/billing/cancel", {
+    method: "POST",
+    body: JSON.stringify({
+      checkoutContextId: checkoutContextId || undefined,
+      abandonedCheckoutSubscriptionId: subscriptionId,
+    }),
+  });
+}
