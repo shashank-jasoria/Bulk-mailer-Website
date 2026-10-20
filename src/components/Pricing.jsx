@@ -452,6 +452,13 @@ export default function Pricing({ user, account, authLoading }) {
     if (currentTierKey === "PRO" && targetTierKey === "CORE") {
       return "Downgrade to Core";
     }
+    if (
+      targetTierKey === "PRO" &&
+      currentTierKey === "FREE" &&
+      billing?.trial?.pro3DayAvailable === true
+    ) {
+      return "Book 3-Day Free Trial";
+    }
     return `Choose ${plan.name}`;
   }
 
