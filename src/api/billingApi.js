@@ -59,3 +59,20 @@ export async function cancelSubscription({ checkoutContextId } = {}) {
     }),
   });
 }
+
+export async function verifyRazorpayAuthorization({
+  checkoutContextId,
+  subscriptionId,
+  paymentId,
+  signature,
+}) {
+  return apiRequest("/billing/razorpay/verify-authorization", {
+    method: "POST",
+    body: JSON.stringify({
+      checkoutContextId: checkoutContextId || undefined,
+      subscriptionId,
+      paymentId,
+      signature,
+    }),
+  });
+}

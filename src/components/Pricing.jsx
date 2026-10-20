@@ -208,11 +208,48 @@ const plans = [
   },
 ];
 
+let razorpayScriptPromise = null;
+
+function loadRazorpayCheckout() {
+  if (window.Razorpay) {
+    return Promise.resolve();
+  }
+
+  if (!razorpayScriptPromise) {
+    razorpayScriptPromise = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.async = true;
+
+      script.onload = () => {
+        if (window.Razorpay) {
+          resolve();
+        } else {
+          razorpayScriptPromise = null;
+          reject(new Error("Razorpay checkout did not initialize"));
+        }
+      };
+
+      script.onerror = () => {
+        razorpayScriptPromise = null;
+        script.remove();
+        reject(new Error("Unable to load Razorpay checkout"));
+      };
+
+      document.body.appendChild(script);
+    });
+  }
+
+  return razorpayScriptPromise;
+}
+
 export default function Pricing({ user, account, authLoading }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const checkoutContextId = searchParams.get("checkout_context");
+  const razorpayReturn = searchParams.get("razorpay") === "verifying";
   const isExtensionFlow = Boolean(checkoutContextId);
   const [billing, setBilling] = useState(null);
   const [billingLoading, setBillingLoading] = useState(false);
@@ -252,6 +289,49 @@ export default function Pricing({ user, account, authLoading }) {
     }
     loadBilling();
   }, [authLoading, isExtensionFlow, loadBilling]);
+
+  useEffect(() => {
+    if (!razorpayReturn) return;
+
+    let cancelled = false;
+    let timer;
+    let attempts = 0;
+
+    async function checkActivation() {
+      try {
+        const data = await getBillingStatus({
+          checkoutContextId: checkoutContextId || undefined,
+        });
+
+        if (cancelled) return;
+
+        const latestBilling = data?.billing || null;
+        setBilling(latestBilling);
+
+        if (
+          latestBilling?.tier?.key === "CORE" ||
+          latestBilling?.tier?.key === "PRO"
+        ) {
+          if (!isExtensionFlow && user) {
+            refreshWebsiteUser().catch(console.error);
+          }
+          return;
+        }
+      } catch (error) {
+        console.error("Billing refresh failed:", error);
+      }
+      attempts += 1;
+      if (!cancelled && attempts < 15) {
+        timer = window.setTimeout(checkActivation, 2000);
+      }
+    }
+    checkActivation();
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [razorpayReturn, checkoutContextId, isExtensionFlow]);
 
   function sendToLogin() {
     window.sessionStorage.setItem(
@@ -323,8 +403,6 @@ export default function Pricing({ user, account, authLoading }) {
       return;
     }
 
-    // New purchases respect the server's checkout gate. In step 5 the
-    // USD prices are visible, but PayPal Live checkout remains disabled.
     if (
       targetTierKey !== "FREE" &&
       currentTierKey === "FREE" &&
@@ -334,9 +412,6 @@ export default function Pricing({ user, account, authLoading }) {
       setActionError(new Error("Checkout is not available right now."));
       return;
     }
-
-    // Existing PayPal subscriptions can be cancelled, but switching between
-    // paid PayPal tiers is intentionally not supported by the backend yet.
     if (
       targetTierKey !== "FREE" &&
       currentTierKey !== "FREE" &&
@@ -358,18 +433,80 @@ export default function Pricing({ user, account, authLoading }) {
         await loadBilling();
         return;
       }
+
       if (currentTierKey === "FREE") {
         const data = await createCheckout({
           checkoutContextId: checkoutContextId || undefined,
           tierKey: targetTierKey,
         });
-        const checkoutUrl = data?.checkout?.checkoutUrl;
+
+        const checkout = data?.checkout;
+
+        if (checkout?.provider === "razorpay") {
+          if (!checkout.subscriptionId || !checkout.keyId) {
+            throw new Error("Razorpay checkout information is missing");
+          }
+
+          await loadRazorpayCheckout();
+
+          const razorpay = new window.Razorpay({
+            key: checkout.keyId,
+            subscription_id: checkout.subscriptionId,
+            name: "Pacemailer",
+            description: `${targetTierKey} subscription`,
+
+            handler: async (response) => {
+              try {
+                if (
+                  response.razorpay_subscription_id !== checkout.subscriptionId
+                ) {
+                  throw new Error("Razorpay subscription mismatch");
+                }
+                await verifyRazorpayAuthorization({
+                  checkoutContextId: checkoutContextId || undefined,
+                  subscriptionId: checkout.subscriptionId,
+                  paymentId: response.razorpay_payment_id,
+                  signature: response.razorpay_signature,
+                });
+                const params = new URLSearchParams(location.search);
+                params.set("razorpay", "verifying");
+
+                navigate(`/pricing?${params.toString()}`, {
+                  replace: true,
+                });
+              } catch (error) {
+                console.error("Razorpay verification failed:", error);
+                setActionError(error);
+              }
+            },
+
+            modal: {
+              ondismiss: () => {
+                setActionLoading(null);
+              },
+            },
+          });
+
+          razorpay.on("payment.failed", (response) => {
+            setActionError(
+              new Error(
+                response?.error?.description || "Razorpay payment failed",
+              ),
+            );
+          });
+
+          razorpay.open();
+          return;
+        }
+        const checkoutUrl = checkout?.checkoutUrl;
         if (!checkoutUrl) {
           throw new Error("Checkout URL was not returned");
         }
+
         window.location.href = checkoutUrl;
         return;
       }
+
       const data = await changePlan({
         checkoutContextId: checkoutContextId || undefined,
 
@@ -436,7 +573,15 @@ export default function Pricing({ user, account, authLoading }) {
     if (targetTierKey === "FREE" && billing.subscription?.cancelAtPeriodEnd) {
       return "Cancellation scheduled";
     }
-
+    if (
+      targetTierKey === "FREE" &&
+      currentTierKey === "PRO" &&
+      billing?.subscription?.provider === "razorpay" &&
+      billing?.subscription?.status === "authenticated" &&
+      billing?.subscription?.trialOfferKey === "PRO_3_DAY"
+    ) {
+      return "Cancel Free Trial";
+    }
     if (targetTierKey === "FREE" && currentTierKey !== "FREE") {
       return "Cancel paid plan";
     }
@@ -523,6 +668,28 @@ export default function Pricing({ user, account, authLoading }) {
     <section className="">
       <div className="pricing-container">
         {/* Header */}
+
+        {razorpayReturn && (
+          <div className="payment-note">
+            <div>
+              {billing?.tier?.key === "CORE" || billing?.tier?.key === "PRO" ? (
+                <>
+                  <strong>Your subscription is active!</strong>
+                  <p>Your account has been updated to your selected plan.</p>
+                </>
+              ) : (
+                <>
+                  <strong>Authorization received!</strong>
+                  <p>
+                    We are confirming your subscription. Your plan will update
+                    when verification is complete. If it takes longer, refresh
+                    this page.
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
+        )}
 
         {billingError ? (
           <div className="payment-note">
@@ -724,133 +891,3 @@ export default function Pricing({ user, account, authLoading }) {
     </section>
   );
 }
-
-// return (
-//   <section className="section section--alt" id="pricing">
-//     <div className="container">
-//       <div className="section-heading section-heading--center ">
-//         <p className="section-kicker">Simple plans, regional checkout</p>
-//         <h2>
-//           Start free. Upgrade when the workflow starts paying for itself.
-//         </h2>
-//         <p>
-//           Paid prices can be shown in the customer’s applicable billing region
-//           and currency, with supported local payment methods at checkout.
-//         </p>
-//       </div>
-
-//       {billingError ? (
-//         <div className="payment-note">
-//           <div>
-//             <strong>Unable to load your billing information.</strong>
-
-//             <p>{billingError.message}</p>
-//           </div>
-//         </div>
-//       ) : null}
-
-//       {actionError ? (
-//         <div className="payment-note">
-//           <div>
-//             <strong>Subscription action failed.</strong>
-
-//             <p>{actionError.message}</p>
-//           </div>
-//         </div>
-//       ) : null}
-
-//       {billing?.planChange ? (
-//         <div className="payment-note">
-//           <div>
-//             <strong>Subscription change in progress</strong>
-
-//             <p>
-//               {billing.planChange.type === "downgrade"
-//                 ? `Your downgrade to ${billing.planChange.targetTier.name} is scheduled. You keep your current plan until the billing cycle ends.`
-//                 : `Your upgrade to ${billing.planChange.targetTier.name} is being completed.`}
-//             </p>
-//           </div>
-//         </div>
-//       ) : null}
-
-//       {billing?.subscription?.cancelAtPeriodEnd ? (
-//         <div className="payment-note">
-//           <div>
-//             <strong>Subscription cancellation scheduled</strong>
-
-//             <p>
-//               You keep your current plan until the end of this billing period.
-//             </p>
-//           </div>
-//         </div>
-//       ) : null}
-//       <div className="pricing-grid ">
-//         {plans.map((plan) => (
-//           <article
-//             className={`pricing-card ${plan.featured ? "pricing-card--featured" : ""}`}
-//             key={plan.name}
-//           >
-//             {plan.featured ? (
-//               <span className="pricing-card__ribbon">Popular</span>
-//             ) : null}
-//             <div className="pricing-card__top">
-//               <p className="pricing-card__label">{plan.label}</p>
-//               <h3>{plan.name}</h3>
-//               <div className="pricing-card__price">
-//                 {plan.name === "Free" ? (
-//                   <>
-//                     <strong>Free</strong>
-//                     <span>forever</span>
-//                   </>
-//                 ) : (
-//                   <>
-//                     <strong>Local price</strong>
-//                     <span>shown for your billing region</span>
-//                   </>
-//                 )}
-//               </div>
-//               <p>{plan.description}</p>
-//             </div>
-//             <ul>
-//               {plan.features.map((feature) => (
-//                 <li key={feature}>
-//                   <span>✓</span>
-//                   {feature}
-//                 </li>
-//               ))}
-//             </ul>
-//             <button
-//               type="button"
-//               className={`button ${
-//                 plan.featured ? "button--primary" : "button--ghost"
-//               } button--full`}
-//               onClick={() => handlePlanAction(plan)}
-//               disabled={isButtonDisabled(plan)}
-//             >
-//               {getButtonLabel(plan)}
-//             </button>
-//           </article>
-//         ))}
-//       </div>
-
-//       <div className="payment-note ">
-//         <div>
-//           <strong>Built for local checkout experiences.</strong>
-//           <p>
-//             Cards globally, plus supported wallets and regional methods such
-//             as UPI in India.
-//           </p>
-//         </div>
-//         <div
-//           className="payment-note__marks"
-//           aria-label="Supported payment method placeholders"
-//         >
-//           <span>Cards</span>
-//           <span>UPI</span>
-//           <span>GPay</span>
-//           <span>Apple Pay</span>
-//         </div>
-//       </div>
-//     </div>
-//   </section>
-// );
