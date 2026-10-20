@@ -35,7 +35,6 @@ import {
   Rocket,
   Star,
 } from "lucide-react";
-
 const plans = [
   {
     id: "free",
@@ -221,6 +220,8 @@ export default function Pricing({ user, account, authLoading }) {
   const [actionLoading, setActionLoading] = useState(null);
   const [actionError, setActionError] = useState(null);
   const [regionalPricing, setRegionalPricing] = useState(null);
+  // Country/provider/checkout availability are determined by the backend.
+  const [pricingRegion, setPricingRegion] = useState(null);
   const [pricingLoading, setPricingLoading] = useState(true);
   const [pricingError, setPricingError] = useState(null);
   const loadBilling = useCallback(async () => {
@@ -269,18 +270,20 @@ export default function Pricing({ user, account, authLoading }) {
 
         const data = await getRegionalPricing();
 
-        if (!data?.success || !data?.prices) {
+        if (!data?.success || !data?.prices || !data?.region) {
           throw new Error("Failed to load regional pricing");
         }
 
         if (cancelled) return;
 
         setRegionalPricing(data.prices);
+        setPricingRegion(data.region);
       } catch (error) {
         if (cancelled) return;
 
         console.error("Failed to load prices:", error);
         setRegionalPricing(null);
+        setPricingRegion(null);
         setPricingError(error);
       } finally {
         if (!cancelled) {
@@ -317,6 +320,29 @@ export default function Pricing({ user, account, authLoading }) {
     const targetTierKey = plan.name.toUpperCase();
     const currentTierKey = billing.tier?.key || account?.tier?.key || "FREE";
     if (currentTierKey === targetTierKey) {
+      return;
+    }
+
+    // New purchases respect the server's checkout gate. In step 5 the
+    // USD prices are visible, but PayPal Live checkout remains disabled.
+    if (
+      targetTierKey !== "FREE" &&
+      currentTierKey === "FREE" &&
+      (!regionalPricing?.[targetTierKey] ||
+        pricingRegion?.checkoutEnabled !== true)
+    ) {
+      setActionError(new Error("Checkout is not available right now."));
+      return;
+    }
+
+    // Existing PayPal subscriptions can be cancelled, but switching between
+    // paid PayPal tiers is intentionally not supported by the backend yet.
+    if (
+      targetTierKey !== "FREE" &&
+      currentTierKey !== "FREE" &&
+      billing.subscription?.provider === "paypal"
+    ) {
+      setActionError(new Error("PayPal plan changes are not supported yet."));
       return;
     }
     try {
@@ -368,11 +394,26 @@ export default function Pricing({ user, account, authLoading }) {
 
   function getButtonLabel(plan) {
     const targetTierKey = plan.name.toUpperCase();
+    const currentTierKey = billing?.tier?.key || account?.tier?.key || "FREE";
     if (actionLoading === targetTierKey) {
       return "Processing...";
     }
     if (!isExtensionFlow && authLoading) {
       return "Loading...";
+    }
+    if (targetTierKey !== "FREE") {
+      if (pricingLoading) return "Loading prices...";
+      if (!pricingRegion || !regionalPricing?.[targetTierKey]) {
+        return "Pricing unavailable";
+      }
+      if (
+        (currentTierKey === "FREE" || (!isExtensionFlow && !user)) &&
+        pricingRegion.checkoutEnabled !== true
+      ) {
+        return pricingRegion.provider === "paypal"
+          ? "PayPal checkout coming soon"
+          : "Checkout unavailable";
+      }
     }
     if (!isExtensionFlow && !user) {
       if (targetTierKey === "FREE") {
@@ -386,7 +427,6 @@ export default function Pricing({ user, account, authLoading }) {
     if (!billing) {
       return `Choose ${plan.name}`;
     }
-    const currentTierKey = billing.tier?.key;
     if (currentTierKey === targetTierKey) {
       return "Current plan";
     }
@@ -400,6 +440,12 @@ export default function Pricing({ user, account, authLoading }) {
     if (targetTierKey === "FREE" && currentTierKey !== "FREE") {
       return "Cancel paid plan";
     }
+    if (
+      targetTierKey !== "FREE" &&
+      billing.subscription?.provider === "paypal"
+    ) {
+      return "Plan changes unavailable";
+    }
     if (currentTierKey === "CORE" && targetTierKey === "PRO") {
       return "Upgrade to Pro";
     }
@@ -411,6 +457,7 @@ export default function Pricing({ user, account, authLoading }) {
 
   function isButtonDisabled(plan) {
     const targetTierKey = plan.name.toUpperCase();
+    const currentTierKey = billing?.tier?.key || account?.tier?.key || "FREE";
 
     if (actionLoading) {
       return true;
@@ -420,22 +467,42 @@ export default function Pricing({ user, account, authLoading }) {
       return true;
     }
 
+    if (targetTierKey !== "FREE") {
+      if (
+        pricingLoading ||
+        !pricingRegion ||
+        !regionalPricing?.[targetTierKey]
+      ) {
+        return true;
+      }
+      // New checkouts are closed until the backend advertises them as open.
+      // This does not block cancellation or Razorpay plan changes.
+      if (
+        (currentTierKey === "FREE" || (!isExtensionFlow && !user)) &&
+        pricingRegion.checkoutEnabled !== true
+      ) {
+        return true;
+      }
+    }
+
     if (!isExtensionFlow && !user) {
       return false;
     }
 
-    if (billingLoading) {
+    if (billingLoading || !billing) {
       return true;
-    }
-
-    if (!billing) {
-      return false;
     }
 
     if (billing.tier?.key === targetTierKey) {
       return true;
     }
     if (billing.planChange) {
+      return true;
+    }
+    if (
+      targetTierKey !== "FREE" &&
+      billing.subscription?.provider === "paypal"
+    ) {
       return true;
     }
     if (targetTierKey === "FREE" && billing.subscription?.cancelAtPeriodEnd) {
@@ -495,16 +562,18 @@ export default function Pricing({ user, account, authLoading }) {
           </div>
         ) : null}
         <header className="pricing-header">
-          <div className="pricing-launch-badge">
-            <span className="pricing-spark">✦</span>
+          {pricingRegion?.currency === "INR" && (
+            <div className="pricing-launch-badge">
+              <span className="pricing-spark">✦</span>
 
-            <span className="pricing-launch-pill">
-              <Rocket size={17} />
-              New Launch Discount
-            </span>
+              <span className="pricing-launch-pill">
+                <Rocket size={17} />
+                New Launch Discount
+              </span>
 
-            <span className="pricing-spark">✦</span>
-          </div>
+              <span className="pricing-spark">✦</span>
+            </div>
+          )}
 
           <h1 className="pricing-title">
             Choose the plan that fits <span>your outreach</span>
@@ -539,6 +608,12 @@ export default function Pricing({ user, account, authLoading }) {
               : "";
 
             const priceUnavailable = plan.id !== "free" && !priceInfo;
+            // PayPal cannot upgrade/downgrade in-place yet. Leave the
+            // current-plan and cancellation buttons available as before.
+            const hideUnsupportedPayPalChange =
+              plan.id !== "free" &&
+              billing?.subscription?.provider === "paypal" &&
+              billing?.tier?.key !== plan.id.toUpperCase();
 
             return (
               <article
@@ -573,7 +648,7 @@ export default function Pricing({ user, account, authLoading }) {
                 {/* Price */}
                 <div className="pricing-price-area">
                   <div className="pricing-price-row">
-                    {plan.oldPrice && (
+                    {plan.oldPrice && pricingRegion?.currency === "INR" && (
                       <span className="pricing-old-price">{plan.oldPrice}</span>
                     )}
 
@@ -586,7 +661,7 @@ export default function Pricing({ user, account, authLoading }) {
                     )}
                   </div>
 
-                  {plan.discount && (
+                  {plan.discount && pricingRegion?.currency === "INR" && (
                     <div className="pricing-card-discount">
                       <Rocket size={15} />
                       New launch discount
@@ -596,18 +671,20 @@ export default function Pricing({ user, account, authLoading }) {
 
                 <p className="pricing-summary">{plan.summary}</p>
 
-                <button
-                  type="button"
-                  className="pricing-button"
-                  onClick={() => handlePlanAction(plan)}
-                  disabled={
-                    isButtonDisabled(plan) ||
-                    actionLoading !== null ||
-                    priceUnavailable
-                  }
-                >
-                  {getButtonLabel(plan)}
-                </button>
+                {!hideUnsupportedPayPalChange && (
+                  <button
+                    type="button"
+                    className="pricing-button"
+                    onClick={() => handlePlanAction(plan)}
+                    disabled={
+                      isButtonDisabled(plan) ||
+                      actionLoading !== null ||
+                      priceUnavailable
+                    }
+                  >
+                    {getButtonLabel(plan)}
+                  </button>
+                )}
 
                 <div className="pricing-divider" />
 
@@ -639,134 +716,134 @@ export default function Pricing({ user, account, authLoading }) {
       </div>
     </section>
   );
-
-  // return (
-  //   <section className="section section--alt" id="pricing">
-  //     <div className="container">
-  //       <div className="section-heading section-heading--center ">
-  //         <p className="section-kicker">Simple plans, regional checkout</p>
-  //         <h2>
-  //           Start free. Upgrade when the workflow starts paying for itself.
-  //         </h2>
-  //         <p>
-  //           Paid prices can be shown in the customer’s applicable billing region
-  //           and currency, with supported local payment methods at checkout.
-  //         </p>
-  //       </div>
-
-  //       {billingError ? (
-  //         <div className="payment-note">
-  //           <div>
-  //             <strong>Unable to load your billing information.</strong>
-
-  //             <p>{billingError.message}</p>
-  //           </div>
-  //         </div>
-  //       ) : null}
-
-  //       {actionError ? (
-  //         <div className="payment-note">
-  //           <div>
-  //             <strong>Subscription action failed.</strong>
-
-  //             <p>{actionError.message}</p>
-  //           </div>
-  //         </div>
-  //       ) : null}
-
-  //       {billing?.planChange ? (
-  //         <div className="payment-note">
-  //           <div>
-  //             <strong>Subscription change in progress</strong>
-
-  //             <p>
-  //               {billing.planChange.type === "downgrade"
-  //                 ? `Your downgrade to ${billing.planChange.targetTier.name} is scheduled. You keep your current plan until the billing cycle ends.`
-  //                 : `Your upgrade to ${billing.planChange.targetTier.name} is being completed.`}
-  //             </p>
-  //           </div>
-  //         </div>
-  //       ) : null}
-
-  //       {billing?.subscription?.cancelAtPeriodEnd ? (
-  //         <div className="payment-note">
-  //           <div>
-  //             <strong>Subscription cancellation scheduled</strong>
-
-  //             <p>
-  //               You keep your current plan until the end of this billing period.
-  //             </p>
-  //           </div>
-  //         </div>
-  //       ) : null}
-  //       <div className="pricing-grid ">
-  //         {plans.map((plan) => (
-  //           <article
-  //             className={`pricing-card ${plan.featured ? "pricing-card--featured" : ""}`}
-  //             key={plan.name}
-  //           >
-  //             {plan.featured ? (
-  //               <span className="pricing-card__ribbon">Popular</span>
-  //             ) : null}
-  //             <div className="pricing-card__top">
-  //               <p className="pricing-card__label">{plan.label}</p>
-  //               <h3>{plan.name}</h3>
-  //               <div className="pricing-card__price">
-  //                 {plan.name === "Free" ? (
-  //                   <>
-  //                     <strong>Free</strong>
-  //                     <span>forever</span>
-  //                   </>
-  //                 ) : (
-  //                   <>
-  //                     <strong>Local price</strong>
-  //                     <span>shown for your billing region</span>
-  //                   </>
-  //                 )}
-  //               </div>
-  //               <p>{plan.description}</p>
-  //             </div>
-  //             <ul>
-  //               {plan.features.map((feature) => (
-  //                 <li key={feature}>
-  //                   <span>✓</span>
-  //                   {feature}
-  //                 </li>
-  //               ))}
-  //             </ul>
-  //             <button
-  //               type="button"
-  //               className={`button ${
-  //                 plan.featured ? "button--primary" : "button--ghost"
-  //               } button--full`}
-  //               onClick={() => handlePlanAction(plan)}
-  //               disabled={isButtonDisabled(plan)}
-  //             >
-  //               {getButtonLabel(plan)}
-  //             </button>
-  //           </article>
-  //         ))}
-  //       </div>
-
-  //       <div className="payment-note ">
-  //         <div>
-  //           <strong>Built for local checkout experiences.</strong>
-  //           <p>
-  //             Cards globally, plus supported wallets and regional methods such
-  //             as UPI in India.
-  //           </p>
-  //         </div>
-  //         <div
-  //           className="payment-note__marks"
-  //           aria-label="Supported payment method placeholders"
-  //         >
-  //           <span>Cards</span>
-  //           <span>UPI</span>
-  //           <span>GPay</span>
-  //           <span>Apple Pay</span>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   </section>
-  // );
 }
+
+// return (
+//   <section className="section section--alt" id="pricing">
+//     <div className="container">
+//       <div className="section-heading section-heading--center ">
+//         <p className="section-kicker">Simple plans, regional checkout</p>
+//         <h2>
+//           Start free. Upgrade when the workflow starts paying for itself.
+//         </h2>
+//         <p>
+//           Paid prices can be shown in the customer’s applicable billing region
+//           and currency, with supported local payment methods at checkout.
+//         </p>
+//       </div>
+
+//       {billingError ? (
+//         <div className="payment-note">
+//           <div>
+//             <strong>Unable to load your billing information.</strong>
+
+//             <p>{billingError.message}</p>
+//           </div>
+//         </div>
+//       ) : null}
+
+//       {actionError ? (
+//         <div className="payment-note">
+//           <div>
+//             <strong>Subscription action failed.</strong>
+
+//             <p>{actionError.message}</p>
+//           </div>
+//         </div>
+//       ) : null}
+
+//       {billing?.planChange ? (
+//         <div className="payment-note">
+//           <div>
+//             <strong>Subscription change in progress</strong>
+
+//             <p>
+//               {billing.planChange.type === "downgrade"
+//                 ? `Your downgrade to ${billing.planChange.targetTier.name} is scheduled. You keep your current plan until the billing cycle ends.`
+//                 : `Your upgrade to ${billing.planChange.targetTier.name} is being completed.`}
+//             </p>
+//           </div>
+//         </div>
+//       ) : null}
+
+//       {billing?.subscription?.cancelAtPeriodEnd ? (
+//         <div className="payment-note">
+//           <div>
+//             <strong>Subscription cancellation scheduled</strong>
+
+//             <p>
+//               You keep your current plan until the end of this billing period.
+//             </p>
+//           </div>
+//         </div>
+//       ) : null}
+//       <div className="pricing-grid ">
+//         {plans.map((plan) => (
+//           <article
+//             className={`pricing-card ${plan.featured ? "pricing-card--featured" : ""}`}
+//             key={plan.name}
+//           >
+//             {plan.featured ? (
+//               <span className="pricing-card__ribbon">Popular</span>
+//             ) : null}
+//             <div className="pricing-card__top">
+//               <p className="pricing-card__label">{plan.label}</p>
+//               <h3>{plan.name}</h3>
+//               <div className="pricing-card__price">
+//                 {plan.name === "Free" ? (
+//                   <>
+//                     <strong>Free</strong>
+//                     <span>forever</span>
+//                   </>
+//                 ) : (
+//                   <>
+//                     <strong>Local price</strong>
+//                     <span>shown for your billing region</span>
+//                   </>
+//                 )}
+//               </div>
+//               <p>{plan.description}</p>
+//             </div>
+//             <ul>
+//               {plan.features.map((feature) => (
+//                 <li key={feature}>
+//                   <span>✓</span>
+//                   {feature}
+//                 </li>
+//               ))}
+//             </ul>
+//             <button
+//               type="button"
+//               className={`button ${
+//                 plan.featured ? "button--primary" : "button--ghost"
+//               } button--full`}
+//               onClick={() => handlePlanAction(plan)}
+//               disabled={isButtonDisabled(plan)}
+//             >
+//               {getButtonLabel(plan)}
+//             </button>
+//           </article>
+//         ))}
+//       </div>
+
+//       <div className="payment-note ">
+//         <div>
+//           <strong>Built for local checkout experiences.</strong>
+//           <p>
+//             Cards globally, plus supported wallets and regional methods such
+//             as UPI in India.
+//           </p>
+//         </div>
+//         <div
+//           className="payment-note__marks"
+//           aria-label="Supported payment method placeholders"
+//         >
+//           <span>Cards</span>
+//           <span>UPI</span>
+//           <span>GPay</span>
+//           <span>Apple Pay</span>
+//         </div>
+//       </div>
+//     </div>
+//   </section>
+// );
