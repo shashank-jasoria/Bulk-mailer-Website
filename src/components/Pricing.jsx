@@ -1,6 +1,6 @@
 // import { plans } from "../data/site.js";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 
 import {
   useLocation,
@@ -10,11 +10,13 @@ import {
 } from "react-router-dom";
 import "../styles/pricingCard.css";
 import {
+  getRegionalPricing,
   getBillingStatus,
   createCheckout,
   changePlan,
   cancelSubscription,
-  getRegionalPricing,
+  abandonRazorpayCheckout,
+  verifyRazorpayAuthorization,
 } from "../api/billingApi";
 
 const params = new URLSearchParams(window.location.search);
@@ -35,6 +37,8 @@ import {
   Rocket,
   Star,
 } from "lucide-react";
+import useNotification from "../context/notifications/useNotification";
+
 const plans = [
   {
     id: "free",
@@ -282,6 +286,58 @@ export default function Pricing({ user, account, authLoading }) {
     }
   }, [checkoutContextId, isExtensionFlow, user]);
   const { refreshWebsiteUser } = useOutletContext();
+  const { showToast } = useNotification();
+
+  const shownToasts = useRef({
+    billingError: null,
+    actionError: null,
+    pricingError: null,
+    razorpayStage: null,
+    subscriptionNotice: null,
+  });
+
+  useEffect(() => {
+    const errors = [
+      {
+        key: "billingError",
+        error: billingError,
+        title: "Unable to load billing information",
+        fallback: "Please refresh the page and try again.",
+      },
+      {
+        key: "actionError",
+        error: actionError,
+        title: "Subscription action failed",
+        fallback: "Please try again.",
+      },
+      {
+        key: "pricingError",
+        error: pricingError,
+        title: "Unable to load pricing",
+        fallback: "Please refresh the page and try again.",
+      },
+    ];
+
+    for (const item of errors) {
+      if (!item.error) {
+        shownToasts.current[item.key] = null;
+        continue;
+      }
+
+      if (shownToasts.current[item.key] === item.error) {
+        continue;
+      }
+
+      shownToasts.current[item.key] = item.error;
+
+      showToast({
+        type: "error",
+        title: item.title,
+        message: item.error.message || item.fallback,
+        duration: 5000,
+      });
+    }
+  }, [billingError, actionError, pricingError, showToast]);
 
   useEffect(() => {
     if (!isExtensionFlow && authLoading) {
@@ -342,6 +398,94 @@ export default function Pricing({ user, account, authLoading }) {
   }
 
   useEffect(() => {
+    if (!razorpayReturn) {
+      shownToasts.current.razorpayStage = null;
+      return;
+    }
+
+    const isActive =
+      billing?.tier?.key === "CORE" || billing?.tier?.key === "PRO";
+
+    const stage = isActive ? "active" : "verifying";
+
+    if (shownToasts.current.razorpayStage === stage) {
+      return;
+    }
+
+    shownToasts.current.razorpayStage = stage;
+
+    if (isActive) {
+      showToast({
+        type: "success",
+        title: "Subscription activated!",
+        message:
+          `Your ${billing.tier.name || billing.tier.key} plan ` +
+          "is now active. Enjoy your upgraded features!",
+        duration: 5000,
+      });
+    } else {
+      showToast({
+        type: "info",
+        title: "Authorization received!",
+        message:
+          "We are confirming your subscription. " +
+          "Your plan will update automatically once verified.",
+        duration: 5000,
+      });
+    }
+  }, [razorpayReturn, billing?.tier?.key, showToast]);
+
+  useEffect(() => {
+    if (!billing) return;
+
+    let notice = null;
+
+    if (billing.planChange) {
+      const change = billing.planChange;
+      const targetName = change.targetTier?.name || "new plan";
+
+      notice = {
+        key: `change:${billing.subscription?.id}:${change.type}:${change.status}:${targetName}`,
+        title:
+          change.status === "pending"
+            ? "Razorpay checkout not completed"
+            : "Subscription change in progress",
+        message:
+          change.status === "pending"
+            ? `Authorization for ${targetName} is not confirmed. ` +
+              "Discard the unfinished checkout to choose again."
+            : change.type === "downgrade"
+              ? `Your downgrade to ${targetName} is scheduled. ` +
+                "You keep your current plan until the billing cycle ends."
+              : `Your upgrade to ${targetName} is being completed.`,
+      };
+    } else if (billing.subscription?.cancelAtPeriodEnd) {
+      notice = {
+        key: `cancel:${billing.subscription.id}`,
+        title: "Subscription cancellation scheduled",
+        message:
+          "You keep your current plan until the end of " +
+          "this billing period.",
+      };
+    }
+
+    if (!notice) return;
+
+    if (shownToasts.current.subscriptionNotice === notice.key) {
+      return;
+    }
+
+    shownToasts.current.subscriptionNotice = notice.key;
+
+    showToast({
+      type: "info",
+      title: notice.title,
+      message: notice.message,
+      duration: 6000,
+    });
+  }, [billing, showToast]);
+
+  useEffect(() => {
     let cancelled = false;
     async function loadRegionalPricing() {
       try {
@@ -379,6 +523,132 @@ export default function Pricing({ user, account, authLoading }) {
     };
   }, []);
 
+  async function openRazorpaySubscriptionModal({
+    subscriptionId,
+    keyId,
+    targetTierKey,
+    isReplacement,
+    changeType,
+  }) {
+    await loadRazorpayCheckout();
+    let authorizationReturned = false;
+    const razorpay = new window.Razorpay({
+      key: keyId,
+      subscription_id: subscriptionId,
+      name: "Pacemailer",
+      description: `${targetTierKey} subscription`,
+      handler: async (response) => {
+        authorizationReturned = true;
+        setActionLoading("VERIFYING");
+        try {
+          if (response.razorpay_subscription_id !== subscriptionId) {
+            throw new Error("Razorpay subscription mismatch");
+          }
+          await verifyRazorpayAuthorization({
+            checkoutContextId: checkoutContextId || undefined,
+            subscriptionId,
+            paymentId: response.razorpay_payment_id,
+            signature: response.razorpay_signature,
+          });
+
+          if (isReplacement) {
+            // Verification checks the checkout signature. The provider's
+            // authenticated webhook remains the source of truth for the
+            // actual scheduled change; it can arrive a few seconds later.
+            let confirmed = false;
+            for (let attempt = 0; attempt < 10; attempt++) {
+              const data = await getBillingStatus({
+                checkoutContextId: checkoutContextId || undefined,
+              });
+              setBilling(data?.billing || null);
+              if (
+                data?.billing?.planChange?.providerSubscriptionId ===
+                  subscriptionId &&
+                data.billing.planChange.status === "authenticated"
+              ) {
+                confirmed = true;
+                break;
+              }
+              await new Promise((resolve) => window.setTimeout(resolve, 1000));
+            }
+            showToast({
+              type: confirmed ? "success" : "info",
+              title: confirmed
+                ? changeType === "downgrade"
+                  ? "Downgrade scheduled"
+                  : "Upgrade authorization confirmed"
+                : "Authorization received",
+              message: confirmed
+                ? changeType === "downgrade"
+                  ? "Your current plan remains active until its billing cycle ends."
+                  : "Your upgrade is being processed."
+                : "Razorpay is still confirming this change. Refresh billing shortly.",
+              duration: 5000,
+            });
+          } else {
+            const params = new URLSearchParams(location.search);
+            params.set("razorpay", "verifying");
+            navigate(`/pricing?${params.toString()}`, { replace: true });
+          }
+        } catch (error) {
+          console.error("Razorpay verification failed:", error);
+          setActionError(error);
+          await loadBilling();
+        } finally {
+          setActionLoading(null);
+        }
+      },
+      modal: {
+        ondismiss: () => {
+          if (authorizationReturned) return;
+          setActionLoading("ABANDONING");
+          setActionError(null);
+          abandonRazorpayCheckout({
+            checkoutContextId: checkoutContextId || undefined,
+            subscriptionId,
+          })
+            .then(() => loadBilling())
+            .catch((error) => {
+              console.error("Unable to discard Razorpay checkout:", error);
+              setActionError(error);
+              loadBilling().catch(console.error);
+            })
+            .finally(() => setActionLoading(null));
+        },
+      },
+    });
+    razorpay.on("payment.failed", (response) => {
+      setActionError(
+        new Error(response?.error?.description || "Razorpay payment failed"),
+      );
+    });
+    razorpay.open();
+  }
+
+  async function handleDiscardPendingChange() {
+    const subscriptionId = billing?.planChange?.providerSubscriptionId;
+    if (
+      !subscriptionId ||
+      billing?.planChange?.status !== "pending" ||
+      actionLoading
+    )
+      return;
+    try {
+      setActionLoading("ABANDONING");
+      setActionError(null);
+      await abandonRazorpayCheckout({
+        checkoutContextId: checkoutContextId || undefined,
+        subscriptionId,
+      });
+      await loadBilling();
+    } catch (error) {
+      setActionError(error);
+      await loadBilling();
+    } finally {
+      setActionLoading(null);
+    }
+  }
+
   async function handlePlanAction(plan) {
     if (actionLoading) {
       return;
@@ -391,13 +661,18 @@ export default function Pricing({ user, account, authLoading }) {
       setActionError(new Error("Billing information is not available."));
       return;
     }
-    if (billing.planChange) {
+    const targetTierKey = plan.name.toUpperCase();
+
+    if (billing.planChange && targetTierKey !== "FREE") {
       setActionError(
-        new Error("A subscription change is already in progress."),
+        new Error(
+          billing.planChange.status === "pending"
+            ? "Discard the unfinished Razorpay checkout before changing plans."
+            : "A subscription change is already scheduled.",
+        ),
       );
       return;
     }
-    const targetTierKey = plan.name.toUpperCase();
     const currentTierKey = billing.tier?.key || account?.tier?.key || "FREE";
     if (currentTierKey === targetTierKey) {
       return;
@@ -420,6 +695,7 @@ export default function Pricing({ user, account, authLoading }) {
       setActionError(new Error("PayPal plan changes are not supported yet."));
       return;
     }
+    let razorpayModalOpened = false;
     try {
       setActionLoading(targetTierKey);
       setActionError(null);
@@ -446,80 +722,16 @@ export default function Pricing({ user, account, authLoading }) {
           if (!checkout.subscriptionId || !checkout.keyId) {
             throw new Error("Razorpay checkout information is missing");
           }
-
-          await loadRazorpayCheckout();
-          let authorizationReturned = false;
-          const razorpay = new window.Razorpay({
-            key: checkout.keyId,
-            subscription_id: checkout.subscriptionId,
-            name: "Pacemailer",
-            description: `${targetTierKey} subscription`,
-
-            handler: async (response) => {
-              authorizationReturned = true;
-              try {
-                if (
-                  response.razorpay_subscription_id !== checkout.subscriptionId
-                ) {
-                  throw new Error("Razorpay subscription mismatch");
-                }
-                await verifyRazorpayAuthorization({
-                  checkoutContextId: checkoutContextId || undefined,
-                  subscriptionId: checkout.subscriptionId,
-                  paymentId: response.razorpay_payment_id,
-                  signature: response.razorpay_signature,
-                });
-                const params = new URLSearchParams(location.search);
-                params.set("razorpay", "verifying");
-
-                navigate(`/pricing?${params.toString()}`, {
-                  replace: true,
-                });
-              } catch (error) {
-                console.error("Razorpay verification failed:", error);
-                setActionError(error);
-              }
-            },
-
-            modal: {
-              ondismiss: () => {
-                if (authorizationReturned) {
-                  return;
-                }
-
-                setActionLoading("ABANDONING");
-                setActionError(null);
-
-                abandonRazorpayCheckout({
-                  checkoutContextId: checkoutContextId || undefined,
-                  subscriptionId: checkout.subscriptionId,
-                })
-                  .then(() => loadBilling())
-                  .catch((error) => {
-                    console.error(
-                      "Unable to close unfinished Razorpay checkout:",
-                      error,
-                    );
-                    setActionError(error);
-                  })
-                  .finally(() => {
-                    setActionLoading(null);
-                  });
-              },
-            },
+          await openRazorpaySubscriptionModal({
+            subscriptionId: checkout.subscriptionId,
+            keyId: checkout.keyId,
+            targetTierKey,
+            isReplacement: false,
           });
-
-          razorpay.on("payment.failed", (response) => {
-            setActionError(
-              new Error(
-                response?.error?.description || "Razorpay payment failed",
-              ),
-            );
-          });
-
-          razorpay.open();
+          razorpayModalOpened = true;
           return;
         }
+
         const checkoutUrl = checkout?.checkoutUrl;
         if (!checkoutUrl) {
           throw new Error("Checkout URL was not returned");
@@ -534,7 +746,26 @@ export default function Pricing({ user, account, authLoading }) {
 
         tierKey: targetTierKey,
       });
-      const checkoutUrl = data?.change?.checkoutUrl;
+      const change = data?.change;
+      if (change?.mode === "replacement") {
+        // Use the dismissible checkout modal. Redirecting to the hosted
+        // short_url loses the on-dismiss callback and leaves a pending row.
+        if (!change.providerSubscriptionId || !change.keyId) {
+          throw new Error(
+            "Razorpay replacement checkout information is missing",
+          );
+        }
+        await openRazorpaySubscriptionModal({
+          subscriptionId: change.providerSubscriptionId,
+          keyId: change.keyId,
+          targetTierKey,
+          isReplacement: true,
+          changeType: change.changeType,
+        });
+        razorpayModalOpened = true;
+        return;
+      }
+      const checkoutUrl = change?.checkoutUrl;
       if (checkoutUrl) {
         window.location.href = checkoutUrl;
         return;
@@ -546,8 +777,15 @@ export default function Pricing({ user, account, authLoading }) {
     } catch (error) {
       console.error("Billing action failed:", error);
       setActionError(error);
+      // Razorpay may have created a local pending replacement even if the
+      // browser failed to load/open Checkout. Reveal the discard action.
+      if (currentTierKey !== "FREE" && targetTierKey !== "FREE") {
+        await loadBilling();
+      }
     } finally {
-      setActionLoading(null);
+      // Do not re-enable the cards while the Razorpay modal is still open.
+      // Its handler and ondismiss callback release the lock instead.
+      if (!razorpayModalOpened) setActionLoading(null);
     }
   }
 
@@ -589,11 +827,30 @@ export default function Pricing({ user, account, authLoading }) {
     if (currentTierKey === targetTierKey) {
       return "Current plan";
     }
-    if (billing.planChange) {
-      return "Plan change pending";
+    if (
+      billing.subscription?.cancelAtPeriodEnd &&
+      !billing.planChange &&
+      targetTierKey !== "FREE"
+    ) {
+      return "Renewal cancelled";
     }
-    if (targetTierKey === "FREE" && billing.subscription?.cancelAtPeriodEnd) {
+
+    if (
+      targetTierKey === "FREE" &&
+      billing.subscription?.cancelAtPeriodEnd &&
+      !billing.planChange
+    ) {
       return "Cancellation scheduled";
+    }
+    if (billing.planChange && targetTierKey !== "FREE") {
+      if (targetTierKey === billing.planChange.targetTier?.key) {
+        return billing.planChange.status === "pending"
+          ? "Authorization pending"
+          : billing.planChange.type === "downgrade"
+            ? "Downgrade scheduled"
+            : "Upgrade processing";
+      }
+      return "Plan change pending";
     }
     if (
       targetTierKey === "FREE" &&
@@ -605,7 +862,9 @@ export default function Pricing({ user, account, authLoading }) {
       return "Cancel Free Trial";
     }
     if (targetTierKey === "FREE" && currentTierKey !== "FREE") {
-      return "Cancel paid plan";
+      return billing.planChange?.status === "authenticated"
+        ? "Cancel future renewal"
+        : "Cancel paid plan";
     }
     if (
       targetTierKey !== "FREE" &&
@@ -670,7 +929,15 @@ export default function Pricing({ user, account, authLoading }) {
     if (billing.tier?.key === targetTierKey) {
       return true;
     }
-    if (billing.planChange) {
+    if (
+      billing.subscription?.cancelAtPeriodEnd &&
+      !billing.planChange &&
+      targetTierKey !== "FREE"
+    ) {
+      return true;
+    }
+
+    if (billing.planChange && targetTierKey !== "FREE") {
       return true;
     }
     if (
@@ -679,7 +946,11 @@ export default function Pricing({ user, account, authLoading }) {
     ) {
       return true;
     }
-    if (targetTierKey === "FREE" && billing.subscription?.cancelAtPeriodEnd) {
+    if (
+      targetTierKey === "FREE" &&
+      billing.subscription?.cancelAtPeriodEnd &&
+      !billing.planChange
+    ) {
       return true;
     }
 
@@ -691,72 +962,6 @@ export default function Pricing({ user, account, authLoading }) {
       <div className="pricing-container">
         {/* Header */}
 
-        {razorpayReturn && (
-          <div className="payment-note">
-            <div>
-              {billing?.tier?.key === "CORE" || billing?.tier?.key === "PRO" ? (
-                <>
-                  <strong>Your subscription is active!</strong>
-                  <p>Your account has been updated to your selected plan.</p>
-                </>
-              ) : (
-                <>
-                  <strong>Authorization received!</strong>
-                  <p>
-                    We are confirming your subscription. Your plan will update
-                    when verification is complete. If it takes longer, refresh
-                    this page.
-                  </p>
-                </>
-              )}
-            </div>
-          </div>
-        )}
-
-        {billingError ? (
-          <div className="payment-note">
-            <div>
-              <strong>Unable to load your billing information.</strong>
-
-              <p>{billingError.message}</p>
-            </div>
-          </div>
-        ) : null}
-
-        {actionError ? (
-          <div className="payment-note">
-            <div>
-              <strong>Subscription action failed.</strong>
-
-              <p>{actionError.message}</p>
-            </div>
-          </div>
-        ) : null}
-
-        {billing?.planChange ? (
-          <div className="payment-note">
-            <div>
-              <strong>Subscription change in progress</strong>
-
-              <p>
-                {billing.planChange.type === "downgrade"
-                  ? `Your downgrade to ${billing.planChange.targetTier.name} is scheduled. You keep your current plan until the billing cycle ends.`
-                  : `Your upgrade to ${billing.planChange.targetTier.name} is being completed.`}
-              </p>
-            </div>
-          </div>
-        ) : null}
-        {billing?.subscription?.cancelAtPeriodEnd && !billing?.planChange ? (
-          <div className="payment-note">
-            <div>
-              <strong>Subscription cancellation scheduled</strong>
-
-              <p>
-                You keep your current plan until the end of this billing period.
-              </p>
-            </div>
-          </div>
-        ) : null}
         <header className="pricing-header">
           {pricingRegion?.currency === "INR" && (
             <div className="pricing-launch-badge">
@@ -867,20 +1072,31 @@ export default function Pricing({ user, account, authLoading }) {
 
                 <p className="pricing-summary">{plan.summary}</p>
 
-                {!hideUnsupportedPayPalChange && (
-                  <button
-                    type="button"
-                    className="pricing-button"
-                    onClick={() => handlePlanAction(plan)}
-                    disabled={
-                      isButtonDisabled(plan) ||
-                      actionLoading !== null ||
-                      priceUnavailable
-                    }
-                  >
-                    {getButtonLabel(plan)}
-                  </button>
-                )}
+                {!hideUnsupportedPayPalChange &&
+                  (billing?.planChange?.status === "pending" &&
+                  billing.planChange.targetTier?.key ===
+                    plan.id.toUpperCase() ? (
+                    <div className="pricing-authorization-status" role="status">
+                      <strong>Authorization pending</strong>
+                      <span>
+                        Your checkout is unfinished. Discard it below to try
+                        again.
+                      </span>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      className="pricing-button"
+                      onClick={() => handlePlanAction(plan)}
+                      disabled={
+                        isButtonDisabled(plan) ||
+                        actionLoading !== null ||
+                        priceUnavailable
+                      }
+                    >
+                      {getButtonLabel(plan)}
+                    </button>
+                  ))}
 
                 <div className="pricing-divider" />
 
@@ -909,6 +1125,26 @@ export default function Pricing({ user, account, authLoading }) {
             );
           })}
         </div>
+        {billing?.planChange?.status === "pending" &&
+          billing?.planChange?.providerSubscriptionId && (
+            <div className="pricing-checkout-recovery" role="status">
+              <p className="pricing-summary">
+                Your {billing.planChange.targetTier?.name || "new plan"}{" "}
+                checkout has not been confirmed. You can discard it without
+                cancelling your currently active plan.
+              </p>
+              <button
+                className="pricing-button"
+                type="button"
+                onClick={handleDiscardPendingChange}
+                disabled={Boolean(actionLoading)}
+              >
+                {actionLoading === "ABANDONING"
+                  ? "Closing checkout..."
+                  : "Discard unfinished Razorpay checkout"}
+              </button>
+            </div>
+          )}
       </div>
     </section>
   );
