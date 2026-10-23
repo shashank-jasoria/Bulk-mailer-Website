@@ -396,6 +396,7 @@
   overflow: hidden;
 }
 .lee-inbox-heading {
+  display: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -421,10 +422,9 @@
   display: flex;
   align-items: center;
   gap: 0.8em;
-  padding: 0.7em 1.5em 1em;
+  padding: 0.5em 1.5em 0.5em;
   border-bottom: 1px solid var(--border-primary);
   color: var(--text-muted);
-  padding-top: 0px;
 }
 .lee-mail-toolbar > .lee-icon {
   width: 1.05em;

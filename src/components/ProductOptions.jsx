@@ -286,8 +286,12 @@ export default function ProductOptions() {
         </div>
 
         <div className="product-stack">
-          {productSections.map((section) => (
-            <ProductSection key={section.title} {...section} />
+          {productSections.map((section, index) => (
+            <ProductSection
+              key={section.title}
+              {...section}
+              reverse={index % 2 !== 0}
+            />
           ))}
         </div>
       </div>

@@ -273,7 +273,7 @@ export default function HomeSvg({
                   >
                     <use href={`#${symbolPrefix}-lee-i-search`} />
                   </svg>
-                  <span>Search mail</span>
+                  <span>in:sent</span>
                   <svg
                     className="lee-icon "
                     viewBox="0 0 24 24"
