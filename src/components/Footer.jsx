@@ -22,7 +22,7 @@ export default function Footer({ site, darkMode }) {
           <div className="site-footer__brand">
             <div className="site-footer__brand-top">
               <div className="site-footer__logo">
-                {/* <Mail size={26} strokeWidth={2.2} /> */}
+                <img src="./icon.svg" alt="PaceMailer" width={51} height={51} />
               </div>
 
               <div className="site-footer__brand-text">

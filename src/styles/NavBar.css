@@ -80,7 +80,7 @@
   height: 6.2rem;
 
   margin: 0 auto;
-  padding: 0 1.4rem 0 2.2rem;
+  padding: 0 1.4rem 0 1.2rem;
 
   display: grid;
   grid-template-columns: 24rem 1fr auto;
@@ -183,7 +183,7 @@
 .relay-logo {
   position: relative;
 
-  width: 5.6rem;
+  /* width: 5.6rem; */
   height: 4.4rem;
 
   display: flex;
@@ -191,6 +191,8 @@
   justify-content: flex-end;
 
   flex-shrink: 0;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .relay-logo__box {
@@ -215,6 +217,7 @@
   box-shadow:
     0 0 1.8rem color-mix(in srgb, var(--accent) 24%, transparent),
     inset 0 0.1rem 0 color-mix(in srgb, white 22%, transparent);
+  overflow: hidden;
 }
 
 .relay-logo__box svg {
@@ -286,7 +289,7 @@
 
   color: var(--text-secondary);
 
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 500;
   line-height: 1;
 

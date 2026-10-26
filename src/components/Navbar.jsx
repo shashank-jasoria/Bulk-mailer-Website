@@ -140,7 +140,7 @@ export default function Navbar({
           <RelayLogo />
 
           <span className="site-header__brand-name">
-            Pace<span className="site-header__brand-diamond">Mail</span>er
+            <img src="./text-icon.svg" alt="PaceMailer" height={25} />
           </span>
         </Link>
 
@@ -287,15 +287,6 @@ export default function Navbar({
                     </button>
                   ) : null}
 
-                  {/* <button
-                    type="button"
-                    className="profile-menu__cancel"
-                    onClick={onCancelSubscription}
-                  >
-                    <CancelIcon />
-                    Cancel Subscription
-                  </button> */}
-
                   <div className="profile-menu__separator" />
 
                   {/* Theme */}
@@ -354,18 +345,7 @@ export default function Navbar({
 function RelayLogo() {
   return (
     <span className="relay-logo" aria-hidden="true">
-      <span className="relay-logo__lines">
-        <i />
-        <i />
-        <i />
-      </span>
-
-      <span className="relay-logo__box">
-        <svg viewBox="0 0 32 32">
-          <path d="M6 9.5h20v13H6z" />
-          <path d="m6.7 10.2 9.3 8 9.3-8" />
-        </svg>
-      </span>
+      <img src="./icon.svg" alt="PaceMailer" width={43} height={43} />
     </span>
   );
 }
