@@ -583,3 +583,17 @@
     font-size: 1.35rem;
   }
 }
+
+.comparison-plan-price {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.comparison-old-price {
+  text-decoration: line-through;
+  opacity: 0.5;
+  font-size: 14px;
+}

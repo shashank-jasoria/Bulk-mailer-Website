@@ -176,16 +176,7 @@ export default function App() {
           }
         >
           <Route index element={<Home />} />
-          <Route
-            path="pricing"
-            element={
-              <PricingPage
-                user={user}
-                account={account}
-                authLoading={authLoading}
-              />
-            }
-          />
+          <Route path="pricing" element={<PricingPage />} />
           <Route path="about" element={<AboutUs />} />
           <Route path="contact" element={<ContactUs />} />
           <Route path="blog" element={<BlogPage />} />

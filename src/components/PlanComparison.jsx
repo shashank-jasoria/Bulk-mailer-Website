@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 
 import "../styles/PlanComparison.css";
+import { getLaunchOldPrice } from "../data/pricingDisplay";
 
 const features = [
   {
@@ -205,8 +206,22 @@ function FeatureValue({ value }) {
   return <div className="comparison-value">{value.text}</div>;
 }
 
-function PlanHeader({ plan, type, popular = false }) {
+function PlanHeader({ plan, type, popular = false, priceInfo, currency }) {
   const Icon = plan.icon;
+
+  const isFree = type === "free";
+
+  // Current price comes from backend
+  const displayPrice = isFree
+    ? plan.price
+    : priceInfo?.formattedPrice || "Unavailable";
+
+  // Original price for launch discount
+  const oldPrice = isFree
+    ? null
+    : getLaunchOldPrice(type, currency, plan.oldPrice);
+
+  const billingPeriod = isFree ? "month" : priceInfo?.billingPeriod || "month";
 
   return (
     <div className={`comparison-plan comparison-plan--${type}`}>
@@ -222,8 +237,13 @@ function PlanHeader({ plan, type, popular = false }) {
           <p>{plan.description}</p>
 
           <div className="comparison-plan-price">
-            <strong>{plan.price}</strong>
-            <span>/ month</span>
+            {oldPrice && (
+              <span className="comparison-old-price">{oldPrice}</span>
+            )}
+
+            <strong>{displayPrice}</strong>
+
+            <span>/ {billingPeriod}</span>
           </div>
         </div>
       </div>
@@ -231,7 +251,7 @@ function PlanHeader({ plan, type, popular = false }) {
   );
 }
 
-export default function PlanComparison() {
+export default function PlanComparison({ regionalPricing, pricingRegion }) {
   return (
     <section className="">
       <div className="comparison-container">
@@ -261,6 +281,7 @@ export default function PlanComparison() {
                 Features
               </div>
 
+              {/* FREE */}
               <div
                 className="comparison-cell comparison-cell--free comparison-cell--header"
                 role="columnheader"
@@ -268,18 +289,31 @@ export default function PlanComparison() {
                 <PlanHeader plan={plans.free} type="free" />
               </div>
 
+              {/* CORE */}
               <div
                 className="comparison-cell comparison-cell--core comparison-cell--header"
                 role="columnheader"
               >
-                <PlanHeader plan={plans.core} type="core" popular />
+                <PlanHeader
+                  plan={plans.core}
+                  type="core"
+                  popular
+                  priceInfo={regionalPricing.CORE}
+                  currency={pricingRegion.currency}
+                />
               </div>
 
+              {/* PRO */}
               <div
                 className="comparison-cell comparison-cell--pro comparison-cell--header"
                 role="columnheader"
               >
-                <PlanHeader plan={plans.pro} type="pro" />
+                <PlanHeader
+                  plan={plans.pro}
+                  type="pro"
+                  priceInfo={regionalPricing.PRO}
+                  currency={pricingRegion.currency}
+                />
               </div>
             </div>
 

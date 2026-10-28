@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 import "../styles/pricingCard.css";
 import {
-  getRegionalPricing,
   getBillingStatus,
   createCheckout,
   changePlan,
@@ -38,6 +37,7 @@ import {
   Star,
 } from "lucide-react";
 import useNotification from "../context/notifications/useNotification";
+import { getLaunchOldPrice } from "../data/pricingDisplay";
 
 const plans = [
   {
@@ -248,7 +248,13 @@ function loadRazorpayCheckout() {
   return razorpayScriptPromise;
 }
 
-export default function Pricing({ user, account, authLoading }) {
+export default function Pricing({
+  user,
+  account,
+  authLoading,
+  regionalPricing,
+  pricingRegion,
+}) {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams] = useSearchParams();
@@ -260,11 +266,10 @@ export default function Pricing({ user, account, authLoading }) {
   const [billingError, setBillingError] = useState(null);
   const [actionLoading, setActionLoading] = useState(null);
   const [actionError, setActionError] = useState(null);
-  const [regionalPricing, setRegionalPricing] = useState(null);
-  // Country/provider/checkout availability are determined by the backend.
-  const [pricingRegion, setPricingRegion] = useState(null);
-  const [pricingLoading, setPricingLoading] = useState(true);
-  const [pricingError, setPricingError] = useState(null);
+  // const [regionalPricing, setRegionalPricing] = useState(null);
+  // const [pricingRegion, setPricingRegion] = useState(null);
+  // const [pricingLoading, setPricingLoading] = useState(true);
+  // const [pricingError, setPricingError] = useState(null);
   const loadBilling = useCallback(async () => {
     if (!isExtensionFlow && !user) {
       setBilling(null);
@@ -291,7 +296,6 @@ export default function Pricing({ user, account, authLoading }) {
   const shownToasts = useRef({
     billingError: null,
     actionError: null,
-    pricingError: null,
     razorpayStage: null,
     subscriptionNotice: null,
   });
@@ -310,12 +314,12 @@ export default function Pricing({ user, account, authLoading }) {
         title: "Subscription action failed",
         fallback: "Please try again.",
       },
-      {
-        key: "pricingError",
-        error: pricingError,
-        title: "Unable to load pricing",
-        fallback: "Please refresh the page and try again.",
-      },
+      // {
+      //   key: "pricingError",
+      //   error: pricingError,
+      //   title: "Unable to load pricing",
+      //   fallback: "Please refresh the page and try again.",
+      // },
     ];
 
     for (const item of errors) {
@@ -337,7 +341,7 @@ export default function Pricing({ user, account, authLoading }) {
         duration: 5000,
       });
     }
-  }, [billingError, actionError, pricingError, showToast]);
+  }, [billingError, actionError, showToast]);
 
   useEffect(() => {
     if (!isExtensionFlow && authLoading) {
@@ -484,44 +488,6 @@ export default function Pricing({ user, account, authLoading }) {
       duration: 6000,
     });
   }, [billing, showToast]);
-
-  useEffect(() => {
-    let cancelled = false;
-    async function loadRegionalPricing() {
-      try {
-        setPricingLoading(true);
-        setPricingError(null);
-
-        const data = await getRegionalPricing();
-
-        if (!data?.success || !data?.prices || !data?.region) {
-          throw new Error("Failed to load regional pricing");
-        }
-
-        if (cancelled) return;
-
-        setRegionalPricing(data.prices);
-        setPricingRegion(data.region);
-      } catch (error) {
-        if (cancelled) return;
-
-        console.error("Failed to load prices:", error);
-        setRegionalPricing(null);
-        setPricingRegion(null);
-        setPricingError(error);
-      } finally {
-        if (!cancelled) {
-          setPricingLoading(false);
-        }
-      }
-    }
-
-    loadRegionalPricing();
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   async function openRazorpaySubscriptionModal({
     subscriptionId,
@@ -799,7 +765,6 @@ export default function Pricing({ user, account, authLoading }) {
       return "Loading...";
     }
     if (targetTierKey !== "FREE") {
-      if (pricingLoading) return "Loading prices...";
       if (!pricingRegion || !regionalPricing?.[targetTierKey]) {
         return "Pricing unavailable";
       }
@@ -901,15 +866,9 @@ export default function Pricing({ user, account, authLoading }) {
     }
 
     if (targetTierKey !== "FREE") {
-      if (
-        pricingLoading ||
-        !pricingRegion ||
-        !regionalPricing?.[targetTierKey]
-      ) {
+      if (!pricingRegion || !regionalPricing?.[targetTierKey]) {
         return true;
       }
-      // New checkouts are closed until the backend advertises them as open.
-      // This does not block cancellation or Razorpay plan changes.
       if (
         (currentTierKey === "FREE" || (!isExtensionFlow && !user)) &&
         pricingRegion.checkoutEnabled !== true
@@ -963,7 +922,7 @@ export default function Pricing({ user, account, authLoading }) {
         {/* Header */}
 
         <header className="pricing-header">
-          {pricingRegion?.currency === "INR" && (
+          {["INR", "USD"].includes(pricingRegion?.currency) && (
             <div className="pricing-launch-badge">
               <span className="pricing-spark">✦</span>
 
@@ -992,6 +951,7 @@ export default function Pricing({ user, account, authLoading }) {
         <div className="pricing-grid">
           {plans.map((plan) => {
             const PlanIcon = plan.icon;
+
             const priceInfo =
               plan.id === "free"
                 ? null
@@ -1000,17 +960,19 @@ export default function Pricing({ user, account, authLoading }) {
             const displayPrice =
               plan.id === "free"
                 ? "Free"
-                : pricingLoading
-                  ? "Loading..."
-                  : priceInfo?.formattedPrice || "Unavailable";
+                : priceInfo?.formattedPrice || "Unavailable";
 
             const displaySuffix = priceInfo?.billingPeriod
               ? `/ ${priceInfo.billingPeriod}`
               : "";
 
+            const oldPrice = getLaunchOldPrice(
+              plan.id,
+              pricingRegion?.currency,
+              plan.oldPrice,
+            );
+
             const priceUnavailable = plan.id !== "free" && !priceInfo;
-            // PayPal cannot upgrade/downgrade in-place yet. Leave the
-            // current-plan and cancellation buttons available as before.
             const hideUnsupportedPayPalChange =
               plan.id !== "free" &&
               billing?.subscription?.provider === "paypal" &&
@@ -1047,13 +1009,14 @@ export default function Pricing({ user, account, authLoading }) {
                 </div>
 
                 {/* Price */}
+                {/* Price */}
                 <div className="pricing-price-area">
                   <div className="pricing-price-row">
-                    {plan.oldPrice && pricingRegion?.currency === "INR" && (
-                      <span className="pricing-old-price">{plan.oldPrice}</span>
+                    {oldPrice && (
+                      <span className="pricing-old-price">{oldPrice}</span>
                     )}
 
-                    <span className="pricing-price"> {displayPrice}</span>
+                    <span className="pricing-price">{displayPrice}</span>
 
                     {displaySuffix && (
                       <span className="pricing-price-suffix">
@@ -1062,7 +1025,7 @@ export default function Pricing({ user, account, authLoading }) {
                     )}
                   </div>
 
-                  {plan.discount && pricingRegion?.currency === "INR" && (
+                  {plan.discount && oldPrice && (
                     <div className="pricing-card-discount">
                       <Rocket size={15} />
                       New launch discount
