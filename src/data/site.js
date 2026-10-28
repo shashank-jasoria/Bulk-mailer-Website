@@ -77,11 +77,11 @@ export const faqs = [
     answer:
       "Yes. The product is designed around connected email accounts such as Gmail and Microsoft so messages can be sent from the account you authorize.",
   },
-  {
-    question: "Will pricing be the same in every country?",
-    answer:
-      "No. The billing system is designed for regional pricing and local payment methods. The website can show the applicable price and payment options before checkout.",
-  },
+  // {
+  //   question: "Will pricing be the same in every country?",
+  //   answer:
+  //     "No. The billing system is designed for regional pricing and local payment methods. The website can show the applicable price and payment options before checkout.",
+  // },
   {
     question: "Where do I manage contacts and analytics?",
     answer:
