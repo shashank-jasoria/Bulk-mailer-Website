@@ -12,7 +12,7 @@ import "../styles/PacemailerPrivacyPolicy.css";
 
 const POLICY_DETAILS = {
   effectiveDate: "October 12, 2026",
-  lastUpdated: "October 12, 2026",
+  lastUpdated: "November 2, 2026",
   legalName: "Shashank",
   businessAddress: "Rajsthan, India",
   contactEmail: "support@pacemailer.com",
@@ -377,6 +377,14 @@ export default function PacemailerPrivacyPolicy() {
                 may come from profiles viewed by a user, information entered by
                 users, and records already available within the Services.
               </p>
+              <p>
+                Contact information may be entered manually, obtained through
+                third-party sources, or generated from professional email
+                patterns. Saved email addresses associated with LinkedIn
+                profiles are contributed to Pacemailer's shared contact database
+                and may be visible to other authenticated users as described in
+                Section 6.
+              </p>
 
               <h3>2.3 Google and Microsoft account information</h3>
               <p>
@@ -565,37 +573,47 @@ export default function PacemailerPrivacyPolicy() {
             <PolicySection
               number={6}
               id="professional-contact-data"
-              title="Professional Contact Data and Shared Reference Records"
+              title="Professional Contact Data and Community Database"
             >
               <p>
-                Pacemailer processes professional contact information supplied
-                or collected by account holders. To support contact management,
-                deduplication, email discovery, and verification, Pacemailer may
-                maintain reference records concerning professional contacts,
-                companies, email domains, company email patterns, and
-                verification status.
+                Pacemailer maintains a community-powered contact database to
+                help users discover email addresses for professional networking
+                and job outreach.
               </p>
+
               <p>
-                Some reference records may be used across accounts where this
-                functionality is enabled and permitted by applicable law. This
-                may involve sharing professional contact details or reference
-                information with other authorized Pacemailer users.
+                When a user saves an email address associated with a LinkedIn
+                profile, whether entered manually or obtained through a
+                third-party source, that email address and related contact
+                information are automatically added to Pacemailer's shared
+                database. These addresses may include work or personal emails.
               </p>
+
               <p>
-                Connected mailbox contents, passwords, OAuth credentials, and
-                private email templates are not intended to be part of shared
-                professional contact reference records. Data obtained from
-                Google APIs remains subject to Google's applicable restrictions,
-                including rules concerning derived data and unauthorized
-                transfers.
+                Other authenticated Pacemailer users visiting the same LinkedIn
+                profile can click the eye icon to view an available saved email
+                address. This includes email addresses marked Valid or
+                Unverified. Verification status does not guarantee accuracy or
+                deliverability.
               </p>
+
               <p>
-                Users must ensure they have an appropriate legal basis for
-                collecting contact details and conducting outreach, and must
-                honor recipients' privacy rights. Individuals may contact us
-                about access, correction, or deletion requests, subject to
-                applicable law and the roles of Pacemailer and the relevant
-                account holder.
+                Shared contact records may include names, companies,
+                professional positions, LinkedIn profile URLs, email addresses,
+                and verification statuses.
+              </p>
+
+              <p>
+                Private email templates, message content, passwords, OAuth
+                credentials, and connected mailbox contents are not included in
+                shared contact records. Google API data remains subject to
+                applicable Google data-use restrictions.
+              </p>
+
+              <p>
+                Individuals may contact Pacemailer to request access,
+                correction, or removal of their contact information, subject to
+                applicable law.
               </p>
             </PolicySection>
 
@@ -624,6 +642,14 @@ export default function PacemailerPrivacyPolicy() {
                 unsubscribe requirements. Where tracking requires consent under
                 applicable law, the appropriate consent or legal authorization
                 must be obtained.
+              </p>
+              <p>
+                When reply tracking is enabled, Pacemailer may process
+                authorized email metadata and relevant message information to
+                identify replies to outreach emails sent through the Services.
+                Reply tracking information helps users monitor responses and
+                evaluate outreach performance. Reply content is not included in
+                the shared community contact database.
               </p>
             </PolicySection>
 
@@ -657,9 +683,11 @@ export default function PacemailerPrivacyPolicy() {
                     process subscription payments and transactions.
                   </>,
                   <>
-                    <strong>Authorized users:</strong> Professional contact
-                    reference information, when shared-data features are enabled
-                    as described above.
+                    <strong>Other Pacemailer users:</strong> Email addresses and
+                    associated professional contact information saved to the
+                    community database are made available to other authenticated
+                    Pacemailer users viewing the same LinkedIn profiles, as
+                    described in Section 6.
                   </>,
                   <>
                     <strong>Legal and security disclosures:</strong> Where
@@ -756,10 +784,12 @@ export default function PacemailerPrivacyPolicy() {
                 exceptions.
               </p>
               <p>
-                Shared professional reference records may follow separate
-                retention criteria where Pacemailer has an independent lawful
-                basis to maintain them. Individuals may submit deletion requests
-                using the contact information below.
+                Shared professional contact records may be retained separately
+                from an individual user's saved contacts, where permitted by
+                applicable law. Deleting a privately saved contact or user
+                account may not automatically remove a shared contact record.
+                Individuals may request correction or deletion of shared records
+                through the contact information provided in this policy.
               </p>
             </PolicySection>
 
@@ -791,6 +821,14 @@ export default function PacemailerPrivacyPolicy() {
                 Certain requests relating to a sender's records may need to be
                 addressed by that account holder. We may reasonably verify
                 identity before responding.
+              </p>
+              <p>
+                If your email address or professional information appears in
+                Pacemailer's community database, you may request access,
+                correction, or removal by contacting support@pacemailer.com.
+                Please provide the relevant email address or LinkedIn profile
+                URL so we can identify the record. We may request reasonable
+                identity verification before processing your request.
               </p>
             </PolicySection>
 
