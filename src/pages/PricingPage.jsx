@@ -69,9 +69,9 @@ export default function PricingPage() {
         <div className="pricing-page-loading" role="status">
           <div className="pricing-page-spinner" />
 
-          <h2>Loading Pricing...</h2>
+          {/* <h2>Loading</h2> */}
 
-          <p>Finding the best prices for your region.</p>
+          {/* <p>Finding the best prices for your region.</p> */}
         </div>
       ) : pricingError ? (
         <div className="pricing-page-error" role="alert">

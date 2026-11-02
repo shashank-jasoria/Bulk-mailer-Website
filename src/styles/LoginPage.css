@@ -461,3 +461,58 @@
     font-size: 10px;
   }
 }
+
+.pace-quote-message {
+  margin-top: 30px;
+  padding-left: 18px;
+  border-left: 3px solid var(--accent, #6947f5);
+  max-width: 650px;
+}
+
+.pace-quote-message__content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.pace-quote-message__heading {
+  margin: 0;
+  color: var(--text-primary, #171827);
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.pace-quote-message__text {
+  margin: 0;
+  color: var(--text-secondary, #5f6475);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.pace-quote-message__signature {
+  margin: 2px 0 0;
+  color: var(--accent, #6947f5);
+  font-size: 14px;
+  font-weight: 600;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .pace-quote-message {
+    margin-top: 24px;
+    padding-left: 13px;
+  }
+
+  .pace-quote-message__heading {
+    font-size: 15px;
+  }
+
+  .pace-quote-message__text {
+    font-size: 13px;
+  }
+
+  .pace-quote-message__signature {
+    font-size: 13px;
+  }
+}

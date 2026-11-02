@@ -5,9 +5,9 @@ export default function LoginPage({ onGoogleLogin, onOutlookLogin }) {
     <main className="login-page">
       <section className="login-left">
         <div className="login-brand">
-          <LogoIcon />
+          <img src="./icon.svg" alt="PaceMailer" width={43} height={43} />
 
-          <span className="login-brand-name">PaceMailer</span>
+          <img src="./text-icon.svg" alt="PaceMailer" height={25} />
         </div>
 
         <div className="login-content">
@@ -67,15 +67,23 @@ export default function LoginPage({ onGoogleLogin, onOutlookLogin }) {
         <div className="testimonial">
           <div className="testimonial-quote-mark">“</div>
 
-          <blockquote>
-            Great tool for helping apply and track for unemployment. Wish I
-            would have thought to look for a tool like this sooner!
-          </blockquote>
+          <blockquote>“You miss 100% of the shots you don’t take.”</blockquote>
 
           <div className="testimonial-user">
-            <div className="testimonial-avatar">CW</div>
+            {/* <div className="testimonial-avatar">WG</div> */}-
+            <span>Wayne Gretzky</span>
+          </div>
 
-            <span>Cale Wilson</span>
+          <div class="pace-quote-message">
+            <div class="pace-quote-message__content">
+              <p class="pace-quote-message__heading">
+                Your next big opportunity might be just one email away.
+              </p>
+              <p class="pace-quote-message__text">
+                Keep reaching out, keep connecting, and keep growing. 💜
+              </p>
+              <p class="pace-quote-message__signature">— Team Pacemailer</p>
+            </div>
           </div>
         </div>
       </section>
@@ -87,64 +95,64 @@ export default function LoginPage({ onGoogleLogin, onOutlookLogin }) {
    LOGO
 ======================================== */
 
-function LogoIcon() {
-  return (
-    <svg
-      className="logo-icon"
-      width="44"
-      height="34"
-      viewBox="0 0 44 34"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <path
-        d="M12 9V6.5C12 4.57 13.57 3 15.5 3H28.5C30.43 3 32 4.57 32 6.5V9"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
+// function LogoIcon() {
+//   return (
+//     <svg
+//       className="logo-icon"
+//       width="44"
+//       height="34"
+//       viewBox="0 0 44 34"
+//       fill="none"
+//       xmlns="http://www.w3.org/2000/svg"
+//       aria-hidden="true"
+//     >
+//       <path
+//         d="M12 9V6.5C12 4.57 13.57 3 15.5 3H28.5C30.43 3 32 4.57 32 6.5V9"
+//         stroke="currentColor"
+//         strokeWidth="3"
+//         strokeLinecap="round"
+//       />
 
-      <rect
-        x="7"
-        y="9"
-        width="30"
-        height="21"
-        rx="3"
-        stroke="currentColor"
-        strokeWidth="3"
-      />
+//       <rect
+//         x="7"
+//         y="9"
+//         width="30"
+//         height="21"
+//         rx="3"
+//         stroke="currentColor"
+//         strokeWidth="3"
+//       />
 
-      <path
-        d="M7 15L18 21H26L37 15"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinejoin="round"
-      />
+//       <path
+//         d="M7 15L18 21H26L37 15"
+//         stroke="currentColor"
+//         strokeWidth="3"
+//         strokeLinejoin="round"
+//       />
 
-      <path
-        d="M2 13H10"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
+//       <path
+//         d="M2 13H10"
+//         stroke="currentColor"
+//         strokeWidth="3"
+//         strokeLinecap="round"
+//       />
 
-      <path
-        d="M1 19H8"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
+//       <path
+//         d="M1 19H8"
+//         stroke="currentColor"
+//         strokeWidth="3"
+//         strokeLinecap="round"
+//       />
 
-      <path
-        d="M4 25H10"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
+//       <path
+//         d="M4 25H10"
+//         stroke="currentColor"
+//         strokeWidth="3"
+//         strokeLinecap="round"
+//       />
+//     </svg>
+//   );
+// }
 
 /* ========================================
    GOOGLE

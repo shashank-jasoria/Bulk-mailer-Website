@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getWebsiteUser } from "../api/authApi";
+import "../styles/pricingCard.css";
 
 export default function WebsiteAuthCallback({ onLogin }) {
   const navigate = useNavigate();
@@ -52,8 +53,12 @@ export default function WebsiteAuthCallback({ onLogin }) {
   }, [navigate, onLogin]);
 
   return (
-    <main>
-      <p>Signing you in...</p>
-    </main>
+    <div className="pricing-page-loading" role="status">
+      <div className="pricing-page-spinner" />
+
+      {/* <h2>Loading</h2> */}
+
+      {/* <p>Finding the best prices for your region.</p> */}
+    </div>
   );
 }

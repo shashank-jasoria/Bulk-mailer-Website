@@ -255,7 +255,7 @@ export default function Navbar({
                   {isFreePlan ? (
                     <Link
                       to="/pricing"
-                      className="profile-menu__cancel"
+                      className="profile-menu__cancel view-subscription-btn "
                       onClick={() => setProfileOpen(false)}
                     >
                       <CrownIcon />
