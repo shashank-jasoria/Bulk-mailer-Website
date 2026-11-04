@@ -26,7 +26,7 @@ export default function Hero({ site }) {
           <div className="hero__actions">
             <a
               className="button button--primary button--large"
-              href={site.chromeStoreUrl}
+              href="https://chromewebstore.google.com/detail/pacemailer-cold-email-job/kdloajdebioefnmcbeeajnaladffgpem?authuser=0&hl=en"
             >
               Add to Chrome <span aria-hidden="true">→</span>
             </a>

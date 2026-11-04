@@ -15,7 +15,7 @@ const POLICY_DETAILS = {
   lastUpdated: "November 2, 2026",
   legalName: "Shashank",
   businessAddress: "Rajsthan, India",
-  contactEmail: "support@pacemailer.com",
+  contactEmail: "shashank@pacemailer.com",
 };
 
 const SECTIONS = [
@@ -825,7 +825,7 @@ export default function PacemailerPrivacyPolicy() {
               <p>
                 If your email address or professional information appears in
                 Pacemailer's community database, you may request access,
-                correction, or removal by contacting support@pacemailer.com.
+                correction, or removal by contacting shashank@pacemailer.com.
                 Please provide the relevant email address or LinkedIn profile
                 URL so we can identify the record. We may request reasonable
                 identity verification before processing your request.

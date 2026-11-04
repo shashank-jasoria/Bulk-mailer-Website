@@ -126,14 +126,15 @@ function OutreachBanner({ darkMode }) {
           </p>
 
           <div className="outreach-banner__cta">
-            <button
-              type="button"
+            <a
+              href="https://chromewebstore.google.com/detail/pacemailer-cold-email-job/kdloajdebioefnmcbeeajnaladffgpem"
+              target="_blank"
+              rel="noopener noreferrer"
               className="outreach-banner__button"
-              // onClick={onGetStarted}
             >
               Get Started
               <ArrowRight />
-            </button>
+            </a>
 
             <span className="outreach-banner__note">
               No credit card required

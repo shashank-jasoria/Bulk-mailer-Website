@@ -1,4 +1,4 @@
-import MediaPlaceholder from "./MediaPlaceholder.jsx";
+import LazyLoopVideo from "./LazyLoopVideo";
 
 export default function ProductSection({
   eyebrow,
@@ -7,7 +7,8 @@ export default function ProductSection({
   features,
   reverse = false,
   badge,
-  mediaAspect = "wide",
+  videoSrc,
+  posterSrc,
 }) {
   return (
     <section className="product-section">
@@ -18,14 +19,21 @@ export default function ProductSection({
       >
         <div className="top-1st">
           <p className="section-kicker">{eyebrow}</p>
+
           {badge && <span className="feature-badge">{badge}</span>}
+
           <h2>{title}</h2>
+
           <p className="product-section__description">{description}</p>
         </div>
 
         <div className="product-section__visual reveal reveal--delay product-part-top-right">
           <div className="media-frame">
-            <MediaPlaceholder aspect={mediaAspect} />
+            <LazyLoopVideo
+              src={videoSrc}
+              poster={posterSrc}
+              title={`${title} product demonstration`}
+            />
           </div>
         </div>
       </div>
@@ -37,6 +45,7 @@ export default function ProductSection({
               <feature.icon className="feature-list__icon-svg" />
               <strong>{feature.title}</strong>
             </div>
+
             <p>{feature.description}</p>
           </div>
         ))}

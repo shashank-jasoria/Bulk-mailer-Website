@@ -55,10 +55,7 @@ export default function WebsiteAuthCallback({ onLogin }) {
   return (
     <div className="pricing-page-loading" role="status">
       <div className="pricing-page-spinner" />
-
-      {/* <h2>Loading</h2> */}
-
-      {/* <p>Finding the best prices for your region.</p> */}
+      <h2>Loading</h2>
     </div>
   );
 }

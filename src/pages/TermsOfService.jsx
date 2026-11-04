@@ -22,7 +22,7 @@ const TERMS_DETAILS = {
   lastUpdated: "October 12, 2026",
   legalName: "Shashank",
   businessAddress: "Rajsthan, India",
-  contactEmail: "support@pacemailer.com",
+  contactEmail: "shashank@pacemailer.com",
   website: "https://pacemailer.com",
   // Complete these two fields before publishing this legal document.
   governingLaw: "[Rajsthan/India]",

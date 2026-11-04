@@ -163,7 +163,7 @@ export default function Navbar({
 
           <a
             className="site-header__chrome-button"
-            href="https://chromewebstore.google.com/"
+            href="https://chromewebstore.google.com/detail/pacemailer-cold-email-job/kdloajdebioefnmcbeeajnaladffgpem?authuser=0&hl=en"
             target="_blank"
             rel="noreferrer"
           >

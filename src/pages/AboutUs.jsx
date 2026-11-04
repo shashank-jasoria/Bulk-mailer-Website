@@ -230,10 +230,10 @@ export default function AboutUs() {
           documents, I realized there had to be a better way. Most outreach
           tools are built for sales teams and recruiters, often with expensive
           subscriptions, and they can still make it surprisingly difficult to
-          add and manage individual unique contacts. So I built Pacemailer a simple
-          yet powerful browser extension that streamlines the entire outreach
-          process, from finding and generating emails to personalizing and
-          sending them.
+          add and manage individual unique contacts. So I built Pacemailer a
+          simple yet powerful browser extension that streamlines the entire
+          outreach process, from finding and generating emails to personalizing
+          and sending them.
         </p>
         {/* <p>
           Most outreach tools are built for sales teams and recruiters, often
@@ -257,7 +257,7 @@ export default function AboutUs() {
             Example: /images/about-mission.jpg
           */}
           <img
-            src="/images/about-mission.jpg"
+            src="/about-img.png"
             alt="Professional working on outreach"
             className="mission-image"
           />
@@ -332,8 +332,8 @@ export default function AboutUs() {
           </h2>
 
           <p>
-            From job seekers to recruiters and sales professionals, Pacemailer is
-            used by people around the world to create meaningful connections.
+            From job seekers to recruiters and sales professionals, Pacemailer
+            is used by people around the world to create meaningful connections.
           </p>
         </div>
 
@@ -364,7 +364,9 @@ export default function AboutUs() {
             </div>
 
             <strong>Join Early</strong>
-            <span>Be among the first to use Pacemailer and get early updates</span>
+            <span>
+              Be among the first to use Pacemailer and get early updates
+            </span>
           </div>
         </div>
       </section>
@@ -389,11 +391,16 @@ export default function AboutUs() {
           <h2>Let’s make outreach effortless</h2>
 
           <p>
-            We're just getting started. Our goal is to keep improving Pacemailer and
-            empowering professionals like you to achieve more.
+            We're just getting started. Our goal is to keep improving Pacemailer
+            and empowering professionals like you to achieve more.
           </p>
 
-          <a href="/signup" className="about-cta-button">
+          <a
+            href="https://chromewebstore.google.com/detail/pacemailer-cold-email-job/kdloajdebioefnmcbeeajnaladffgpem"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="about-cta-button"
+          >
             Get Started for Free
             <ArrowRight size={18} />
           </a>

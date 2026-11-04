@@ -219,32 +219,6 @@ const productSections = [
     ],
   },
   {
-    eyebrow: "Email discovery",
-    title: "Find the right email, your way.",
-    description:
-      "Use Pacemailer's email tools to find an address, discover a company's pattern, or generate one automatically.",
-    features: [
-      {
-        icon: Search,
-        title: "Use email finding tools",
-        description:
-          "Already have an email finder? Use the address directly in Pacemailer.",
-      },
-      {
-        icon: SlidersHorizontal,
-        title: "Find the company pattern",
-        description:
-          "Check a few company emails to identify their common email format.",
-      },
-      {
-        icon: Sparkles,
-        title: "Generate emails automatically",
-        description:
-          "Set the format once and let Pacemailer generate emails for new contacts.",
-      },
-    ],
-  },
-  {
     eyebrow: "Outreach insights",
     title: "Know what works best.",
     description:
@@ -271,6 +245,13 @@ const productSections = [
   },
 ];
 
+const productVideos = [
+  "/Website-Save.mp4",
+  "/Website-Template.mp4",
+  "/Website-mail.mp4",
+  "/Website-Dashboard.mp4",
+];
+
 export default function ProductOptions() {
   return (
     <section className="section" id="product">
@@ -290,6 +271,7 @@ export default function ProductOptions() {
             <ProductSection
               key={section.title}
               {...section}
+              videoSrc={productVideos[index]}
               reverse={index % 2 !== 0}
             />
           ))}

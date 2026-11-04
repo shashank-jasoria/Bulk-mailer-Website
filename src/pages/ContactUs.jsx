@@ -293,8 +293,8 @@ export default function ContactUs() {
                 icon={<Mail size={25} />}
                 title="Email Support"
                 description="For general queries and support"
-                linkText="support@pacemailer.com"
-                href="mailto:support@pacemailer.com"
+                linkText="shashank@pacemailer.com"
+                href="mailto:shashank@pacemailer.com"
               />
               {/* 
               <SupportCard

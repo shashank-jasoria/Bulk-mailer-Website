@@ -59,10 +59,15 @@ export default function LoginPage({ onGoogleLogin, onOutlookLogin }) {
       <section className="login-showcase">
         <div className="login-pattern" />
 
-        <button type="button" className="install-button">
+        <a
+          href="https://chromewebstore.google.com/detail/pacemailer-cold-email-job/kdloajdebioefnmcbeeajnaladffgpem"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="install-button"
+        >
           <ChromeIcon />
           <span>Install</span>
-        </button>
+        </a>
 
         <div className="testimonial">
           <div className="testimonial-quote-mark">“</div>
